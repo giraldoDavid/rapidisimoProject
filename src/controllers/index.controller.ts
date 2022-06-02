@@ -13,6 +13,12 @@ export const getAllUsuarios = async (req: Request, res: Response) => {
         res.status(500).json({
             message: 'Error al traer los usuarios',
         });
+    } finally {
+        //(Liberar) libera un cliente adquirido de vuelta al pool.
+        //Debes llamar a client.release cuando hayas terminado con un cliente. Si te olvidas de liberar al cliente, tu aplicación agotará rápidamente los clientes disponibles e inactivos en el pool y todas las llamadas posteriores a pool.connect se agotarán con un error o se colgarán indefinidamente si tienes configurado connectionTimeoutMillis a 0.
+        // El true significa que indicará al pool que desconecte y destruya este cliente, dejando un espacio dentro de sí mismo para un nuevo cliente.
+        // indicar al pool que destruya a este cliente
+        cliente.release(true)
     }
 }
 
@@ -28,6 +34,8 @@ export const postUsuario = async (req: Request, res: Response) => {
         res.status(500).json({
             message: 'Error al crear el usuario',
         });
+    } finally {
+        cliente.release(true)
     }
 }
 
@@ -44,6 +52,8 @@ export const patchUsuario = async (req: Request, res: Response) => {
         res.status(500).json({
             message: 'Error al editar el usuario',
         });
+    } finally {
+        cliente.release(true)
     }
 }
 
@@ -60,5 +70,7 @@ export const deleteUsuario = async (req: Request, res: Response) => {
         res.status(500).json({
             message: 'Error al eliminar el usuario',
         });
+    } finally {
+        cliente.release(true)
     }
 }
