@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import { pool } from '../data-base/config';
+import { pool } from '../data-base/config.postgres';
 import { QueryResult } from 'pg';
 
 export const getAll = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     try {
-        let result: QueryResult = await cliente.query('SELECT * FROM users');
+        let result: QueryResult = await cliente.query('SELECT * FROM usuarios');
         res.status(201).json(result.rows);
     } catch (error) {
         console.log(error);

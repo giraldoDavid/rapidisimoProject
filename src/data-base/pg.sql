@@ -38,7 +38,7 @@ DROP TABLE IF EXISTS rol_comercio CASCADE;
 -- Seleccionando Database
 -- \c rapidisimo;
 -- Creando secuencias
-CREATE SEQUENCE id_vehiculo_seq START WITH 100 INCREMENT BY 1 MAXVALUE 999 MINVALUE 100;
+CREATE SEQUENCE id_vehiculo_seq START WITH 1 INCREMENT BY 1 MAXVALUE 999 MINVALUE 1;
 
 CREATE SEQUENCE id_envio_seq START WITH 1000 INCREMENT BY 1 MAXVALUE 9999 MINVALUE 1000;
 
@@ -53,45 +53,19 @@ CREATE TYPE type_estado_repartidor AS ENUM ('Disponible', 'Ocupado');
 
 CREATE TYPE type_roles AS ENUM ('admin', 'comercio', 'repartidor');
 
-CREATE TYPE type_vehiculo AS ENUM ('Moto', 'Carro', 'Camión', 'Bicicleta');
+CREATE TYPE type_vehiculo AS ENUM ('Carro', 'A pie', 'Bicicleta');
 
 -- Creando Tablas
-CREATE TABLE repartidor_vehiculo (
-    id_vehiculo id_vehiculo_seq,
-    cedula_repartidor VARCHAR(10) NOT NULL,
-    tipo_vehiculo type_vehiculo NOT NULL,
-    color VARCHAR(10) NOT NULL,
-    marca VARCHAR(10) NOT NULL,
-    modelo VARCHAR(10) NOT NULL,
-    CONSTRAINT pk_repartidor_vehiculo PRIMARY KEY (id_vehiculo)
-);
-
-CREATE TABLE rol_repar (
-    cedula VARCHAR(10),
-    email_usuario VARCHAR(350) NOT NULL,
-    name VARCHAR(25) NOT NULL,
-    lastname VARCHAR(25) NOT NULL,
-    date DATE NOT NULL,
-    CONSTRAINT pk_rol_repar PRIMARY KEY (cedula)
-);
-
 CREATE TABLE usuarios(
-    email VARCHAR(350),
-    rol type_roles,
+    email VARCHAR(50),
+    rol type_roles NOT NULL,
     CONSTRAINT pk_usuarios PRIMARY KEY (email)
 );
 
-CREATE TABLE pedidos_asignado(
-    id_envio id_envio_seq,
-    cedula_admin VARCHAR(10) NOT NULL,
-    cedula_repartidor VARCHAR(10) NOT NULL,
-    codigo_ruta_pedido codigo_pedido_seq NOT NULL,
-    CONSTRAINT pk_pedidos_asignados PRIMARY KEY (id_envio)
-);
-
+-- Admismistrador
 CREATE TABLE rol_admin (
     cedula VARCHAR(10),
-    email_usuario VARCHAR(350) NOT NULL,
+    email_usuario VARCHAR(50) NOT NULL,
     name VARCHAR(25) NOT NULL,
     lastname VARCHAR(25) NOT NULL,
     telefono VARCHAR(10) NOT NULL,
@@ -100,9 +74,10 @@ CREATE TABLE rol_admin (
     CONSTRAINT pk_rol_admin PRIMARY KEY (cedula)
 );
 
+-- Comercio
 CREATE TABLE rol_comercio (
-    codigo_comercio codigo_comercio_seq,
-    email_comercio VARCHAR(350) NOT NULL,
+    codigo_comercio INT DEFAULT NEXTVAL('codigo_comercio_seq'),
+    email_comercio VARCHAR(50) NOT NULL,
     name_company VARCHAR(30) NOT NULL,
     telefono VARCHAR(10) NOT NULL,
     municipio VARCHAR(15) NOT NULL,
@@ -113,10 +88,39 @@ CREATE TABLE rol_comercio (
     CONSTRAINT pk_rol_comercio PRIMARY KEY (codigo_comercio)
 );
 
+-- Repartidores
+CREATE TABLE rol_repar (
+    cedula VARCHAR(10),
+    email_usuario VARCHAR(50) NOT NULL,
+    name VARCHAR(25) NOT NULL,
+    lastname VARCHAR(25) NOT NULL,
+    date DATE NOT NULL,
+    CONSTRAINT pk_rol_repar PRIMARY KEY (cedula)
+);
+
+CREATE TABLE repartidor_vehiculo (
+    id_vehiculo INT DEFAULT NEXTVAL('id_vehiculo_seq'),
+    cedula_repartidor VARCHAR(10) NOT NULL,
+    tipo_vehiculo type_vehiculo NOT NULL,
+    color VARCHAR(10) NOT NULL,
+    marca VARCHAR(10) NOT NULL,
+    modelo VARCHAR(10) NOT NULL,
+    CONSTRAINT pk_repartidor_vehiculo PRIMARY KEY (id_vehiculo)
+);
+
+CREATE TABLE pedidos_asignado(
+    id_envio INT DEFAULT NEXTVAL('id_envio_seq'),
+    cedula_admin VARCHAR(10) NOT NULL,
+    cedula_repartidor VARCHAR(10) NOT NULL,
+    codigo_ruta_pedido INT NOT NULL,
+    CONSTRAINT pk_pedidos_asignados PRIMARY KEY (id_envio)
+);
+
+
 CREATE TABLE pedidos(
-    codigo_pedido codigo_pedido_seq,
-    id_codigo_comercio  codigo_comercio_seq NOT NULL,
-    email_user VARCHAR(350) NOT NULL,
+    codigo_pedido INT DEFAULT NEXTVAL('codigo_pedido_seq'),
+    id_codigo_comercio INT NOT NULL,
+    email_user VARCHAR(50) NOT NULL,
     user_name VARCHAR(25) NOT NULL,
     user_phone VARCHAR(10) NOT NULL,
     address_user VARCHAR(20) NOT NULL,
@@ -138,7 +142,8 @@ ADD
 ALTER TABLE
     rol_repar
 ADD
-    CONSTRAINT fk_rol_repartidor_usuarios FOREIGN KEY (email_usuario) REFERENCES usuarios(email);
+    CONSTRAINT fk_rol_repartidor_usuarios FOREIGN KEY (email_usuario, rol) REFERENCES usuarios(email, rol);
+    
 
 ALTER TABLE
     pedidos_asignado
@@ -169,3 +174,11 @@ ALTER TABLE
     pedidos
 ADD
     CONSTRAINT fk_pedidos_rol_comercio FOREIGN KEY (id_codigo_comercio) REFERENCES rol_comercio(codigo_comercio);
+
+INSERT INTO usuarios 
+    VALUES ('david.girald0@hotmail.com', 'admin'),
+            ('gamboa@gmail.com', 'repartidor'),
+            ('estefa@gmail.com', 'comercio');
+
+INSERT INTO rol_repar (cedula, email_usuario, name, lastname, date)
+    VALUES ('1234567890', 'gamboa@gmail.com', 'Brayan', 'Gamboa', '2005-04-19');
