@@ -41,16 +41,18 @@
  *             - lastname
  *             - phone
  *          example:
- *             id_user: 1
- *             email: estefa@gmail.com
- *             document: 1018223445
- *             name: Estefania
- *             lastname: Salazar
- *             phone: 3143230456
- *             delivery_man_status: En reparto
- *             vehicle: A pie
- *             rol: Repartidor
- *             
+ *             "id_user": 1
+ *             "email": "estefa@gmail.com"
+ *             "document": 1018223445
+ *             "name": "Estefania"
+ *             "lastname": "Salazar"
+ *             "phone": "3143230456"
+ *             "delivery_man_status": "En reparto"
+ *             "vehicle": "A pie"
+ *             "rol": "Repartidor"
+ */
+
+/**            
  * @swagger
  * /allUsers:
  *  get:
@@ -61,7 +63,9 @@
  *          description: Trae todos los usuarios
  *      508: 
  *          description: Error al traer los usuarios
- * 
+ */
+
+/** 
  * @swagger
  * /postUser:
  *  post:
@@ -73,6 +77,7 @@
  *              application/json:
  *                 schema:
  *                   type: object
+ *                   $ref: '#/components/schemas/Users'
  *                  
  *    responses:
  *      201:
@@ -80,7 +85,9 @@
  *      508:
  *          description: Error al crear el usuario
  * 
- * 
+ */ 
+
+/**
  * @swagger
  * /putUser/:id:
  *  put:
@@ -91,6 +98,7 @@
  *          name: _id
  *          schema:
  *              type: objectId
+ *              $ref: '#/components/schemas/Users'
  *          required: true
  *          description: Identificador del User
  *      requestBody:
@@ -104,7 +112,9 @@
  *              description: Usuario con id ${id}, editado satisfactoriamente
  *          508:
  *              description: Error al editar el usuario
- * 
+ */
+
+/**
  * @swagger
  * /deleteUser/:id:
  *  delete:

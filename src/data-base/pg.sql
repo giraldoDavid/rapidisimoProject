@@ -41,7 +41,7 @@ CREATE SEQUENCE id_assigned_order_seq START WITH 1000000 INCREMENT BY 1 MAXVALUE
 -- Creando tipos
 CREATE TYPE type_delivery_man_status AS ENUM ('En espera', 'En reparto', 'Entregadas');
 
-CREATE TYPE type_rol AS ENUM ('Admin', 'Company', 'Delivery man');
+CREATE TYPE type_rol AS ENUM ('Admin', 'Delivery man');
 
 CREATE TYPE type_vehicle AS ENUM ('Carro', 'A pie', 'Bicicleta');
 
@@ -53,7 +53,7 @@ CREATE TABLE users (
     name VARCHAR(50) NOT NULL,
     lastname VARCHAR(50) NOT NULL,
     phone VARCHAR(13) NOT NULL,
-    -- delivery_man_status type_delivery_man_status,
+    delivery_man_status type_delivery_man_status,
     vehicle type_vehicle,
     rol type_rol NOT NULL,
     CONSTRAINT pk_users PRIMARY KEY (id_user)
@@ -115,7 +115,7 @@ VALUES
         'Estefanía',
         'Salazar',
         '3174884944',
-        'Company'
+        'Admin'
     );
 
 INSERT INTO
