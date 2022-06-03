@@ -1,13 +1,14 @@
 import { Router } from 'express';
 const router = Router();
 
-import { getAllUsuarios, postUsuario, patchUsuario, deleteUsuario } from '../controllers/index.controller';
+import { getAllUsers, postUser, putUsuario, patchUsuario, deleteUsuario } from '../controllers/index.controller';
 
-
-router.get('/allUsers', getAllUsuarios);
-router.post('/postUser', postUsuario);
-router.patch('/patchUser/:email', patchUsuario);
-router.delete('/deleteUser/:email', deleteUsuario);
+// Tabla usuarios
+router.get('/allUsers', getAllUsers);
+router.post('/postUser', postUser);
+router.put('/putUser/:id', putUsuario);
+router.patch('/patchUser/:id', patchUsuario);
+router.delete('/deleteUser/:id', deleteUsuario);
 
 
 export default router;
