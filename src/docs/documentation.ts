@@ -22,7 +22,7 @@
  *                 type: string
  *                 description: Lastname of Users
  *             phone:
- *                 type: number
+ *                 type: string
  *                 description: Phone of Users
  *             delivery_man_status:
  *                 type: string

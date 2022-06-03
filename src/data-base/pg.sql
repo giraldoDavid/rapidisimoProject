@@ -1,184 +1,238 @@
 -- Borrando Database (en caso de que exista)
 -- DROP DATABASE IF EXISTS rapidisimo;
 -- Borrando secuencias (en caso de que existan)
-DROP SEQUENCE IF EXISTS id_vehiculo_seq CASCADE;
+DROP SEQUENCE IF EXISTS id_users_seq CASCADE;
 
-DROP SEQUENCE IF EXISTS id_envio_seq CASCADE;
+DROP SEQUENCE IF EXISTS id_company_seq CASCADE;
 
-DROP SEQUENCE IF EXISTS codigo_pedido_seq CASCADE;
+DROP SEQUENCE IF EXISTS id_order_seq CASCADE;
 
-DROP SEQUENCE IF EXISTS codigo_comercio_seq CASCADE;
+DROP SEQUENCE IF EXISTS id_assigned_order_seq CASCADE;
 
 -- Borrando tipos (en caso de que existan)
 DROP TYPE IF EXISTS type_estado_pedido CASCADE;
 
-DROP TYPE IF EXISTS type_vehiculo CASCADE;
+DROP TYPE IF EXISTS type_vehicle CASCADE;
 
-DROP TYPE IF EXISTS type_roles CASCADE;
-
-DROP TYPE IF EXISTS type_estado_repartidor CASCADE;
+DROP TYPE IF EXISTS type_rol CASCADE;
 
 -- Borrando Tablas (en caso de que existan)
-DROP TABLE IF EXISTS repartidor_vehiculo CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
 
-DROP TABLE IF EXISTS usuarios CASCADE;
+DROP TABLE IF EXISTS company CASCADE;
 
-DROP TABLE IF EXISTS rol_repar CASCADE;
+DROP TABLE IF EXISTS orders CASCADE;
 
-DROP TABLE IF EXISTS pedidos_asignado CASCADE;
-
-DROP TABLE IF EXISTS rol_admin CASCADE;
-
-DROP TABLE IF EXISTS pedidos CASCADE;
-
-DROP TABLE IF EXISTS rol_comercio CASCADE;
+DROP TABLE IF EXISTS assigned_order CASCADE;
 
 -- Creando Database
 -- CREATE DATABASE rapidisimo WITH ENCODING = 'UTF8';
 -- Seleccionando Database
 -- \c rapidisimo;
 -- Creando secuencias
-CREATE SEQUENCE id_vehiculo_seq START WITH 1 INCREMENT BY 1 MAXVALUE 999 MINVALUE 1;
+CREATE SEQUENCE id_users_seq START WITH 1 INCREMENT BY 1 MAXVALUE 9999 MINVALUE 1;
 
-CREATE SEQUENCE id_envio_seq START WITH 1000 INCREMENT BY 1 MAXVALUE 9999 MINVALUE 1000;
+CREATE SEQUENCE id_company_seq START WITH 10000 INCREMENT BY 1 MAXVALUE 99999 MINVALUE 10000;
 
-CREATE SEQUENCE codigo_pedido_seq START WITH 10000 INCREMENT BY 1 MAXVALUE 99999 MINVALUE 10000;
+CREATE SEQUENCE id_order_seq START WITH 100000 INCREMENT BY 1 MAXVALUE 999999 MINVALUE 100000;
 
-CREATE SEQUENCE codigo_comercio_seq START WITH 100000 INCREMENT BY 1 MAXVALUE 999999 MINVALUE 100000;
+CREATE SEQUENCE id_assigned_order_seq START WITH 1000000 INCREMENT BY 1 MAXVALUE 9999999 MINVALUE 1000000;
 
 -- Creando tipos
-CREATE TYPE type_estado_pedido AS ENUM ('Pendiente', 'Enviado', 'Entregado');
+CREATE TYPE type_delivery_man_status AS ENUM ('En espera', 'En reparto', 'Entregadas');
 
-CREATE TYPE type_estado_repartidor AS ENUM ('Disponible', 'Ocupado');
+CREATE TYPE type_rol AS ENUM ('Admin', 'Company', 'Delivery man');
 
-CREATE TYPE type_roles AS ENUM ('admin', 'comercio', 'repartidor');
-
-CREATE TYPE type_vehiculo AS ENUM ('Carro', 'A pie', 'Bicicleta');
+CREATE TYPE type_vehicle AS ENUM ('Carro', 'A pie', 'Bicicleta');
 
 -- Creando Tablas
-CREATE TABLE usuarios(
-    email VARCHAR(50),
-    rol type_roles NOT NULL,
-    CONSTRAINT pk_usuarios PRIMARY KEY (email)
+CREATE TABLE users (
+    id_user INT DEFAULT NEXTVAL('id_users_seq'),
+    email VARCHAR(50) NOT NULL,
+    document INTEGER NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    lastname VARCHAR(50) NOT NULL,
+    phone VARCHAR(13) NOT NULL,
+    -- delivery_man_status type_delivery_man_status,
+    vehicle type_vehicle,
+    rol type_rol NOT NULL,
+    CONSTRAINT pk_users PRIMARY KEY (id_user)
 );
 
--- Admismistrador
-CREATE TABLE rol_admin (
-    cedula VARCHAR(10),
-    email_usuario VARCHAR(50) NOT NULL,
-    name VARCHAR(25) NOT NULL,
-    lastname VARCHAR(25) NOT NULL,
-    telefono VARCHAR(10) NOT NULL,
-    estado_repartidor type_estado_repartidor NOT NULL,
-    date DATE NOT NULL,
-    CONSTRAINT pk_rol_admin PRIMARY KEY (cedula)
+CREATE TABLE company (
+    id_company INT DEFAULT NEXTVAL('id_company_seq'),
+    email_company VARCHAR(50) NOT NULL,
+    name_company VARCHAR(50) NOT NULL,
+    phone_company VARCHAR(13) NOT NULL,
+    city VARCHAR(50) NOT NULL,
+    neighborhood VARCHAR(50) NOT NULL,
+    streat VARCHAR(50) NOT NULL,
+    career VARCHAR(50) NOT NULL,
+    close_time_company TIME NOT NULL,
+    CONSTRAINT pk_company PRIMARY KEY (id_company)
 );
 
--- Comercio
-CREATE TABLE rol_comercio (
-    codigo_comercio INT DEFAULT NEXTVAL('codigo_comercio_seq'),
-    email_comercio VARCHAR(50) NOT NULL,
-    name_company VARCHAR(30) NOT NULL,
-    telefono VARCHAR(10) NOT NULL,
-    municipio VARCHAR(15) NOT NULL,
-    barrio VARCHAR(10) NOT NULL,
-    calle VARCHAR(9) NOT NULL,
-    carrera VARCHAR(7) NOT NULL,
-    rango_hora_laboral VARCHAR(10) NOT NULL,
-    CONSTRAINT pk_rol_comercio PRIMARY KEY (codigo_comercio)
+CREATE TABLE orders (
+    id_order INT DEFAULT NEXTVAL('id_order_seq'),
+    id_company INT NOT NULL,
+    client_email VARCHAR(50) NOT NULL,
+    client_name VARCHAR(50) NOT NULL,
+    client_phone VARCHAR(13) NOT NULL,
+    client_address VARCHAR(50) NOT NULL,
+    date_delivery DATE NOT NULL,
+    estimated_time TIME NOT NULL,
+    order_cost INT NOT NULL,
+    image_order VARCHAR NOT NULL,
+    status_order type_delivery_man_status NOT NULL,
+    rating INT NOT NULL,
+    CONSTRAINT pk_orders PRIMARY KEY (id_order),
+    CONSTRAINT fk_orders_Company FOREIGN KEY (id_company) REFERENCES company(id_company)
 );
 
--- Repartidores
-CREATE TABLE rol_repar (
-    cedula VARCHAR(10),
-    email_usuario VARCHAR(50) NOT NULL,
-    name VARCHAR(25) NOT NULL,
-    lastname VARCHAR(25) NOT NULL,
-    date DATE NOT NULL,
-    CONSTRAINT pk_rol_repar PRIMARY KEY (cedula)
+CREATE TABLE assigned_order (
+    id_assigned INT DEFAULT NEXTVAL('id_assigned_order_seq'),
+    id_user INT NOT NULL,
+    id_order INT NOT NULL,
+    CONSTRAINT pk_assigned_order PRIMARY KEY (id_assigned),
+    CONSTRAINT fk_assigned_order_User FOREIGN KEY (id_user) REFERENCES users(id_user),
+    CONSTRAINT fk_assigned_order_Order FOREIGN KEY (id_order) REFERENCES orders(id_order)
 );
 
-CREATE TABLE repartidor_vehiculo (
-    id_vehiculo INT DEFAULT NEXTVAL('id_vehiculo_seq'),
-    cedula_repartidor VARCHAR(10) NOT NULL,
-    tipo_vehiculo type_vehiculo NOT NULL,
-    color VARCHAR(10) NOT NULL,
-    marca VARCHAR(10) NOT NULL,
-    modelo VARCHAR(10) NOT NULL,
-    CONSTRAINT pk_repartidor_vehiculo PRIMARY KEY (id_vehiculo)
+INSERT INTO
+    users (email, document, name, lastname, phone, rol)
+VALUES
+    (
+        'david.giraldo@gmail.com',
+        438987987,
+        'David',
+        'Giraldo',
+        '3237486764',
+        'Admin'
+    ),
+    (
+        'estefania123@gmail.com',
+        '1020638950',
+        'Estefanía',
+        'Salazar',
+        '3174884944',
+        'Company'
+    );
+
+INSERT INTO
+    users (
+        email,
+        document,
+        name,
+        lastname,
+        phone,
+        vehicle,
+        rol
+    )
+VALUES
+    (
+        'bsgv2005@gmail.com',
+        1020106835,
+        'Brayan',
+        'Gamboa',
+        '3136705458',
+        'Carro',
+        'Delivery man'
+    );
+
+SELECT
+    *
+FROM
+    users;
+
+INSERT INTO
+    company (
+        email_company,
+        name_company,
+        phone_company,
+        city,
+        neighborhood,
+        streat,
+        career,
+        close_time_company
+    )
+VALUES
+    (
+        'models@gmail.com',
+        'Models Company S.A.S',
+        '3174889744',
+        'Bogotá',
+        'Ciudad Bolívar',
+        'Calle 1',
+        'Carrera 3',
+        '18:00:00'
+    ),
+    (
+        'tauro@gmail.com',
+        'Tauro Gym',
+        '3456789123',
+        'Cali',
+        'Santa Rita',
+        'Calle 102',
+        'Carrera 129',
+        '21:00:00'
+    );
+
+SELECT
+    *
+FROM
+    company;
+
+INSERT INTO orders (
+    id_company,
+    client_email,
+    client_name,
+    client_phone,
+    client_address,
+    date_delivery,
+    estimated_time,
+    order_cost,
+    image_order,
+    status_order,
+    rating
+)
+VALUES
+    (
+        10000,
+        'raul@gmail.com',
+        'Raul Gómez',
+        '3136705458',
+        'Cra. 1 # 1 - 1 Medellín - Colombia',
+        '2020-05-01',
+        '10:00:00',
+        4000,
+        'http.cat/200',
+        'En espera',
+        5
+    ),(
+        10001,
+        'isa123@gmail.com',
+        'Isabella Taborda',
+        '3535621234',
+        'Cra. 5 # 34 - 4 Medellín - Colombia',
+        '2020-05-05',
+        '12:00:00',
+        6000,
+        'http.cat/201',
+        'En reparto',
+        4
+    );
+
+SELECT * FROM orders;	
+
+INSERT INTO assigned_order (
+    id_user,
+    id_order
+) VALUES(
+    3,
+    100001 
+),(
+    3,
+    100000
 );
 
-CREATE TABLE pedidos_asignado(
-    id_envio INT DEFAULT NEXTVAL('id_envio_seq'),
-    cedula_admin VARCHAR(10) NOT NULL,
-    cedula_repartidor VARCHAR(10) NOT NULL,
-    codigo_ruta_pedido INT NOT NULL,
-    CONSTRAINT pk_pedidos_asignados PRIMARY KEY (id_envio)
-);
-
-
-CREATE TABLE pedidos(
-    codigo_pedido INT DEFAULT NEXTVAL('codigo_pedido_seq'),
-    id_codigo_comercio INT NOT NULL,
-    email_user VARCHAR(50) NOT NULL,
-    user_name VARCHAR(25) NOT NULL,
-    user_phone VARCHAR(10) NOT NULL,
-    address_user VARCHAR(20) NOT NULL,
-    fecha_entrega DATE NOT NULL,
-    hora_estimada VARCHAR(10) NOT NULL,
-    costo_pedido VARCHAR(6) NOT NULL,
-    estado type_estado_pedido NOT NULL,
-    calificacion VARCHAR(5) NOT NULL,
-    imagen VARCHAR NOT NULL,
-    CONSTRAINT pk_pedidos PRIMARY KEY (codigo_pedido)
-);
-
--- Creando llaves foraneas
-ALTER TABLE
-    repartidor_vehiculo
-ADD
-    CONSTRAINT fk_repartidor_vehiculo_rol_repartidor FOREIGN KEY (cedula_repartidor) REFERENCES rol_repar(cedula);
-
-ALTER TABLE
-    rol_repar
-ADD
-    CONSTRAINT fk_rol_repartidor_usuarios FOREIGN KEY (email_usuario, rol) REFERENCES usuarios(email, rol);
-    
-
-ALTER TABLE
-    pedidos_asignado
-ADD
-    CONSTRAINT fk_pedidos_asignados_rol_repar FOREIGN KEY (cedula_repartidor) REFERENCES rol_repar(cedula);
-
-ALTER TABLE
-    pedidos_asignado
-ADD
-    CONSTRAINT fk_pedidos_asignados_rol_admin FOREIGN KEY (cedula_admin) REFERENCES rol_admin(cedula);
-
-ALTER TABLE
-    rol_admin
-ADD
-    CONSTRAINT fk_rol_admin_usuarios FOREIGN KEY (email_usuario) REFERENCES usuarios(email);
-
-ALTER TABLE
-    rol_comercio
-ADD
-    CONSTRAINT fk_rol_comercio_usuarios FOREIGN KEY (email_comercio) REFERENCES usuarios(email);
-
-ALTER TABLE
-    pedidos_asignado
-ADD
-    CONSTRAINT fk_pedidos_asignados_pedidos FOREIGN KEY (codigo_ruta_pedido) REFERENCES pedidos(codigo_pedido);
-
-ALTER TABLE
-    pedidos
-ADD
-    CONSTRAINT fk_pedidos_rol_comercio FOREIGN KEY (id_codigo_comercio) REFERENCES rol_comercio(codigo_comercio);
-
-INSERT INTO usuarios 
-    VALUES ('david.girald0@hotmail.com', 'admin'),
-            ('gamboa@gmail.com', 'repartidor'),
-            ('estefa@gmail.com', 'comercio');
-
-INSERT INTO rol_repar (cedula, email_usuario, name, lastname, date)
-    VALUES ('1234567890', 'gamboa@gmail.com', 'Brayan', 'Gamboa', '2005-04-19');
+SELECT * FROM assigned_order;

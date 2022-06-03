@@ -4,7 +4,6 @@ import cors from "cors";
 import * as dotenv from 'dotenv';
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
-import path from "path";
 import router from './routes/index';
 
 dotenv.config();
@@ -20,7 +19,7 @@ const swaggerSpec = {
         },
         servers: [
             {
-                url: 'http://localhost:3000/',
+                url: 'http://localhost:4200/',
             }
         ]
     },
