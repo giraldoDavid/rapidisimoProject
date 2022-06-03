@@ -2,11 +2,31 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 import * as dotenv from 'dotenv';
-
+import swaggerUi from "swagger-ui-express";
+import swaggerJsdoc from "swagger-jsdoc";
+import path from "path";
 import router from './routes/index';
 
 dotenv.config();
 const app = express();
+
+//Establecer conexión con Swagger 
+const swaggerSpec = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'Documentación Rapidisimo',
+            version: '1.0.0'
+        },
+        servers: [
+            {
+                url: 'http://localhost:3000/',
+            }
+        ]
+    },
+    apis: ['./dist/docs/*.js']
+}
+
 
 //Midelware
 app.use(express.json());
@@ -21,6 +41,8 @@ app.use("/api/", (req, res, next) => {
 //routes
 app.use("/", router);
 
+//Swagger
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(swaggerSpec)))
 
 //Establecer puerto
 app.set("port", process.env.PORT || 3000);
