@@ -4,7 +4,9 @@ import cors from "cors";
 import * as dotenv from 'dotenv';
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
+
 import router from './routes/index';
+import { connectToDatabase } from './data-base/config.mongodb';
 
 dotenv.config();
 const app = express();
@@ -51,7 +53,18 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(swaggerSpec))
 //Establecer puerto
 app.set("port", process.env.PORT || 3000);
 
+// Conectar con la base de datos MONGODB
+connectToDatabase()
+    .then(() => {
+        console.log("Connected to database");
+    })
+    .catch((error: Error) => {
+        console.error("Database connection failed", error);
+        process.exit();
+    });
+
 //Iniciar el servidor
 app.listen(app.get("port"), () => {
     console.log(`Server started at http://localhost:${app.get("port")}`);
 });
+
