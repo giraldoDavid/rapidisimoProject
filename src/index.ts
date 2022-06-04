@@ -6,6 +6,7 @@ import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
 
 import router from './routes/index.routes';
+import routerMap from "./routes/index.mongo.routes";
 import { connectToDatabase } from './data-base/config.mongodb';
 
 dotenv.config();
@@ -46,6 +47,7 @@ app.use("/api/", (req, res, next) => {
 
 //routes
 app.use("/", router);
+app.use("/", routerMap)
 
 //Swagger
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(swaggerSpec)))
