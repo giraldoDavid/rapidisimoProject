@@ -111,7 +111,7 @@ export const deleteOrder = async (req: Request, res: Response) => {
     } catch (error) {
         console.log(error);
         res.status(500).json({
-            message: 'Error al eliminar el usuario',
+            message: 'Error al eliminar la orden',
         });
     } finally {
         cliente.release(true)

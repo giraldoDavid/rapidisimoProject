@@ -91,7 +91,7 @@ export const deleteAssignedOrder = async (req: Request, res: Response) => {
     } catch (error) {
         console.log(error);
         res.status(500).json({
-            message: 'Error al eliminar el una orden asignada',
+            message: 'Error al eliminar una orden asignada',
         });
     } finally {
         cliente.release(true)

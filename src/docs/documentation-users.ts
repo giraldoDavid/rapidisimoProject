@@ -95,7 +95,7 @@
  *      tags: [Users]
  *      parameters:
  *        - in: path
- *          name: _id
+ *          name: id_user
  *          schema:
  *              type: objectId
  *              $ref: '#/components/schemas/Users'
@@ -122,7 +122,7 @@
  *      tags: [Users]
  *      parameters:
  *        - in: path
- *          name: _id
+ *          name: id_user
  *          schema:
  *              type: objectId
  *          required: true
@@ -133,3 +133,5 @@
  *          500:
  *              description: Error al eliminar el usuario
  */ 
+
+
