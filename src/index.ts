@@ -15,11 +15,16 @@ const swaggerSpec = {
         openapi: '3.0.0',
         info: {
             title: 'Documentación Rapidisimo',
-            version: '1.0.0'
+            description: 'Documentación de la API de Rapidisimo, creada en TypeScript con Express, con bases de datos en PostgreSQL y MongoDB',
+            version: '1.0.0',
+            contact: {
+                name: 'Rapidisimo',
+                email: 'dev.rapidisimo@gmail.com'
+            },
         },
         servers: [
             {
-                url: 'http://localhost:4200/',
+                url: `http://localhost:${process.env.PORT}/`,
             }
         ]
     },
