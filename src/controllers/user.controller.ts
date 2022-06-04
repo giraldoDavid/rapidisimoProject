@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { pool } from '../data-base/config.postgres';
 import { QueryResult } from 'pg';
+import { createValidator } from 'express-joi-validation';
+const validator = createValidator();
 
 // Traer todos los usuarios
 export const getAllUsers = async (req: Request, res: Response) => {

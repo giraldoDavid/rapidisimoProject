@@ -5,7 +5,7 @@ import * as dotenv from 'dotenv';
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
 
-import router from './routes/index';
+import router from './routes/index.routes';
 import { connectToDatabase } from './data-base/config.mongodb';
 
 dotenv.config();

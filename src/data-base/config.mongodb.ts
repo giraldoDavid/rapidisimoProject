@@ -1,6 +1,6 @@
 import * as mongoDB from "mongodb";
 import * as dotenv from "dotenv";
-import { locationMap } from '../models/map';
+import { locationMap } from '../models/map.models';
 
 export const collection: { map?: mongoDB.Collection<locationMap> } = {};
 

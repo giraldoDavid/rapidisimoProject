@@ -2,6 +2,11 @@ import { Request, Response } from 'express';
 import { pool } from '../data-base/config.postgres';
 import { QueryResult } from 'pg';
 
+// Importando los esquemas para las rutas
+import { assignedOrderSchema } from "../models/assigned_order.models";
+
+import { AnyMxRecord } from 'dns';
+
 // Obtener todos las empresas y/o compañias registradas
 export const getAllCompanies = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
@@ -19,7 +24,7 @@ export const getAllCompanies = async (req: Request, res: Response) => {
 };
 
 // Crear una nueva empresa
-export const postCompany = async (req: Request, res: Response) => {
+export const postCompany = async(req: Request, res: Response) => {
     let cliente = await pool.connect();
     const {email_company, name_company, phone_company, city, neighborhood, streat, career, close_time_company} = req.body;
     try {

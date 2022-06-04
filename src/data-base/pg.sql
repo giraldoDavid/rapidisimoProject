@@ -39,7 +39,9 @@ CREATE SEQUENCE id_order_seq START WITH 100000 INCREMENT BY 1 MAXVALUE 999999 MI
 CREATE SEQUENCE id_assigned_order_seq START WITH 1000000 INCREMENT BY 1 MAXVALUE 9999999 MINVALUE 1000000;
 
 -- Creando tipos
-CREATE TYPE type_delivery_man_status AS ENUM ('En espera', 'En reparto', 'Entregadas');
+CREATE TYPE type_order_status AS ENUM ('En espera', 'En reparto', 'Entregadas');
+
+CREATE TYPE type_delivery_man_status AS ENUM ('Disponible', 'Ocupado', 'Fuera de servicio');
 
 CREATE TYPE type_rol AS ENUM ('Admin', 'Delivery man');
 
@@ -83,7 +85,7 @@ CREATE TABLE orders (
     estimated_time TIME NOT NULL,
     order_cost INT NOT NULL,
     image_order VARCHAR NOT NULL,
-    status_order type_delivery_man_status NOT NULL,
+    status_order type_order_status NOT NULL,
     rating INT NOT NULL,
     CONSTRAINT pk_orders PRIMARY KEY (id_order),
     CONSTRAINT fk_orders_Company FOREIGN KEY (id_company) REFERENCES company(id_company)
@@ -135,6 +137,7 @@ VALUES
         'Brayan',
         'Gamboa',
         '3136705458',
+        'Disponible',
         'Carro',
         'Delivery man'
     );
