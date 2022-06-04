@@ -1,4 +1,4 @@
-const Joi = require('joi');
+import * as Joi from 'joi';
 
 export const assignedOrderSchema = Joi.object().keys({
     order_id: Joi.number().integer(),

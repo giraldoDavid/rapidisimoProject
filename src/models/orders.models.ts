@@ -1,4 +1,4 @@
-const Joi = require('joi');
+import * as Joi from 'joi';
 
 export const ordersSchema = Joi.object().keys({
     id_company: Joi.number().min(10000).max(99999).required(),

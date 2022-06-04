@@ -1,4 +1,4 @@
-const Joi = require('joi');
+import * as Joi from 'joi';
 
 export const companySchema = Joi.object().keys({
     email_company: Joi.string().email().max(50).required(),

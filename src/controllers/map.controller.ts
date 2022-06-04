@@ -4,7 +4,7 @@ import { collection } from "../data-base/config.mongodb";
 
 
 //Traer toda la información
-export const getAllMap = async (req: Request, res: Response) => {
+export const getAllMaps = async (req: Request, res: Response) => {
     try {
         let localizacion = await collection.map.find({}).toArray();
         res.status(201).json(localizacion);
@@ -36,7 +36,7 @@ export const putMap = async (req: Request, res: Response) => {
     const id = req?.params?.id;
     try {
         const updatedLocation = req.body;
-        const query = { id: new ObjectId(id) };
+        const query = { _id: new ObjectId(id) };
         const result = await collection.map.updateOne(query, { $set: updatedLocation });
         res.status(201).json(`Locación con id: ${id}, editado satisfactoriamente`);
     } catch (error) {
@@ -51,7 +51,7 @@ export const putMap = async (req: Request, res: Response) => {
 export const deleteMap = async (req: Request, res: Response) => {
     const id = req?.params?.id;
     try {
-        const query = { id: new ObjectId(id) };
+        const query = { _id: new ObjectId(id) };
         const result = await collection.map.deleteOne(query);
         res.status(201).json(`Locación con id: ${id}, eliminada satisfactoriamente`);
     } catch (error) {
