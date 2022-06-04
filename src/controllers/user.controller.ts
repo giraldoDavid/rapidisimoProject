@@ -41,7 +41,7 @@ export const postUser = async (req: Request, res: Response) => {
 }
 
 // Editar usuario PUT
-export const putUsuario = async (req: Request, res: Response) => {
+export const putUser = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     let id = req.params.id;
     try {
@@ -60,7 +60,7 @@ export const putUsuario = async (req: Request, res: Response) => {
 }
 
 // Editar usuario PATCH
-export const patchUsuario = async (req: Request, res: Response) => {
+export const patchUser = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     let id = req.params.id;
     try {
@@ -85,7 +85,7 @@ export const patchUsuario = async (req: Request, res: Response) => {
 }
 
 // Eliminar usuario
-export const deleteUsuario = async (req: Request, res: Response) => {
+export const deleteUser = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     let id = req.params.id;
     try {
