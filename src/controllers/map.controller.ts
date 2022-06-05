@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { ObjectId } from "mongodb";
+import { ListCollectionsCursor, ObjectId } from "mongodb";
 import { collection } from "../data-base/config.mongodb";
 
 
@@ -16,6 +16,21 @@ export const getAllMaps = async (req: Request, res: Response) => {
         
     }
 }
+
+// Traer una localización por id
+export const getMapById = async (req: Request, res: Response) => {
+    let id = req.params.id;
+    try {
+        let localizacion = await collection.map.findOne({ _id: new ObjectId(id) });
+        res.status(201).json(localizacion);
+    } catch(error) {
+        console.log(error);
+        res.status(508).send({
+            message: 'Error al traer la localización',
+        });
+    }
+}
+
 
 //Crear una nueva localización
 export const postMap = async (req: Request, res: Response) => {
