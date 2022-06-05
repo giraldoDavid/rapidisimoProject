@@ -51,7 +51,7 @@
  *              application/json:
  *                 schema:
  *                   type: object
- *                   $ref: '#/components/schemas/Users'
+ *                   $ref: '#/components/schemas/Assigned Order'
  *                  
  *    responses:
  *      201:
@@ -72,7 +72,7 @@
  *          name: id_assigned
  *          schema:
  *              type: objectId
- *              $ref: '#/components/schemas/Users'
+ *              $ref: '#/components/schemas/Assigned Order'
  *          required: true
  *          description: Identificador de la orden asignada
  *      requestBody:

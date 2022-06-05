@@ -90,7 +90,7 @@
  *              application/json:
  *                 schema:
  *                   type: object
- *                   $ref: '#/components/schemas/Users'
+ *                   $ref: '#/components/schemas/Orders'
  *                  
  *    responses:
  *      200:
@@ -111,7 +111,7 @@
  *          name: id_order
  *          schema:
  *              type: objectId
- *              $ref: '#/components/schemas/Users'
+ *              $ref: '#/components/schemas/Orders'
  *          required: true
  *          description: Identificador de la orden
  *      requestBody:

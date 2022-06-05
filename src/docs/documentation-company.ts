@@ -81,7 +81,7 @@
  *              application/json:
  *                 schema:
  *                   type: object
- *                   $ref: '#/components/schemas/Users'
+ *                   $ref: '#/components/schemas/Company'
  *                  
  *    responses:
  *      200:
@@ -102,7 +102,7 @@
  *          name: id_company
  *          schema:
  *              type: objectId
- *              $ref: '#/components/schemas/Users'
+ *              $ref: '#/components/schemas/Company'
  *          required: true
  *          description: Identificador de la empresa
  *      requestBody:
