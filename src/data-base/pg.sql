@@ -93,10 +93,10 @@ CREATE TABLE orders (
 
 CREATE TABLE assigned_order (
     id_assigned INT DEFAULT NEXTVAL('id_assigned_order_seq'),
-    id_user INT NOT NULL,
+    id_delivery_man INT NOT NULL,
     id_order INT NOT NULL,
     CONSTRAINT pk_assigned_order PRIMARY KEY (id_assigned),
-    CONSTRAINT fk_assigned_order_User FOREIGN KEY (id_user) REFERENCES users(id_user),
+    CONSTRAINT fk_assigned_order_User FOREIGN KEY (id_delivery_man) REFERENCES users(id_user),
     CONSTRAINT fk_assigned_order_Order FOREIGN KEY (id_order) REFERENCES orders(id_order)
 );
 
@@ -228,7 +228,7 @@ VALUES
 SELECT * FROM orders;	
 
 INSERT INTO assigned_order (
-    id_user,
+    id_delivery_man,
     id_order
 ) VALUES(
     3,

@@ -10,6 +10,9 @@ import { getAllOrders, postOrder, putOrder, patchOrder, deleteOrder } from "../c
 import { getAllAssignedOrder, postAssignedOrder, putAssignedOrder, patchAssignedOrder, deleteAssignedOrder } 
     from "../controllers/assigned_order.controller";
 
+    // Importando consultas del repartidor
+import { getDeliveryManById, getOrdersOfDeliveryMan } from "../controllers/queries/deliveryman.controller";
+
 // Importando los esquemas para las rutas
 import { companySchema, companySchemaPatch } from "../models/company.models";
 import { assignedOrderSchemaPatch, assignedOrderSchema, } from "../models/assigned_order.models";
@@ -43,5 +46,10 @@ router.post("/postAssignedOrder", validator.body(assignedOrderSchema), postAssig
 router.put("/putAssignedOrder/:id", validator.body(assignedOrderSchema), putAssignedOrder );
 router.patch("/patchAssignedOrder/:id", validator.body(assignedOrderSchemaPatch), patchAssignedOrder );
 router.delete("/deleteAssignedOrder/:id", deleteAssignedOrder);
+
+// Consultas
+router.get("/deliveryMan/:id", getDeliveryManById);                 // Traer la información del repartidor segun id
+router.get("/ordersOfDeliveryMan/:id", getOrdersOfDeliveryMan);     // Traer todos las ordenes segun id del repartidor
+
 
 export default router;
