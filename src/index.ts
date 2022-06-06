@@ -4,7 +4,6 @@ import cors from "cors";
 import * as dotenv from 'dotenv';
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
-
 import router from './routes/index.routes';
 import routerMap from "./routes/index.mongo.routes";
 import { connectToDatabase } from './data-base/config.mongodb';
