@@ -7,6 +7,7 @@ import swaggerJsdoc from "swagger-jsdoc";
 import router from './routes/index.routes';
 import routerMap from "./routes/index.mongo.routes";
 import { connectToDatabase } from './data-base/config.mongodb';
+import { authRouter } from "./routes/auth.router";
 
 dotenv.config();
 const app = express();
@@ -46,7 +47,8 @@ app.use("/api/", (req, res, next) => {
 
 //routes
 app.use("/", router);
-app.use("/", routerMap)
+app.use("/", routerMap);
+app.use("/auth", authRouter);                   //ruta de autenticación
 
 //Swagger
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(swaggerSpec)))
