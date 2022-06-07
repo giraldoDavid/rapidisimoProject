@@ -45,15 +45,14 @@
  *             - career
  *             - close_time_company
  *          example:
- *             "id_company": 1
  *             "email_company": "nike123@gmail.com"
  *             "name_company": "Nike"
- *             "phone_company": 3123456789
- *             "city": "Medellin"
- *             "neighborhood": "Laureles"
- *             "streat": "32C"
- *             "career": "87A-168"
- *             "close_time_company": "7pm"
+ *             "phone_company": "3456789123"
+ *             "city": "Cali"
+ *             "neighborhood": "Santa Rita"
+ *             "streat": "Calle 102"
+ *             "career": "Carrera 129"
+ *             "close_time_company": "21:00:00"
  */
 
 /**            

@@ -21,9 +21,8 @@
  *             - id_delivery_man
  *             - id_order
  *          example:
- *             "id_assigned": 1
- *             "id_delivery_man": "1"
- *             "id_order": "1"
+ *             "id_user": 3
+ *             "id_order": 100000
  */
 
 /**            
