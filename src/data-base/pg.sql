@@ -10,11 +10,13 @@ DROP SEQUENCE IF EXISTS id_order_seq CASCADE;
 DROP SEQUENCE IF EXISTS id_assigned_order_seq CASCADE;
 
 -- Borrando tipos (en caso de que existan)
-DROP TYPE IF EXISTS type_estado_pedido CASCADE;
+DROP TYPE IF EXISTS type_order_status CASCADE;
 
-DROP TYPE IF EXISTS type_vehicle CASCADE;
+DROP TYPE IF EXISTS type_delivery_man_status CASCADE;
 
 DROP TYPE IF EXISTS type_rol CASCADE;
+
+DROP TYPE IF EXISTS type_vehicle CASCADE;
 
 -- Borrando Tablas (en caso de que existan)
 DROP TABLE IF EXISTS users CASCADE;
@@ -127,6 +129,7 @@ INSERT INTO
         name,
         lastname,
         phone,
+        delivery_man_status,
         vehicle,
         rol
     )

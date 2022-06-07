@@ -53,17 +53,17 @@
  *             - image
  *             - status_order
  *          example:
- *             "id_order": 1
- *             "id_company": 1
- *             "client_email": "camila@gmail.com"
- *             "client_name": "Camila Mejia"
- *             "client_phone": 3245434567
- *             "client_address": "Cr55c #89-79"
- *             "date_delivery": "15-06-2022"
- *             "estimated_time": "3 horas"
- *             "order_cost": 10000
- *             "image": "orden-3.png"
- *             "status_order": "En espera"
+ *             "id_company": 10001
+ *             "client_email": "isa123@gmail.com"
+ *             "client_name": "Isabella Taborda"
+ *             "client_phone": "3535621234"
+ *             "client_address": "Cra. 5 # 34 - 4 Medell¡n - Colombia"
+ *             "date_delivery": "2020-05-05T05:00:00.000Z"
+ *             "estimated_time": "12:00:00"
+ *             "order_cost": 6000
+ *             "image_order": "http.cat/201"
+ *             "status_order": "En reparto"
+ *             "rating": 5
  */
 /**            
  * @swagger

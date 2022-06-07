@@ -12,7 +12,7 @@ export const getAllCompanies = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     try {
         let result: QueryResult = await cliente.query('SELECT * FROM company');
-        res.status(200).json(result.rows);
+        res.status(201).json(result.rows);
     } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -31,10 +31,10 @@ export const postCompany = async(req: Request, res: Response) => {
         let result: QueryResult = await cliente.query
             ('INSERT INTO company (email_company, name_company, phone_company, city, neighborhood, streat, career, close_time_company) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
                 [name_company, email_company, phone_company, city, neighborhood, streat, career, close_time_company]);
-        res.status(200).json(`Empresa creada con exito`);
+        res.status(201).json(`Empresa creada con exito`);
     } catch (error) {
         console.log(error);
-        res.status(409).json({
+        res.status(508).json({
             message: 'Error al crear la empresa',
         });
     } finally {
@@ -51,10 +51,10 @@ export const putCompany = async (req: Request, res: Response) => {
         let result: QueryResult = await cliente.query
             ('UPDATE company SET email_company=$1, name_company=$2, phone_company=$3, city=$4, neighborhood=$5, streat=$6, career=$7, close_time_company=$8 WHERE id_company=$9',
                 [email_company, name_company, phone_company, city, neighborhood, streat, career, close_time_company, id_company]);
-        res.status(200).json(`Empresa con id: ${id_company}, editada satisfactoriamente`);
+        res.status(201).json(`Empresa con id: ${id_company}, editada satisfactoriamente`);
     } catch (error) {
         console.log(error);
-        res.status(409).json({
+        res.status(508).json({
             message: 'Error al editar la empresa',
         });
     } finally {
@@ -76,10 +76,10 @@ export const patchCompany = async (req: Request, res: Response) => {
             }
         });
         await cliente.query(`UPDATE company SET ${fieldsQuery.join()} WHERE id_user = '${id}'`);
-        res.status(200).json(`Compañia con id: ${id}, se ha editado satisfactoriamente`);
+        res.status(201).json(`Compañia con id: ${id}, se ha editado satisfactoriamente`);
     } catch (error) {
         console.log(error);
-        res.status(409).json({
+        res.status(508).json({
             message: 'Error al editar el compañia',
         });
     } finally {
@@ -93,10 +93,10 @@ export const deleteCompany = async (req: Request, res: Response) => {
     let id = req.params.id;
     try {
         let result: QueryResult = await cliente.query('DELETE FROM company WHERE id_company = $1', [id]);
-        res.status(200).json(`Empresa con id: ${id}, eliminada satisfactoriamente`);
+        res.status(201).json(`Empresa con id: ${id}, eliminada satisfactoriamente`);
     } catch (error) {
         console.log(error);
-        res.status(409).json({
+        res.status(508).json({
             message: 'Error al eliminar la empresa',
         });
     } finally {

@@ -41,15 +41,14 @@
  *             - lastname
  *             - phone
  *          example:
- *             "id_user": 1
- *             "email": "estefa@gmail.com"
- *             "document": 1018223445
- *             "name": "Estefania"
- *             "lastname": "Salazar"
- *             "phone": "3143230456"
- *             "delivery_man_status": "En reparto"
- *             "vehicle": "A pie"
- *             "rol": "Repartidor"
+ *              "email": "mariocardenas@gmail.com"
+ *              "document": 420106835
+ *              "name": "Mario"
+ *              "lastname": "Cárdenas"
+ *              "phone": "3136763849"
+ *              "delivery_man_status": "Ocupado"
+ *              "vehicle": "Carro"
+ *              "rol": "Delivery man"
  */
 
 /**            
