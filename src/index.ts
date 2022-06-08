@@ -48,9 +48,9 @@ app.use("/api/", (req, res, next) => {
 
 //routes
 app.use("/", router);
-app.use("/", routerMap);
-app.use('/mail',mailRouter);
-app.use("/auth", authRouter);                   //ruta de autenticación
+app.use("/", routerMap);                        // rutas para la Peticiones de MongoDB
+app.use('/mail',mailRouter);                    // rutas de mail SendGrid
+app.use("/auth", authRouter);                   // ruta de autenticación
 
 //Swagger
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(swaggerSpec)))

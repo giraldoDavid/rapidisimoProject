@@ -60,6 +60,7 @@ CREATE TABLE users (
     delivery_man_status type_delivery_man_status,
     vehicle type_vehicle,
     rol type_rol NOT NULL,
+    user_image VARCHAR,
     CONSTRAINT pk_users PRIMARY KEY (id_user)
 );
 
@@ -89,6 +90,7 @@ CREATE TABLE orders (
     image_order VARCHAR NOT NULL,
     status_order type_order_status NOT NULL,
     rating INT NOT NULL,
+    _id_tracking VARCHAR,
     CONSTRAINT pk_orders PRIMARY KEY (id_order),
     CONSTRAINT fk_orders_Company FOREIGN KEY (id_company) REFERENCES company(id_company)
 );
@@ -103,7 +105,7 @@ CREATE TABLE assigned_order (
 );
 
 INSERT INTO
-    users (email, document, name, lastname, phone, rol)
+    users (email, document, name, lastname, phone, rol, user_image)
 VALUES
     (
         'david.giraldo@gmail.com',
@@ -111,7 +113,8 @@ VALUES
         'David',
         'Giraldo',
         '3237486764',
-        'Admin'
+        'Admin',
+        'https://http.cat/200'
     ),
     (
         'estefania123@gmail.com',
@@ -119,7 +122,8 @@ VALUES
         'Estefanía',
         'Salazar',
         '3174884944',
-        'Admin'
+        'Admin',
+        'https://http.cat/200'
     );
 
 INSERT INTO
@@ -131,7 +135,8 @@ INSERT INTO
         phone,
         delivery_man_status,
         vehicle,
-        rol
+        rol,
+        user_image
     )
 VALUES
     (
@@ -142,7 +147,8 @@ VALUES
         '3136705458',
         'Disponible',
         'Carro',
-        'Delivery man'
+        'Delivery man',
+        'https://http.cat/202'
     );
 
 SELECT
@@ -199,7 +205,8 @@ INSERT INTO orders (
     order_cost,
     image_order,
     status_order,
-    rating
+    rating,
+    _id_tracking
 )
 VALUES
     (
@@ -213,7 +220,8 @@ VALUES
         4000,
         'http.cat/200',
         'En espera',
-        5
+        5,
+        '8479834INFG9JH8FY493'
     ),(
         10001,
         'isa123@gmail.com',
@@ -225,7 +233,8 @@ VALUES
         6000,
         'http.cat/201',
         'En reparto',
-        4
+        4,
+        'UYEFN9834INFG9JH8FY493'
     );
 
 SELECT * FROM orders;	

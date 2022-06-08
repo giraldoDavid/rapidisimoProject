@@ -1,5 +1,5 @@
-import express, { Request, Response } from "express";
-import auth from '../firebase/auth';
+import express from "express";
+import { createUser, logIn} from '../controllers/firebase/firebase.controller';
 import authSchema from "../schemas-joi/auth.schemajoi";
 import { createValidator } from 'express-joi-validation';
 const validator = createValidator();
@@ -8,22 +8,5 @@ export const authRouter = express.Router();
 
 authRouter.use(express.json());
 
-authRouter.post('/createUser', validator.body(authSchema), async (_req: Request, res: Response) => {
-    try {
-        const { email, password } = _req.body;
-        const result = await auth.createUser(email, password);
-        res.status(201).send(result)
-    } catch (error) {
-        res.status(500).send(error.message)
-    }
-})
-
-authRouter.post('/logIn', validator.body(authSchema), async (_req: Request, res: Response) => {
-    try {
-        const { email, password } = _req.body;
-        const result = await auth.logIn(email, password);
-        res.status(201).send(result)
-    } catch (error) {
-        res.status(500).send(error.message)
-    }
-})
+authRouter.post('/createUser', validator.body(authSchema), createUser)
+authRouter.post('/logIn', validator.body(authSchema), logIn )

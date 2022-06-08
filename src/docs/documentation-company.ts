@@ -101,7 +101,6 @@
  *          name: id_company
  *          schema:
  *              type: objectId
- *              $ref: '#/components/schemas/Company'
  *          required: true
  *          description: Identificador de la empresa
  *      requestBody:
@@ -110,11 +109,39 @@
  *              application/json:
  *                 schema:
  *                   type: object
+ *                   $ref: '#/components/schemas/Company'
  *      responses:
  *          200:
  *              description: Empresa con id ${id_company}, editada satisfactoriamente
  *          409:
  *              description: Error al editar la empresa
+ */
+
+/**
+ * @swagger
+ * /patchCompany/:id:
+ *  patch:
+ *      summary: Edit a Companies with the method PATCH
+ *      tags: [Company]
+ *      parameters:
+ *        - in: path
+ *          name: id_company
+ *          schema:
+ *              type: objectId
+ *          required: true
+ *          description: Identificador de la empresa
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                 schema:
+ *                   type: object
+ *                   $ref: '#/components/schemas/Company'
+ *      responses:
+ *          201:
+ *              description: Compañia con id ${id_company}, se ha editado satisfactoriamente
+ *          508:
+ *              description: Error al editar la compañia
  */
 
 /**

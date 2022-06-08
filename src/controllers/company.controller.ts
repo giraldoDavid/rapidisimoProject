@@ -3,7 +3,7 @@ import { pool } from '../data-base/config.postgres';
 import { QueryResult } from 'pg';
 
 // Importando los esquemas para las rutas
-import { assignedOrderSchema } from "../models/assigned_order.models";
+import { assignedOrderSchema } from "../schemas-joi/assigned_order.schemajoi";
 
 import { AnyMxRecord } from 'dns';
 
@@ -80,7 +80,7 @@ export const patchCompany = async (req: Request, res: Response) => {
     } catch (error) {
         console.log(error);
         res.status(508).json({
-            message: 'Error al editar el compañia',
+            message: 'Error al editar la compañia',
         });
     } finally {
         cliente.release(true)

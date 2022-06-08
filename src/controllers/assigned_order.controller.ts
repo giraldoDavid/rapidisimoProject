@@ -26,7 +26,7 @@ export const postAssignedOrder = async (req: Request, res: Response) => {
             (`INSERT INTO assigned_order(id_delivery_man, id_order) VALUES($1, $2)`, 
                 [req.body.id_user, req.body.id_order]);
         res.status(201).json(`Orden asignada satisfactoriamente`);
-    } catch (error) {
+    } catch (error) { false
         console.log(error);
         res.status(508).json({
             message: 'Error al crear la orden',
