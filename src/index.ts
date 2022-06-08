@@ -9,6 +9,7 @@ import routerMap from "./routes/index.mongo.routes";
 import { connectToDatabase } from './data-base/config.mongodb';
 import { mailRouter } from "./routes/mail.routes";
 import { authRouter } from "./routes/auth.router";
+import { googleRouter } from "./routes/google.router";
 
 dotenv.config();
 const app = express();
@@ -51,6 +52,7 @@ app.use("/", router);
 app.use("/", routerMap);                        // rutas para la Peticiones de MongoDB
 app.use('/mail',mailRouter);                    // rutas de mail SendGrid
 app.use("/auth", authRouter);                   // ruta de autenticación
+app.use("/google", googleRouter);               // ruta de Google
 
 //Swagger
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(swaggerSpec)))

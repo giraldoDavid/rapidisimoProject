@@ -8,7 +8,8 @@ import { getAllUsers, postUser, putUser, patchUser, deleteUser } from '../contro
 import { getAllCompanies, postCompany, putCompany, patchCompany, deleteCompany,} from '../controllers/company.controller';
 import { getAllOrders, postOrder, putOrder, patchOrder, deleteOrder } from '../controllers/orders.controller';
 import { getAllAssignedOrder, postAssignedOrder, putAssignedOrder, patchAssignedOrder, deleteAssignedOrder } from '../controllers/assigned_order.controller';
-import { image } from '../controllers/image_multer.controllers';
+import { image } from '../controllers/image_multer.controller';
+import { imageUser } from '../controllers/image_user.controller';
 
 // Importando consultas del repartidor
 import { getDeliveryManById, getOrdersOfDeliveryMan } from "../controllers/queries/deliveryman.controller";
@@ -53,6 +54,7 @@ router.get("/ordersOfDeliveryMan/:id", getOrdersOfDeliveryMan);     // Traer tod
 
 // Subir imagen
 router.post('/uploadImage', image);
+router.post('/uploadImageUser/:id', imageUser);                     // Subir imagen de usuario editando base de datos
 
 // Exportando el router
 export default router;

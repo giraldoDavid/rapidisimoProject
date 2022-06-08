@@ -107,3 +107,6 @@ src/public
 
 #Firebase files
 serviceAccountKey.json
+
+#GCP
+key.json

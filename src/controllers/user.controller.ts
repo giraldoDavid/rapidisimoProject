@@ -29,8 +29,8 @@ export const postUser = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     try {
         let result: QueryResult = await cliente.query
-            ('INSERT INTO users(email, document, name, lastname, phone, delivery_man_status, vehicle, rol) VALUES($1, $2, $3, $4, $5, $6, $7, $8)', 
-                [req.body.email, req.body.document, req.body.name, req.body.lastname, req.body.phone, req.body.delivery_man_status, req.body.vehicle, req.body.rol]);
+            ('INSERT INTO users(email, document, name, lastname, phone, delivery_man_status, vehicle, rol, user_image) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)', 
+                [req.body.email, req.body.document, req.body.name, req.body.lastname, req.body.phone, req.body.delivery_man_status, req.body.vehicle, req.body.rol, req.body.user_image]);
         res.status(201).json(`Usuario creado satisfactoriamente`);
     } catch (error) {
         console.log(error);
@@ -48,8 +48,8 @@ export const putUser = async (req: Request, res: Response) => {
     let id = req.params.id;
     try {
         let result: QueryResult = await cliente.query
-            ('UPDATE users SET email=$1, document=$2, name=$3, lastname=$4, phone=$5, delivery_man_status=$6, vehicle=$7, rol=$8 WHERE id_user=$9', 
-                [req.body.email, req.body.document, req.body.name, req.body.lastname, req.body.phone, req.body.delivery_man_status, req.body.vehicle, req.body.rol, id]);
+            ('UPDATE users SET email=$1, document=$2, name=$3, lastname=$4, phone=$5, delivery_man_status=$6, vehicle=$7, rol=$8, user_image=$9 WHERE id_user=$10', 
+                [req.body.email, req.body.document, req.body.name, req.body.lastname, req.body.phone, req.body.delivery_man_status, req.body.vehicle, req.body.rol,, req.body.user_image, id]);
         res.status(201).json(`Usuario con id: ${id}, editado satisfactoriamente`);
     } catch (error) {
         console.log(error);
