@@ -71,7 +71,6 @@
  *          name: id_assigned
  *          schema:
  *              type: objectId
- *              $ref: '#/components/schemas/Assigned Order'
  *          required: true
  *          description: Identificador de la orden asignada
  *      requestBody:
@@ -80,6 +79,34 @@
  *              application/json:
  *                 schema:
  *                   type: object
+ *                   $ref: '#/components/schemas/Assigned Order'
+ *      responses:
+ *          201:
+ *              description: Orden asignada con id ${id_company}, editada satisfactoriamente
+ *          508:
+ *              description: Error al editar la orden asignada
+ */
+
+/**
+ * @swagger
+ * /patchAssignedOrder/:id:
+ *  patch:
+ *      summary: Edit a Assigned Order with the method PATCH
+ *      tags: [Assigned Order]
+ *      parameters:
+ *        - in: path
+ *          name: id_assigned
+ *          schema:
+ *              type: objectId
+ *          required: true
+ *          description: Identificador de la orden asignada
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                 schema:
+ *                   type: object
+ *                   $ref: '#/components/schemas/Assigned Order'
  *      responses:
  *          201:
  *              description: Orden asignada con id ${id_company}, editada satisfactoriamente

@@ -80,7 +80,7 @@ export const patchCompany = async (req: Request, res: Response) => {
     } catch (error) {
         console.log(error);
         res.status(508).json({
-            message: 'Error al editar el compañia',
+            message: 'Error al editar la compañia',
         });
     } finally {
         cliente.release(true)

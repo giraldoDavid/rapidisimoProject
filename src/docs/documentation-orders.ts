@@ -111,7 +111,6 @@
  *          name: id_order
  *          schema:
  *              type: objectId
- *              $ref: '#/components/schemas/Orders'
  *          required: true
  *          description: Identificador de la orden
  *      requestBody:
@@ -120,12 +119,41 @@
  *              application/json:
  *                 schema:
  *                   type: object
+ *                   $ref: '#/components/schemas/Orders'
  *      responses:
  *          201:
  *              description: Orden con id ${id}, editado satisfactoriamente
  *          508:
  *              description: Error al editar la orden
  */
+
+/**
+ * @swagger
+ * /patchOrder/:id:
+ *  patch:
+ *      summary: Edit a Orders with the method PATCH
+ *      tags: [Orders]
+ *      parameters:
+ *        - in: path
+ *          name: id_order
+ *          schema:
+ *              type: objectId
+ *          required: true
+ *          description: Identificador de la orden
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                 schema:
+ *                   type: object
+ *                   $ref: '#/components/schemas/Orders'
+ *      responses:
+ *          201:
+ *              description: Orden con id ${id}, editada satisfactoriamente
+ *          508:
+ *              description: Error al editar la orden
+ */
+
 
 /**
  * @swagger

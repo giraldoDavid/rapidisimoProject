@@ -36,9 +36,25 @@ export const getOrdersOfDeliveryMan = async (req: Request, res: Response) => {
     } catch (error) {
         console.log(error);
         res.status(508).json({
-            message: 'Error al traer las ordenes del repartidor repartidor',
+            message: 'Error al traer las ordenes del repartidor',
         });
     } finally {
         cliente.release(true)
     }
 }
+
+
+//Traer los repartidores disponibles
+export const getDeliveryManAvailable = async (req: Request, res: Response) => {
+    let cliente = await pool.connect();
+    try {
+        let result: QueryResult = await cliente.query("SELECT * FROM users WHERE delivery_man_status= 'Disponible'");
+        res.status(201).json(result.rows);
+    } catch (error) {
+        console.log(error);
+        res.status(508).json({
+            message: 'Error al traer los repartidores disponibles',
+        });
+    }
+}
+

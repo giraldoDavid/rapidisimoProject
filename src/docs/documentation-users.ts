@@ -5,7 +5,6 @@
  *      Users:
  *          type: object
  *          properties:
- *  
  *             id_user:
  *                 type: number
  *                 description: Id autoincrementing
@@ -33,6 +32,9 @@
  *             rol:
  *                 type: string
  *                 description: User's role
+ *             user_image:
+ *                 type: string
+ *                 description: User's image
  *
  *          required:
  *             - email
@@ -49,6 +51,7 @@
  *              "delivery_man_status": "Ocupado"
  *              "vehicle": "Carro"
  *              "rol": "Delivery man"
+ *              "user_image": "imagen.png"
  */
 
 /**            
@@ -96,8 +99,7 @@
  *        - in: path
  *          name: id_user
  *          schema:
- *              type: objectId
- *              $ref: '#/components/schemas/Users'
+ *              type: number
  *          required: true
  *          description: Identificador del User
  *      requestBody:
@@ -106,6 +108,34 @@
  *              application/json:
  *                 schema:
  *                   type: object
+ *                   $ref: '#/components/schemas/Users'
+ *      responses:
+ *          201:
+ *              description: Usuario con id ${id}, editado satisfactoriamente
+ *          508:
+ *              description: Error al editar el usuario
+ */
+
+/**
+ * @swagger
+ * /patchUser/:id:
+ *  patch:
+ *      summary: Edit a Users with the method PATCH
+ *      tags: [Users]
+ *      parameters:
+ *        - in: path
+ *          name: id_user
+ *          schema:
+ *              type: objectId
+ *          required: true
+ *          description: Identificador del User
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                 schema:
+ *                   type: object
+ *                   $ref: '#/components/schemas/Users'
  *      responses:
  *          201:
  *              description: Usuario con id ${id}, editado satisfactoriamente

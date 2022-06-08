@@ -12,8 +12,10 @@ import { image } from '../controllers/image_multer.controller';
 import { imageUser } from '../controllers/image_user.controller';
 
 // Importando consultas del repartidor
-import { getDeliveryManById, getOrdersOfDeliveryMan } from "../controllers/queries/deliveryman.controller";
+import { getDeliveryManById, getOrdersOfDeliveryMan, getDeliveryManAvailable } from "../controllers/queries/deliveryman.controller";
 
+//Importando consultas de las ordenes
+import { getOrdersCompanySlopes } from "../controllers/queries/orders.controller"
 // Importando los esquemas para las rutas
 import { companySchema, companySchemaPatch } from '../schemas-joi/company.schemajoi';
 import { assignedOrderSchemaPatch, assignedOrderSchema, } from '../schemas-joi/assigned_order.schemajoi';
@@ -48,10 +50,13 @@ router.put('/putAssignedOrder/:id', validator.body(assignedOrderSchema), putAssi
 router.patch('/patchAssignedOrder/:id', validator.body(assignedOrderSchemaPatch), patchAssignedOrder );
 router.delete('/deleteAssignedOrder/:id', deleteAssignedOrder);
 
-// Consultas
+// Consultas repartidor
 router.get("/deliveryMan/:id", getDeliveryManById);                 // Traer la información del repartidor segun id
 router.get("/ordersOfDeliveryMan/:id", getOrdersOfDeliveryMan);     // Traer todos las ordenes segun id del repartidor
+router.get("/deliveryManAvailable", getDeliveryManAvailable)    //Traer todos los repartidores disponiles
 
+// Consultas ordenes
+router.get("/getOrdersCompanySlopes/:id_company", getOrdersCompanySlopes)
 // Subir imagen
 router.post('/uploadImage', image);
 router.post('/uploadImageUser/:id', imageUser);                     // Subir imagen de usuario editando base de datos
