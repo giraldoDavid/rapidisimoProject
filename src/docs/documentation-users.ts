@@ -33,6 +33,9 @@
  *             rol:
  *                 type: string
  *                 description: User's role
+ *             user_image:
+ *                 type: string
+ *                 description: User's image
  *
  *          required:
  *             - email
@@ -49,6 +52,7 @@
  *              "delivery_man_status": "Ocupado"
  *              "vehicle": "Carro"
  *              "rol": "Delivery man"
+ *              "user_image": "imagen.png"
  */
 
 /**            
