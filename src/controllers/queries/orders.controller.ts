@@ -20,3 +20,21 @@ export const getOrdersCompanySlopes = async (req: Request, res: Response) => {
         cliente.release(true)
     }
 }
+
+
+//Pedidos pendientes para el siguiente día
+export const getOrdersDateDelivery = async (req: Request, res: Response) => {
+    let cliente = await pool.connect();
+    try {
+        let result: QueryResult = await cliente.query(
+            `SELECT * FROM orders WHERE date_delivery = current_date + INTEGER '1'`)
+            res.status(201).json(result.rows);
+    } catch (error) {
+        console.log(error);
+        res.status(508).json({
+            message: 'Error al traer las ordenes de los comercios',
+        });
+    } finally {
+        cliente.release(true)
+    }
+}

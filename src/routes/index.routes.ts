@@ -15,7 +15,8 @@ import { imageUser } from '../controllers/image_user.controller';
 import { getDeliveryManById, getOrdersOfDeliveryMan, getDeliveryManAvailable } from "../controllers/queries/deliveryman.controller";
 
 //Importando consultas de las ordenes
-import { getOrdersCompanySlopes } from "../controllers/queries/orders.controller"
+import { getOrdersCompanySlopes, getOrdersDateDelivery } from "../controllers/queries/orders.controller"
+
 // Importando los esquemas para las rutas
 import { companySchema, companySchemaPatch } from '../schemas-joi/company.schemajoi';
 import { assignedOrderSchemaPatch, assignedOrderSchema, } from '../schemas-joi/assigned_order.schemajoi';
@@ -56,7 +57,9 @@ router.get("/ordersOfDeliveryMan/:id", getOrdersOfDeliveryMan);     // Traer tod
 router.get("/deliveryManAvailable", getDeliveryManAvailable)    //Traer todos los repartidores disponiles
 
 // Consultas ordenes
-router.get("/getOrdersCompanySlopes/:id_company", getOrdersCompanySlopes)
+router.get("/getOrdersCompanySlopes/:id_company", getOrdersCompanySlopes);    //Pedido pendientes por comercio
+router.get("/OrdersDateDelivery", getOrdersDateDelivery)  //Pedidos pendientes para el siguiente día
+
 // Subir imagen
 router.post('/uploadImage', image);
 router.post('/uploadImageUser/:id', imageUser);                     // Subir imagen de usuario editando base de datos
