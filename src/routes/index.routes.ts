@@ -11,7 +11,7 @@ import { getAllAssignedOrder, postAssignedOrder, putAssignedOrder, patchAssigned
 import { image } from '../controllers/image_multer.controllers';
 
 // Importando consultas del repartidor
-import { getDeliveryManById, getOrdersOfDeliveryMan } from "../controllers/queries/deliveryman.controller";
+import { getDeliveryManById, getOrdersOfDeliveryMan, getDeliveryManAvailable } from "../controllers/queries/deliveryman.controller";
 
 // Importando los esquemas para las rutas
 import { companySchema, companySchemaPatch } from '../schemas-joi/company.schemajoi';
@@ -50,6 +50,7 @@ router.delete('/deleteAssignedOrder/:id', deleteAssignedOrder);
 // Consultas
 router.get("/deliveryMan/:id", getDeliveryManById);                 // Traer la información del repartidor segun id
 router.get("/ordersOfDeliveryMan/:id", getOrdersOfDeliveryMan);     // Traer todos las ordenes segun id del repartidor
+router.get("/deliveryManAvailable", getDeliveryManAvailable)    //Traer todos los repartidores disponiles
 
 // Subir imagen
 router.post('/uploadImage', image);

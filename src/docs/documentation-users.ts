@@ -5,7 +5,6 @@
  *      Users:
  *          type: object
  *          properties:
- *  
  *             id_user:
  *                 type: number
  *                 description: Id autoincrementing
