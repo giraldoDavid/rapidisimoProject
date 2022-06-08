@@ -36,7 +36,7 @@ export const getOrdersOfDeliveryMan = async (req: Request, res: Response) => {
     } catch (error) {
         console.log(error);
         res.status(508).json({
-            message: 'Error al traer las ordenes del repartidor repartidor',
+            message: 'Error al traer las ordenes del repartidor',
         });
     } finally {
         cliente.release(true)
