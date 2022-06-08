@@ -14,10 +14,10 @@ import { image } from '../controllers/image_multer.controllers';
 import { getDeliveryManById, getOrdersOfDeliveryMan } from "../controllers/queries/deliveryman.controller";
 
 // Importando los esquemas para las rutas
-import { companySchema, companySchemaPatch } from '../models/company.models';
-import { assignedOrderSchemaPatch, assignedOrderSchema, } from '../models/assigned_order.models';
-import { ordersSchema, ordersSchemaPatch } from '../models/orders.models';
-import { userSchema, userSchemaPatch } from '../models/user.models';
+import { companySchema, companySchemaPatch } from '../schemas-joi/company.schemajoi';
+import { assignedOrderSchemaPatch, assignedOrderSchema, } from '../schemas-joi/assigned_order.schemajoi';
+import { ordersSchema, ordersSchemaPatch } from '../schemas-joi/orders.schemajoi';
+import { userSchema, userSchemaPatch } from '../schemas-joi/user.schemajoi';
 
 // Tabla usuarios
 router.get('/allUsers', getAllUsers);
