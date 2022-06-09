@@ -27,6 +27,11 @@ DROP TABLE IF EXISTS orders CASCADE;
 
 DROP TABLE IF EXISTS assigned_order CASCADE;
 
+-- Borrando vistas (en caso de que existan)
+DROP VIEW IF EXISTS orders_view CASCADE;
+DROP VIEW IF EXISTS assigned_order_view CASCADE;
+DROP VIEW IF EXISTS orders_with_delivery_view CASCADE;
+
 -- Creando Database
 -- CREATE DATABASE rapidisimo WITH ENCODING = 'UTF8';
 -- Seleccionando Database
@@ -105,7 +110,15 @@ CREATE TABLE assigned_order (
 );
 
 INSERT INTO
-    users (email, document, name, lastname, phone, rol, user_image)
+    users (
+        email,
+        document,
+        name,
+        lastname,
+        phone,
+        rol,
+        user_image
+    )
 VALUES
     (
         'david.giraldo@gmail.com',
@@ -194,20 +207,21 @@ SELECT
 FROM
     company;
 
-INSERT INTO orders (
-    id_company,
-    client_email,
-    client_name,
-    client_phone,
-    client_address,
-    date_delivery,
-    estimated_time,
-    order_cost,
-    image_order,
-    status_order,
-    rating,
-    _id_tracking
-)
+INSERT INTO
+    orders (
+        id_company,
+        client_email,
+        client_name,
+        client_phone,
+        client_address,
+        date_delivery,
+        estimated_time,
+        order_cost,
+        image_order,
+        status_order,
+        rating,
+        _id_tracking
+    )
 VALUES
     (
         10000,
@@ -222,7 +236,8 @@ VALUES
         'En espera',
         5,
         '8479834INFG9JH8FY493'
-    ),(
+    ),
+    (
         10001,
         'isa123@gmail.com',
         'Isabella Taborda',
@@ -237,17 +252,50 @@ VALUES
         'UYEFN9834INFG9JH8FY493'
     );
 
-SELECT * FROM orders;	
+SELECT
+    *
+FROM
+    orders;
 
-INSERT INTO assigned_order (
-    id_delivery_man,
-    id_order
-) VALUES(
-    3,
-    100001 
-),(
-    3,
-    100000
-);
+INSERT INTO
+    assigned_order (id_delivery_man, id_order)
+VALUES
+    (3, 100001),
+    (3, 100000);
 
-SELECT * FROM assigned_order;
+
+CREATE VIEW orders_view AS
+SELECT
+    *,
+    'En espera' AS Estado
+FROM
+    orders
+WHERE
+    status_order = 'En espera'
+UNION
+ALL
+SELECT
+    *,
+    'En reparto' AS Estado
+FROM
+    orders
+WHERE
+    status_order = 'En reparto'
+UNION
+ALL
+SELECT
+    *,
+    'Entregadas' AS Estado
+FROM
+    orders
+WHERE
+    status_order = 'Entregadas';
+
+
+-- SELECT SUM(order_cost)
+--     id_delivery_man,
+--     orders.id_order
+-- FROM
+--     assigned_order
+--     INNER JOIN users ON assigned_order.id_delivery_man = users.id_user
+--     INNER JOIN orders ON assigned_order.id_order = orders.id_order;

@@ -7,10 +7,10 @@ export const getAllOrders = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     try {
         let result: QueryResult = await cliente.query('SELECT * FROM orders');
-        res.status(201).json(result.rows);
+        return res.status(201).json(result.rows);
     } catch (error) {
         console.log(error);
-        res.status(508).json({
+        return res.status(508).json({
             message: 'Error al traer las ordenes',
         });
     } finally {
@@ -36,10 +36,10 @@ export const postOrder = async (req: Request, res: Response) => {
                 req.body.image_order,
                 req.body.status_order,
                 req.body.rating]);
-        res.status(201).json(`Orden creada satisfactoriamente`);
+        return res.status(201).json(`Orden creada satisfactoriamente`);
     } catch (error) {
         console.log(error);
-        res.status(508).json({
+        return res.status(508).json({
             message: 'Error al crear la orden',
         });
     } finally {
@@ -66,10 +66,10 @@ export const putOrder = async (req: Request, res: Response) => {
                 req.body.status_order,
                 req.body.rating,
                     id]);
-        res.status(201).json(`Orden con id: ${id}, editado satisfactoriamente`);
+        return res.status(201).json(`Orden con id: ${id}, editado satisfactoriamente`);
     } catch (error) {
         console.log(error);
-        res.status(508).json({
+        return res.status(508).json({
             message: 'Error al editar la orden',
         });
     } finally {
@@ -91,10 +91,10 @@ export const patchOrder = async (req: Request, res: Response) => {
             }
         });
         await cliente.query(`UPDATE orders SET ${fieldsQuery.join()} WHERE id_order = '${id}'`);
-        res.status(201).json(`Orden con id: ${id}, editada satisfactoriamente`);
+        return res.status(201).json(`Orden con id: ${id}, editada satisfactoriamente`);
     } catch (error) {
         console.log(error);
-        res.status(508).json({
+        return res.status(508).json({
             message: 'Error al editar la orden',
         });
     } finally {
@@ -109,10 +109,10 @@ export const deleteOrder = async (req: Request, res: Response) => {
     try {
         let result: QueryResult = await cliente.query
             ('DELETE FROM orders WHERE id_order=$1', [id]);
-        res.status(201).json(`Orden con id: ${id}, eliminada satisfactoriamente`);
+        return res.status(201).json(`Orden con id: ${id}, eliminada satisfactoriamente`);
     } catch (error) {
         console.log(error);
-        res.status(500).json({
+        return res.status(500).json({
             message: 'Error al eliminar la orden',
         });
     } finally {

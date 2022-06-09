@@ -6,14 +6,14 @@ export const image = (req: Request, res: Response) => {
         if (err){
             console.log(err);
             err.message ='Error al cargar el archivo'
-            res.send(err)
+            return res.send(err)
         }
         if(req.file){
             console.log(req.file);
-            res.send('!Imagen cargada correctamente¡')
+            return res.send('!Imagen cargada correctamente¡')
         }else if(req.files){
             console.log(req.files);
-            res.send('!Imagenes cargadas correctamente¡')
+            return res.send('!Imagenes cargadas correctamente¡')
         }
     })
 }

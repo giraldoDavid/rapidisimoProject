@@ -14,7 +14,7 @@ export const imageUser = (req: Request, res: Response) => {
         if (err){
             console.log(err);
             err.message ='Error al cargar el archivo'
-            res.send(err)
+            return res.send(err)
         }
         if(req.file){
             console.log(req.file);
@@ -26,10 +26,10 @@ export const imageUser = (req: Request, res: Response) => {
             try{
                 console.log(id.id);
                 await cliente.query(`UPDATE users SET user_image = '${imagenQuery}' WHERE id_user = '${id.id}'`);
-                res.status(201).json(`Imagen del usuario con id: ${id.id}, editada satisfactoriamente`);
+                return res.status(201).json(`Imagen del usuario con id: ${id.id}, editada satisfactoriamente`);
             } catch (error) {
                 console.log(error);
-                res.status(508).json({
+                return res.status(508).json({
                 message: 'Error al editar el usuario',
                 });
             } finally {
@@ -37,7 +37,7 @@ export const imageUser = (req: Request, res: Response) => {
             }
         }else if(req.files){
             console.log(req.files);
-            res.send('!Imagenes cargadas correctamente¡')
+            return res.send('!Imagenes cargadas correctamente¡')
         }
     })
 }

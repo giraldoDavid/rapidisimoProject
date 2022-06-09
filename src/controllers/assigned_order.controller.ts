@@ -7,10 +7,10 @@ export const getAllAssignedOrder = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     try {
         let result: QueryResult = await cliente.query('SELECT * FROM assigned_order');
-        res.status(201).json(result.rows);
+        return res.status(201).json(result.rows);
     } catch (error) {
         console.log(error);
-        res.status(508).json({
+        return res.status(508).json({
             message: 'Error al traer las ordenes asignadas',
         });
     } finally {
@@ -25,10 +25,10 @@ export const postAssignedOrder = async (req: Request, res: Response) => {
         let result: QueryResult = await cliente.query
             (`INSERT INTO assigned_order(id_delivery_man, id_order) VALUES($1, $2)`, 
                 [req.body.id_user, req.body.id_order]);
-        res.status(201).json(`Orden asignada satisfactoriamente`);
+        return res.status(201).json(`Orden asignada satisfactoriamente`);
     } catch (error) { false
         console.log(error);
-        res.status(508).json({
+        return res.status(508).json({
             message: 'Error al crear la orden',
         });
     } finally {
@@ -44,10 +44,10 @@ export const putAssignedOrder = async (req: Request, res: Response) => {
         let result: QueryResult = await cliente.query
             ('UPDATE assigned_order SET id_delivery_man=$1, id_order=$2 WHERE id_assigned=$3', 
                 [req.body.id_user, req.body.id_order, id]);
-        res.status(201).json(`Orden asignada con id: ${id}, editada satisfactoriamente`);
+        return res.status(201).json(`Orden asignada con id: ${id}, editada satisfactoriamente`);
     } catch (error) {
         console.log(error);
-        res.status(508).json({
+        return res.status(508).json({
             message: 'Error al editar la orden asignada',
         });
     } finally {
@@ -69,10 +69,10 @@ export const patchAssignedOrder = async (req: Request, res: Response) => {
             }
         });
         await cliente.query(`UPDATE assigned_order SET ${fieldsQuery.join()} WHERE id_assigned = '${id}'`);
-        res.status(201).json(`Orden asignada con id: ${id}, editada satisfactoriamente`);
+        return res.status(201).json(`Orden asignada con id: ${id}, editada satisfactoriamente`);
     } catch (error) {
         console.log(error);
-        res.status(508).json({
+        return res.status(508).json({
             message: 'Error al editar la orden asignada',
         });
     } finally {
@@ -87,10 +87,10 @@ export const deleteAssignedOrder = async (req: Request, res: Response) => {
     try {
         let result: QueryResult = await cliente.query
             ('DELETE FROM assigned_order WHERE id_assigned=$1', [id]);
-        res.status(201).json(`Orden asignada con id: ${id}, eliminada satisfactoriamente`);
+        return res.status(201).json(`Orden asignada con id: ${id}, eliminada satisfactoriamente`);
     } catch (error) {
         console.log(error);
-        res.status(500).json({
+        return res.status(500).json({
             message: 'Error al eliminar una orden asignada',
         });
     } finally {
