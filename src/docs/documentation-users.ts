@@ -126,7 +126,7 @@
  *        - in: path
  *          name: id_user
  *          schema:
- *              type: objectId
+ *              type: number
  *          required: true
  *          description: Identificador del User
  *      requestBody:
@@ -153,7 +153,7 @@
  *        - in: path
  *          name: id_user
  *          schema:
- *              type: objectId
+ *              type: number
  *          required: true
  *          description: Identificador del User
  *      responses:

@@ -100,7 +100,7 @@
  *        - in: path
  *          name: id_company
  *          schema:
- *              type: objectId
+ *              type: number
  *          required: true
  *          description: Identificador de la empresa
  *      requestBody:
@@ -127,7 +127,7 @@
  *        - in: path
  *          name: id_company
  *          schema:
- *              type: objectId
+ *              type: number
  *          required: true
  *          description: Identificador de la empresa
  *      requestBody:
@@ -154,7 +154,7 @@
  *        - in: path
  *          name: id_company
  *          schema:
- *              type: objectId
+ *              type: number
  *          required: true
  *          description: Identificador de la empresa
  *      responses:

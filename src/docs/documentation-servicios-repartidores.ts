@@ -8,7 +8,7 @@
  *        - in: path
  *          name: id_user
  *          schema:
- *              type: objectId
+ *              type: number
  *          required: true
  *          description: Identificador del repartidor
  *    responses:
@@ -28,7 +28,7 @@
  *        - in: path
  *          name: id_user
  *          schema:
- *              type: objectId
+ *              type: number
  *          required: true
  *          description: Identificador del repartidor
  *    responses:

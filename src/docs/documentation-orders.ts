@@ -110,7 +110,7 @@
  *        - in: path
  *          name: id_order
  *          schema:
- *              type: objectId
+ *              type: number
  *          required: true
  *          description: Identificador de la orden
  *      requestBody:
@@ -137,7 +137,7 @@
  *        - in: path
  *          name: id_order
  *          schema:
- *              type: objectId
+ *              type: number
  *          required: true
  *          description: Identificador de la orden
  *      requestBody:
@@ -165,7 +165,7 @@
  *        - in: path
  *          name: id_order
  *          schema:
- *              type: objectId
+ *              type: number
  *          required: true
  *          description: Identificador de la empresa
  *      responses:

@@ -70,7 +70,7 @@
  *        - in: path
  *          name: id_assigned
  *          schema:
- *              type: objectId
+ *              type: number
  *          required: true
  *          description: Identificador de la orden asignada
  *      requestBody:
@@ -97,7 +97,7 @@
  *        - in: path
  *          name: id_assigned
  *          schema:
- *              type: objectId
+ *              type: number
  *          required: true
  *          description: Identificador de la orden asignada
  *      requestBody:
@@ -124,7 +124,7 @@
  *        - in: path
  *          name: id_assigned
  *          schema:
- *              type: objectId
+ *              type: number
  *          required: true
  *          description: Identificador de la orden asignada
  *      responses:
