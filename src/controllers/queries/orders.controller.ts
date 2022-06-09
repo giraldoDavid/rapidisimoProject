@@ -27,12 +27,12 @@ export const getOrdersDateDelivery = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     try {
         let result: QueryResult = await cliente.query(
-            `SELECT * FROM orders WHERE date_delivery = current_date + INTEGER '1'`)
+            `SELECT * FROM orders WHERE date_delivery = current_date + INTERVAL '1 day'`)
             res.status(201).json(result.rows);
     } catch (error) {
         console.log(error);
         res.status(508).json({
-            message: 'Error al traer las ordenes de los comercios',
+            message: 'Error al traer las ordenes de mañana',
         });
     } finally {
         cliente.release(true)
