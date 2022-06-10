@@ -59,19 +59,19 @@ router.patch('/patchAssignedOrder/:id', validator.body(assignedOrderSchemaPatch)
 router.delete('/deleteAssignedOrder/:id', deleteAssignedOrder);
 
 // Consultas repartidor
-router.get('/deliveryMan/:id', getDeliveryManById); // Traer la información del repartidor segun id
-router.get('/ordersOfDeliveryMan/:id', getOrdersOfDeliveryMan); // Traer todos las ordenes segun id del repartidor
-router.get('/deliveryManAvailable', getDeliveryManAvailable) //Traer todos los repartidores disponiles
-router.get('/deliveriesByDeliveryMan/:id', getDeliveriesByDeliveryMan) //Traer todas las ordenes del día segun id del repartidor
-router.get('/deliveriesByDeliveryManRange/:id/:startDate/:endDate', getDeliveriesByDeliveryManRange) //Traer todas las ordenes del día segun id del repartidor
+router.get('/deliveryMan/:id', getDeliveryManById);                                                     // Traer la información del repartidor segun id
+router.get('/ordersOfDeliveryMan/:id', getOrdersOfDeliveryMan);                                         // Traer todos las ordenes segun id del repartidor
+router.get('/deliveryManAvailable', getDeliveryManAvailable)                                            //Traer todos los repartidores disponiles
+router.get('/deliveriesByDeliveryMan/:id', getDeliveriesByDeliveryMan)                                  //Traer todas las ordenes del día segun id del repartidor
+router.get('/deliveriesByDeliveryManRange/:id/:startDate/:endDate', getDeliveriesByDeliveryManRange)    //Traer todas las ordenes del día segun id del repartidor
 
 
 // Consultas ordenes
-router.get('/getOrdersCompanySlopes/:id_company', getOrdersCompanySlopes); //Pedido pendientes por comercio
-router.get('/OrdersDateDelivery', getOrdersDateDelivery)  //Pedidos pendientes para el siguiente día
-router.get('/getOrdersDateDeliveryToday', getOrdersDateDeliveryToday)  //Pedidos pendientes para el día de hoy (actual)')
-router.get('/getDiscriminatedDeliveries', getDiscriminatedDeliveries) // Pedidos discriminados por estado
-router.get('/getDeliveriesCompany/:id_company', getDeliveriesCompany) // Pedidos discriminados por comercio
+router.get('/getOrdersCompanySlopes/:id_company', getOrdersCompanySlopes);                              //Pedido pendientes por comercio
+router.get('/OrdersDateDelivery', getOrdersDateDelivery)                                                //Pedidos pendientes para el siguiente día
+router.get('/getOrdersDateDeliveryToday', getOrdersDateDeliveryToday)                                   //Pedidos pendientes para el día de hoy (actual)')
+router.get('/getDiscriminatedDeliveries', getDiscriminatedDeliveries)                                   // Pedidos discriminados por estado
+router.get('/getDeliveriesCompany/:id_company', getDeliveriesCompany)                                   // Pedidos discriminados por comercio
 
 
 // Subir imagen

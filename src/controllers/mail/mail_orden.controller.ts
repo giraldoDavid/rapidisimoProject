@@ -1,7 +1,6 @@
 import { Request, Response } from 'express'
 import sendEmail from '../../utilities/sendgrid'
 import templateIds from '../../constants/templateid.const'
-import generatecode from '../../utilities/generatecode'
 import { pool } from '../../data-base/config.postgres';
 import { QueryResult } from 'pg';
 
@@ -23,14 +22,15 @@ export const mailOrder = async (_req: Request, res: Response) => {
                 WHERE id_order = $1`, [_req.body.id_order]);
 
         // Envio del correo al usuario
-        const codigo = generatecode();
         await sendEmail(order.rows[0].client_email,
             {
                 mensaje: 'Welcome to Rapidisimo',
                 nombre: order.rows[0].client_name,
                 comercio: company.rows[0].name_company,
+                fecha_entraga: order.rows[0].delivery_date,
                 horario: order.rows[0].estimated_time,
-                codigo
+                codigo: order.rows[0]._id_tracking,
+                link: `https://rapidisimo.com/tracking/`
             },
             templateIds.SEND_CODE
         )
@@ -42,33 +42,5 @@ export const mailOrder = async (_req: Request, res: Response) => {
         });
     } finally {
         cliente.release(true)
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    try {
-        const { nombre, comercio, horario, email } = _req.body;
-        const codigo = generatecode();
-        await sendEmail(email,
-            {
-                mensaje: 'Welcome to Rapidisimo',
-                nombre,
-                comercio,
-                horario,
-                codigo
-            },
-            templateIds.SEND_CODE
-        )
-        res.status(200).send(`¡Se ha enviado el correo de forma correcta al email: ${email}!`)
-    } catch (error) {
-        console.log(error)
-        res.status(500).send(error.message)
     }
 }
