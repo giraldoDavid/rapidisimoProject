@@ -291,11 +291,3 @@ FROM
     orders
 WHERE
     status_order = 'Entregadas';
-
--- SELECT SUM(order_cost)
---     id_delivery_man,
---     orders.id_order
--- FROM
---     assigned_order
---     INNER JOIN users ON assigned_order.id_delivery_man = users.id_user
---     INNER JOIN orders ON assigned_order.id_order = orders.id_order;
