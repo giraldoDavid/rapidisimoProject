@@ -6,25 +6,31 @@ const validator = createValidator();
 // Importando los controladores para las rutas
 import { getAllUsers, postUser, putUser, patchUser, deleteUser } from '../controllers/user.controller';
 import { getAllCompanies, postCompany, putCompany, patchCompany, deleteCompany, } from '../controllers/company.controller';
-import { getAllOrders, postOrder, putOrder, patchOrder, deleteOrder } from '../controllers/orders.controller';
-import { getAllAssignedOrder, postAssignedOrder, putAssignedOrder, patchAssignedOrder, deleteAssignedOrder } from '../controllers/assigned_order.controller';
+import { getAllOrders, getOrderById, postOrder, putOrder, patchOrder, deleteOrder } from '../controllers/orders.controller';
+import { getAllAssignedOrder, postAssignedOrder, putAssignedOrder, patchAssignedOrder, deleteAssignedOrder } 
+    from '../controllers/assigned_order.controller';
 import { image } from '../controllers/image_multer.controller';
 import { imageUser } from '../controllers/image_user.controller';
 
 // Importando consultas del repartidor
-import { getDeliveryManById, getOrdersOfDeliveryMan, getDeliveryManAvailable,getDeliveriesByDeliveryMan, getDeliveriesByDeliveryManRange } from '../controllers/queries/deliveryman.controller';
+import { getDeliveryManById, getOrdersOfDeliveryMan, getDeliveryManAvailable, getDeliveriesByDeliveryMan, getDeliveriesByDeliveryManRange } 
+    from '../controllers/queries/deliveryman.controller';
 
 //Importando consultas de las ordenes
-import { getOrdersCompanySlopes, getOrdersDateDelivery, getOrdersDateDeliveryToday, getDiscriminatedDeliveries, getDeliveriesCompany } from '../controllers/queries/orders.controller'
+import { getOrdersCompanySlopes, getOrdersDateDelivery, getOrdersDateDeliveryToday, getDiscriminatedDeliveries, getDeliveriesCompany } 
+    from '../controllers/queries/orders.controller'
 
-// Importando los esquemas para las rutas
+// Importando los esquemas de Joi para las rutas
 import { companySchema, companySchemaPatch } from '../schemas-joi/company.schemajoi';
 import { assignedOrderSchemaPatch, assignedOrderSchema, } from '../schemas-joi/assigned_order.schemajoi';
 import { ordersSchema, ordersSchemaPatch } from '../schemas-joi/orders.schemajoi';
 import { userSchema, userSchemaPatch } from '../schemas-joi/user.schemajoi';
 
+// Importando la validación del token
+import { decodeToken } from '../firebase/manage.token';
+
 // Tabla usuarios
-router.get('/allUsers', getAllUsers);
+router.get('/allUsers', decodeToken, getAllUsers);
 router.post('/postUser', validator.body(userSchema), postUser);
 router.put('/putUser/:id', validator.body(userSchema), putUser);
 router.patch('/patchUser/:id', validator.body(userSchemaPatch), patchUser);
@@ -39,6 +45,7 @@ router.delete('/deleteCompany/:id', deleteCompany);
 
 // Tabla ordenes
 router.get('/allOrders', getAllOrders);
+router.get('/getOrderById/:id', getOrderById);                                                  // NUEVO SERVICIO
 router.post('/postOrder', validator.body(ordersSchema), postOrder);
 router.put('/putOrder/:id', validator.body(ordersSchema), putOrder);
 router.patch('/patchOrder/:id', validator.body(ordersSchemaPatch), patchOrder);

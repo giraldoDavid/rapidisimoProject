@@ -24,7 +24,7 @@ export const postAssignedOrder = async (req: Request, res: Response) => {
     try {
         let result: QueryResult = await cliente.query
             (`INSERT INTO assigned_order(id_delivery_man, id_order) VALUES($1, $2)`, 
-                [req.body.id_user, req.body.id_order]);
+                [req.body.id_delivery_man, req.body.id_order]);
         return res.status(201).json(`Orden asignada satisfactoriamente`);
     } catch (error) { false
         console.log(error);
@@ -43,7 +43,7 @@ export const putAssignedOrder = async (req: Request, res: Response) => {
     try {
         let result: QueryResult = await cliente.query
             ('UPDATE assigned_order SET id_delivery_man=$1, id_order=$2 WHERE id_assigned=$3', 
-                [req.body.id_user, req.body.id_order, id]);
+                [req.body.id_delivery_man, req.body.id_order, id]);
         return res.status(201).json(`Orden asignada con id: ${id}, editada satisfactoriamente`);
     } catch (error) {
         console.log(error);

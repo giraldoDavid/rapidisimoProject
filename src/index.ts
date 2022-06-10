@@ -50,7 +50,7 @@ app.use("/api/", (req, res, next) => {
 //routes
 app.use("/", router);
 app.use("/", routerMap);                        // rutas para la Peticiones de MongoDB
-app.use('/mail',mailRouter);                    // rutas de mail SendGrid
+app.use('/mail', mailRouter);                   // rutas de mail SendGrid
 app.use("/auth", authRouter);                   // ruta de autenticación
 
 //Swagger

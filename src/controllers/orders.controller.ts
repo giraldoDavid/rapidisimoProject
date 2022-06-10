@@ -18,6 +18,23 @@ export const getAllOrders = async (req: Request, res: Response) => {
     }
 }
 
+// Traer una orden por id GET
+export const getOrderById = async (req: Request, res: Response) => {
+    let cliente = await pool.connect();
+    let id = req.params.id;
+    try {
+        let result: QueryResult = await cliente.query('SELECT * FROM orders WHERE id_order=$1', [id]);
+        return res.status(201).json(result.rows);
+    } catch (error) {
+        console.log(error);
+        return res.status(508).json({
+            message: 'Error identificar la orden por el id',
+        });
+    } finally {
+        cliente.release(true)
+    }
+}
+
 // Crear orden POST
 export const postOrder = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
@@ -47,7 +64,7 @@ export const postOrder = async (req: Request, res: Response) => {
     }
 }
 
-// Editar usuario PUT
+// Editar orden PUT
 export const putOrder = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     let id = req.params.id;
@@ -77,7 +94,7 @@ export const putOrder = async (req: Request, res: Response) => {
     }
 }
 
-// Editar usuario PATCH
+// Editar orden PATCH
 export const patchOrder = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     let id = req.params.id;
@@ -102,7 +119,7 @@ export const patchOrder = async (req: Request, res: Response) => {
     }
 }
 
-// Eliminar usuario
+// Eliminar orden DELETE
 export const deleteOrder = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     let id = req.params.id;
