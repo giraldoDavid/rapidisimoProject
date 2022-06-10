@@ -4,14 +4,13 @@ import { QueryResult } from 'pg';
 
 // Importando los esquemas para las rutas
 import { assignedOrderSchema } from "../schemas-joi/assigned_order.schemajoi";
-
 import { AnyMxRecord } from 'dns';
 
 // Obtener todos las empresas y/o compañias registradas
 export const getAllCompanies = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
+    let result: QueryResult = await cliente.query('SELECT * FROM company');
     try {
-        let result: QueryResult = await cliente.query('SELECT * FROM company');
         return res.status(201).json(result.rows);
     } catch (error) {
         console.log(error);
@@ -24,13 +23,13 @@ export const getAllCompanies = async (req: Request, res: Response) => {
 };
 
 // Crear una nueva empresa
-export const postCompany = async(req: Request, res: Response) => {
+export const postCompany = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
-    const {email_company, name_company, phone_company, city, neighborhood, streat, career, close_time_company} = req.body;
+    const { email_company, name_company, phone_company, city, neighborhood, streat, career, close_time_company } = req.body;
+    let result: QueryResult = await cliente.query
+        ('INSERT INTO company (email_company, name_company, phone_company, city, neighborhood, streat, career, close_time_company) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
+            [name_company, email_company, phone_company, city, neighborhood, streat, career, close_time_company]);
     try {
-        let result: QueryResult = await cliente.query
-            ('INSERT INTO company (email_company, name_company, phone_company, city, neighborhood, streat, career, close_time_company) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
-                [name_company, email_company, phone_company, city, neighborhood, streat, career, close_time_company]);
         return res.status(201).json(`Empresa creada con exito`);
     } catch (error) {
         console.log(error);
@@ -46,11 +45,11 @@ export const postCompany = async(req: Request, res: Response) => {
 export const putCompany = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     const id_company = req.params.id;
-    const {email_company, name_company, phone_company, city, neighborhood, streat, career, close_time_company} = req.body;
+    const { email_company, name_company, phone_company, city, neighborhood, streat, career, close_time_company } = req.body;
+    let result: QueryResult = await cliente.query
+        ('UPDATE company SET email_company=$1, name_company=$2, phone_company=$3, city=$4, neighborhood=$5, streat=$6, career=$7, close_time_company=$8 WHERE id_company=$9',
+            [email_company, name_company, phone_company, city, neighborhood, streat, career, close_time_company, id_company]);
     try {
-        let result: QueryResult = await cliente.query
-            ('UPDATE company SET email_company=$1, name_company=$2, phone_company=$3, city=$4, neighborhood=$5, streat=$6, career=$7, close_time_company=$8 WHERE id_company=$9',
-                [email_company, name_company, phone_company, city, neighborhood, streat, career, close_time_company, id_company]);
         return res.status(201).json(`Empresa con id: ${id_company}, editada satisfactoriamente`);
     } catch (error) {
         console.log(error);
@@ -66,16 +65,16 @@ export const putCompany = async (req: Request, res: Response) => {
 export const patchCompany = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     let id = req.params.id;
+    const fields = Object.keys(req.body);
+    const fieldsQuery = fields.map(field => {
+        if (typeof req.body[`${field}`] === 'string') {
+            return `${field} = '${req.body[`${field}`]}'`
+        } else {
+            return `${field} = ${req.body[`${field}`]}`
+        }
+    });
+    await cliente.query(`UPDATE company SET ${fieldsQuery.join()} WHERE id_user = '${id}'`);
     try {
-        const fields = Object.keys(req.body);
-        const fieldsQuery = fields.map(field => {
-            if(typeof req.body[`${field}`] === 'string'){
-                return `${field} = '${req.body[`${field}`]}'`
-            }else{
-                return `${field} = ${req.body[`${field}`]}`
-            }
-        });
-        await cliente.query(`UPDATE company SET ${fieldsQuery.join()} WHERE id_user = '${id}'`);
         return res.status(201).json(`Compañia con id: ${id}, se ha editado satisfactoriamente`);
     } catch (error) {
         console.log(error);
@@ -91,8 +90,8 @@ export const patchCompany = async (req: Request, res: Response) => {
 export const deleteCompany = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     let id = req.params.id;
+    let result: QueryResult = await cliente.query('DELETE FROM company WHERE id_company = $1', [id]);
     try {
-        let result: QueryResult = await cliente.query('DELETE FROM company WHERE id_company = $1', [id]);
         return res.status(201).json(`Empresa con id: ${id}, eliminada satisfactoriamente`);
     } catch (error) {
         console.log(error);

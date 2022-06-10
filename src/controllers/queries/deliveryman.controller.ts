@@ -23,10 +23,7 @@ export const getDeliveryManById = async (req: Request, res: Response) => {
 export const getOrdersOfDeliveryMan = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     let id = req.params.id;
-    let result: QueryResult = await cliente.query(
-        `SELECT * FROM assigned_order 
-            RIGHT JOIN orders ON assigned_order.id_order = orders.id_order 
-            WHERE id_delivery_man = $1;`, [id]);
+    let result: QueryResult = await cliente.query(`SELECT * FROM assigned_order RIGHT JOIN orders ON assigned_order.id_order = orders.id_order WHERE id_delivery_man = $1;`, [id]);
     try {
         if (result.rows[0] !== undefined) {
             return res.status(201).json(result.rows);
@@ -63,22 +60,8 @@ export const getDeliveryManAvailable = async (req: Request, res: Response) => {
 export const getDeliveriesByDeliveryMan = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     let id = req.params.id;
-    let result: QueryResult = await cliente.query(`SELECT
-    id_delivery_man,
-    id_company,
-    orders.id_order,
-    client_email,
-    client_name,
-    client_phone,
-    client_address,
-    date_delivery,
-    estimated_time,
-    order_cost
-FROM
-    assigned_order
-    INNER JOIN users ON assigned_order.id_delivery_man = users.id_user
-    INNER JOIN orders ON assigned_order.id_order = orders.id_order
-    WHERE orders.date_delivery = current_date - INTERVAL '1 day' AND assigned_order.id_delivery_man = $1;`, [id]);
+    let result: QueryResult = await cliente.query(`SELECT id_delivery_man,id_company,orders.id_order,client_email,client_name,client_phone,client_address, date_delivery, estimated_time, order_cost FROM assigned_order INNER JOIN users ON assigned_order.id_delivery_man = users.id_user INNER JOIN orders ON assigned_order.id_order = orders.id_order WHERE orders.date_delivery = current_date - INTERVAL '1 day' AND assigned_order.id_delivery_man = $1;`, 
+    [id]);
     try {
         return res.status(201).json(result.rows)
     } catch (error) {
@@ -95,23 +78,8 @@ export const getDeliveriesByDeliveryManRange = async (req: Request, res: Respons
     let id = req.params.id;
     let startDate = req.params.startDate;
     let endDate = req.params.endDate;
-    let result: QueryResult = await cliente.query(`SELECT
-    id_delivery_man,
-    id_company,
-    orders.id_order,
-    client_email,
-    client_name,
-    client_phone,
-    client_address,
-    date_delivery,
-    estimated_time,
-    order_cost,
-    status_order
-FROM
-    assigned_order
-    INNER JOIN users ON assigned_order.id_delivery_man = users.id_user
-    INNER JOIN orders ON assigned_order.id_order = orders.id_order
-    WHERE assigned_order.id_delivery_man = $1 AND orders.date_delivery >= $2 AND orders.date_delivery <= $3;`, [id, startDate, endDate]);
+    let result: QueryResult = await cliente.query(`SELECT id_delivery_man,id_company, orders.id_order, client_email, client_name, client_phone, client_address, date_delivery, estimated_time, order_cost, status_order FROM assigned_order INNER JOIN users ON assigned_order.id_delivery_man = users.id_user INNER JOIN orders ON assigned_order.id_order = orders.id_order WHERE assigned_order.id_delivery_man = $1 AND orders.date_delivery >= $2 AND orders.date_delivery <= $3;`,
+        [id, startDate, endDate]);
     try {
         if (result.rowCount !== 0) {
             return res.status(201).json(result.rows)

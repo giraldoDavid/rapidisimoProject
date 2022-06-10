@@ -29,7 +29,9 @@ DROP TABLE IF EXISTS assigned_order CASCADE;
 
 -- Borrando vistas (en caso de que existan)
 DROP VIEW IF EXISTS orders_view CASCADE;
+
 DROP VIEW IF EXISTS assigned_order_view CASCADE;
+
 DROP VIEW IF EXISTS orders_with_delivery_view CASCADE;
 
 -- Creando Database
@@ -64,7 +66,7 @@ CREATE TABLE users (
     phone VARCHAR(13) NOT NULL,
     delivery_man_status type_delivery_man_status,
     vehicle type_vehicle,
-    rol type_rol NOT NULL,
+    rol type_rol DEFAULT 'Delivery man' NOT NULL,
     user_image VARCHAR,
     CONSTRAINT pk_users PRIMARY KEY (id_user)
 );
@@ -91,10 +93,10 @@ CREATE TABLE orders (
     client_address VARCHAR(50) NOT NULL,
     date_delivery DATE NOT NULL,
     estimated_time TIME NOT NULL,
-    order_cost INT NOT NULL,
-    image_order VARCHAR NOT NULL,
-    status_order type_order_status NOT NULL,
-    rating INT NOT NULL,
+    order_cost INT,
+    image_order VARCHAR,
+    status_order type_order_status,
+    rating INT,
     _id_tracking VARCHAR,
     CONSTRAINT pk_orders PRIMARY KEY (id_order),
     CONSTRAINT fk_orders_Company FOREIGN KEY (id_company) REFERENCES company(id_company)
@@ -263,7 +265,6 @@ VALUES
     (3, 100001),
     (3, 100000);
 
-
 CREATE VIEW orders_view AS
 SELECT
     *,
@@ -290,12 +291,3 @@ FROM
     orders
 WHERE
     status_order = 'Entregadas';
-
-
--- SELECT SUM(order_cost)
---     id_delivery_man,
---     orders.id_order
--- FROM
---     assigned_order
---     INNER JOIN users ON assigned_order.id_delivery_man = users.id_user
---     INNER JOIN orders ON assigned_order.id_order = orders.id_order;
