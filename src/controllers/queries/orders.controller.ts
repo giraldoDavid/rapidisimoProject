@@ -7,10 +7,10 @@ import { QueryResult } from 'pg';
 export const getOrdersCompanySlopes = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     let id_company = req.params.id_company;
+    let result: QueryResult = await cliente.query(
+        `SELECT * FROM orders WHERE status_order = 'En espera' AND id_company= $1;`, [id_company]);
     try {
-        let result: QueryResult = await cliente.query(
-            `SELECT * FROM orders WHERE status_order = 'En espera' AND id_company= $1;`, [id_company]);
-            res.status(201).json(result.rows);
+        res.status(201).json(result.rows);
     } catch (error) {
         console.log(error);
         res.status(508).json({
@@ -21,14 +21,13 @@ export const getOrdersCompanySlopes = async (req: Request, res: Response) => {
     }
 }
 
-
 //Pedidos pendientes para el siguiente día
 export const getOrdersDateDelivery = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
+    let result: QueryResult = await cliente.query(
+        `SELECT * FROM orders WHERE date_delivery = current_date + INTERVAL '1 day'`)
     try {
-        let result: QueryResult = await cliente.query(
-            `SELECT * FROM orders WHERE date_delivery = current_date + INTERVAL '1 day'`)
-            res.status(201).json(result.rows);
+        res.status(201).json(result.rows);
     } catch (error) {
         console.log(error);
         res.status(508).json({
@@ -61,7 +60,6 @@ export const getOrdersDateDeliveryToday = async (req: Request, res: Response) =>
         cliente.release(true)
     }
 }
-
 
 // Traer todas las entregas discriminadas
 export const getDiscriminatedDeliveries = async (req: Request, res: Response) => {
@@ -104,6 +102,61 @@ export const getDeliveriesCompany = async (req: Request, res: Response) => {
         console.log(error);
         return res.status(508).json({
             message: 'Error al traer las entregas discriminadas por comercio',
+        });
+    } finally {
+        cliente.release(true)
+    }
+}
+
+// Total de ganancias del día
+export const getTotalEarnings = async (req: Request, res: Response) => {
+    let cliente = await pool.connect();
+    let result: QueryResult = await cliente.query(
+        `SELECT SUM(order_cost) FROM orderS WHERE date_delivery = current_date - INTERVAL '1 day';`)
+    try {
+        return res.status(201).json(result.rows[0]);
+    } catch (error) {
+        console.log(error);
+        return res.status(508).json({
+            message: 'Error al obtener las ganancias del día',
+        });
+    } finally {
+        cliente.release(true)
+    }
+}
+
+// Traer las ganancias por rango de fechas
+export const getTotalEarningsByDate = async (req: Request, res: Response) => {
+    let cliente = await pool.connect();
+    let date_start = req.params.date_start;
+    let date_end = req.params.date_end;
+    let result: QueryResult = await cliente.query(
+        `SELECT SUM(order_cost) FROM orders WHERE date_delivery >= $1 AND date_delivery <= $2`, [date_start, date_end])
+    try {
+        res.status(201).json(result.rows);
+    } catch (error) {
+        console.log(error);
+        res.status(508).json({
+            message: 'Error al obtener las ganancias por rango de fechas',
+        });
+    } finally {
+        cliente.release(true)
+    }
+}
+
+// Traer las ganancias por el id de una repartidor con el rango de fechas
+export const getTotalEarningsByDateOfDeliveryMan = async (req: Request, res: Response) => {
+    let cliente = await pool.connect();
+    let date_start = req.params.date_start;
+    let date_end = req.params.date_end;
+    let result: QueryResult = await cliente.query(
+        `SELECT SUM(order_cost) FROM orders WHERE date_delivery >= $1 AND date_delivery <= $2`, [date_start, date_end])
+    try {
+        res.status(201).json(result.rows);
+    } catch (error) {
+        console.log(error);
+        res.status(508).json({
+            message: 'Error al obtener las ganancias por rango de fechas',
         });
     } finally {
         cliente.release(true)

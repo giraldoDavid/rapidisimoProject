@@ -317,3 +317,7 @@ FROM
 WHERE
     orders.date_delivery = current_date - INTERVAL '1 day'
     AND assigned_order.id_delivery_man = 3;
+
+
+SELECT SUM(order_cost) FROM order WHERE date_delivery = current_date - INTERVAL '1 day';
+SELECT SUM(order_cost) FROM orders WHERE date_delivery >= '2002-05-12';
