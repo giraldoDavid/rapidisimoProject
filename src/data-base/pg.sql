@@ -29,7 +29,9 @@ DROP TABLE IF EXISTS assigned_order CASCADE;
 
 -- Borrando vistas (en caso de que existan)
 DROP VIEW IF EXISTS orders_view CASCADE;
+
 DROP VIEW IF EXISTS assigned_order_view CASCADE;
+
 DROP VIEW IF EXISTS orders_with_delivery_view CASCADE;
 
 -- Creando Database
@@ -263,7 +265,6 @@ VALUES
     (3, 100001),
     (3, 100000);
 
-
 CREATE VIEW orders_view AS
 SELECT
     *,
@@ -291,7 +292,6 @@ FROM
 WHERE
     status_order = 'Entregadas';
 
-
 -- SELECT SUM(order_cost)
 --     id_delivery_man,
 --     orders.id_order
@@ -299,3 +299,21 @@ WHERE
 --     assigned_order
 --     INNER JOIN users ON assigned_order.id_delivery_man = users.id_user
 --     INNER JOIN orders ON assigned_order.id_order = orders.id_order;
+SELECT
+    id_delivery_man,
+    id_company,
+    orders.id_order,
+    client_email,
+    client_name,
+    client_phone,
+    client_address,
+    date_delivery,
+    estimated_time,
+    order_cost
+FROM
+    assigned_order
+    INNER JOIN users ON assigned_order.id_delivery_man = users.id_user
+    INNER JOIN orders ON assigned_order.id_order = orders.id_order
+WHERE
+    orders.date_delivery = current_date - INTERVAL '1 day'
+    AND assigned_order.id_delivery_man = 3;

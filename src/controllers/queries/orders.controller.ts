@@ -90,7 +90,7 @@ export const getDeliveriesCompany = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     let id_company = req.params.id_company;
     let result: QueryResult = await cliente.query(
-        `SELECT * FROM orders WHERE id_company = $1 ORDER BY status_order`,[id_company])
+        `SELECT * FROM orders WHERE id_company = $1 ORDER BY status_order`, [id_company])
     try {
         if (result.rows.length === 0) {
             console.log('No hay ordenes para hoy');
