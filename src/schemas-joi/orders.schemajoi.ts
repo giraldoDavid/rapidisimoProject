@@ -8,10 +8,10 @@ export const ordersSchema = Joi.object().keys({
     client_address: Joi.string().max(50).required(),
     date_delivery: Joi.date().required(),
     estimated_time: Joi.string().max(8).required(),
-    order_cost: Joi.number().min(0).max(999999).required(),
-    image_order: Joi.string().required(),
-    status_order: Joi.string().max(50).required(),
-    rating: Joi.number().min(0).max(5).required(),
+    order_cost: Joi.number().min(0).max(999999),
+    image_order: Joi.string(),
+    status_order: Joi.string().max(50),
+    rating: Joi.number().min(0).max(5),
 });
 
 export const ordersSchemaPatch = Joi.object().keys({
