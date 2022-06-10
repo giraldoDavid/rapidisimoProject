@@ -66,7 +66,7 @@ CREATE TABLE users (
     phone VARCHAR(13) NOT NULL,
     delivery_man_status type_delivery_man_status,
     vehicle type_vehicle,
-    rol type_rol NOT NULL,
+    rol type_rol DEFAULT 'Delivery man' NOT NULL,
     user_image VARCHAR,
     CONSTRAINT pk_users PRIMARY KEY (id_user)
 );
@@ -93,10 +93,10 @@ CREATE TABLE orders (
     client_address VARCHAR(50) NOT NULL,
     date_delivery DATE NOT NULL,
     estimated_time TIME NOT NULL,
-    order_cost INT NOT NULL,
-    image_order VARCHAR NOT NULL,
-    status_order type_order_status NOT NULL,
-    rating INT NOT NULL,
+    order_cost INT,
+    image_order VARCHAR,
+    status_order type_order_status,
+    rating INT,
     _id_tracking VARCHAR,
     CONSTRAINT pk_orders PRIMARY KEY (id_order),
     CONSTRAINT fk_orders_Company FOREIGN KEY (id_company) REFERENCES company(id_company)
@@ -299,25 +299,3 @@ WHERE
 --     assigned_order
 --     INNER JOIN users ON assigned_order.id_delivery_man = users.id_user
 --     INNER JOIN orders ON assigned_order.id_order = orders.id_order;
-SELECT
-    id_delivery_man,
-    id_company,
-    orders.id_order,
-    client_email,
-    client_name,
-    client_phone,
-    client_address,
-    date_delivery,
-    estimated_time,
-    order_cost
-FROM
-    assigned_order
-    INNER JOIN users ON assigned_order.id_delivery_man = users.id_user
-    INNER JOIN orders ON assigned_order.id_order = orders.id_order
-WHERE
-    orders.date_delivery = current_date - INTERVAL '1 day'
-    AND assigned_order.id_delivery_man = 3;
-
-
-SELECT SUM(order_cost) FROM order WHERE date_delivery = current_date - INTERVAL '1 day';
-SELECT SUM(order_cost) FROM orders WHERE date_delivery >= '2002-05-12';
