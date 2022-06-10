@@ -7,17 +7,17 @@ const validator = createValidator();
 import { getAllUsers, postUser, putUser, patchUser, deleteUser } from '../controllers/user.controller';
 import { getAllCompanies, postCompany, putCompany, patchCompany, deleteCompany, } from '../controllers/company.controller';
 import { getAllOrders, getOrderById, postOrder, putOrder, patchOrder, deleteOrder } from '../controllers/orders.controller';
-import { getAllAssignedOrder, postAssignedOrder, putAssignedOrder, patchAssignedOrder, deleteAssignedOrder } 
+import { getAllAssignedOrder, postAssignedOrder, putAssignedOrder, patchAssignedOrder, deleteAssignedOrder }
     from '../controllers/assigned_order.controller';
 import { image } from '../controllers/image_multer.controller';
 import { imageUser } from '../controllers/image_user.controller';
 
 // Importando consultas del repartidor
-import { getDeliveryManById, getOrdersOfDeliveryMan, getDeliveryManAvailable, getDeliveriesByDeliveryMan, getDeliveriesByDeliveryManRange } 
+import { getDeliveryManById, getOrdersOfDeliveryMan, getDeliveryManAvailable, getDeliveriesByDeliveryMan, getDeliveriesByDeliveryManRange }
     from '../controllers/queries/deliveryman.controller';
 
 //Importando consultas de las ordenes
-import { getOrdersCompanySlopes, getOrdersDateDelivery, getOrdersDateDeliveryToday, getDiscriminatedDeliveries, getDeliveriesCompany } 
+import { getOrdersCompanySlopes, getOrdersDateDelivery, getOrdersDateDeliveryToday, getDiscriminatedDeliveries, getDeliveriesCompany, getTotalEarnings, getTotalEarningsByDate }
     from '../controllers/queries/orders.controller'
 
 // Importando los esquemas de Joi para las rutas
