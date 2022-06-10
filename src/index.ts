@@ -74,3 +74,5 @@ app.listen(app.get("port"), () => {
     console.log(`Server started at http://localhost:${app.get("port")}`);
 });
 
+export default app;
+
