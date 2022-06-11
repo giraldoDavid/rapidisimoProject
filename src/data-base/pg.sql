@@ -251,3 +251,5 @@ INSERT INTO assigned_order (
 );
 
 SELECT * FROM assigned_order;
+
+SELECT CURRENT_DATE;
