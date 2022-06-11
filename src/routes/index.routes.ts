@@ -17,8 +17,12 @@ import { getDeliveryManById, getOrdersOfDeliveryMan, getDeliveryManAvailable, ge
     from '../controllers/queries/deliveryman.controller';
 
 //Importando consultas de las ordenes
-import { getOrdersCompanySlopes, getOrdersDateDelivery, getOrdersDateDeliveryToday, getDiscriminatedDeliveries, getDeliveriesCompany, getTotalEarnings, getTotalEarningsByDate, getTotalEarningsByDateOfDeliveryMan, getTotalEarningsOfDeliveryManToday }
+import { getOrdersCompanySlopes, getOrdersDateDelivery, getOrdersDateDeliveryToday, getDiscriminatedDeliveries, getDeliveriesCompany }
     from '../controllers/queries/orders.controller'
+
+//Importando consultas de ganancias
+import { getTotalEarnings, getTotalEarningsByDate, getTotalEarningsByDateOfDeliveryMan, getTotalEarningsOfDeliveryManToday }
+    from '../controllers/queries/earnings.controller'
 
 // Importando los esquemas de Joi para las rutas
 import { companySchema, companySchemaPatch } from '../schemas-joi/company.schemajoi';
@@ -59,32 +63,30 @@ router.patch('/patchAssignedOrder/:id', decodeToken, validator.body(assignedOrde
 router.delete('/deleteAssignedOrder/:id', decodeToken, deleteAssignedOrder);
 
 // Consultas repartidor
-router.get('/deliveryMan/:id', decodeToken, getDeliveryManById);                                                             // Traer la información del repartidor segun id
-router.get('/ordersOfDeliveryMan/:id', decodeToken, getOrdersOfDeliveryMan);                                                 // Traer todos las ordenes segun id del repartidor
-router.get('/deliveryManAvailable', decodeToken, getDeliveryManAvailable)                                                    //Traer todos los repartidores disponiles
-router.get('/deliveriesByDeliveryMan/:id', decodeToken, getDeliveriesByDeliveryMan)                                          //Traer todas las ordenes del día segun id del repartidor
-router.get('/deliveriesByDeliveryManRange/:id/:startDate/:endDate', decodeToken, getDeliveriesByDeliveryManRange)            //Traer todas las ordenes del día segun id del repartidor
-router.get('/getTotalEarnings', decodeToken, getTotalEarnings)                                                               //Obtener las ganancias totales del día
-router.get('/getTotalEarnings/date_start/date_end', decodeToken, getTotalEarningsByDate)                                     //Obtener las ganancias totales en un periodo de tiempo determinado
-router.get('/getTotalEarningsByDateOfDeliveryMan/:id_delivery/:date_start/:date_end', decodeToken, getTotalEarningsByDateOfDeliveryMan) //Obtener las ganancias totales del día segun id del repartidor
-router.get('/getTotalEarningsByDateOfDeliveryMan/:id_delivery', decodeToken, getTotalEarningsOfDeliveryManToday) //Obtener las ganancias totales del día segun id del repartidor
-
-
-
-
+router.get('/deliveryMan/:id', decodeToken, getDeliveryManById);                                                                        // Traer la información del repartidor segun id
+router.get('/ordersOfDeliveryMan/:id', decodeToken, getOrdersOfDeliveryMan);                                                            // Traer todos las ordenes segun id del repartidor
+router.get('/deliveryManAvailable', decodeToken, getDeliveryManAvailable)                                                               //Traer todos los repartidores disponiles
+router.get('/deliveriesByDeliveryMan/:id', decodeToken, getDeliveriesByDeliveryMan)                                                     //Traer todas las ordenes del día segun id del repartidor
+router.get('/deliveriesByDeliveryManRange/:id/:startDate/:endDate', decodeToken, getDeliveriesByDeliveryManRange)                       //Traer todas las ordenes del día segun id del repartidor
 
 
 // Consultas ordenes
-router.get('/getOrdersCompanySlopes/:id_company', decodeToken, getOrdersCompanySlopes);                                      //Pedido pendientes por comercio
-router.get('/OrdersDateDelivery', decodeToken, getOrdersDateDelivery)                                                        //Pedidos pendientes para el siguiente día
-router.get('/getOrdersDateDeliveryToday', decodeToken, getOrdersDateDeliveryToday)                                           //Pedidos pendientes para el día de hoy (actual)')
-router.get('/getDiscriminatedDeliveries', decodeToken, getDiscriminatedDeliveries)                                           // Pedidos discriminados por estado
-router.get('/getDeliveriesCompany/:id_company', decodeToken, getDeliveriesCompany)                                           // Pedidos discriminados por comercio
+router.get('/getOrdersCompanySlopes/:id_company', decodeToken, getOrdersCompanySlopes);                                         //Pedido pendientes por comercio
+router.get('/OrdersDateDelivery', decodeToken, getOrdersDateDelivery)                                                           //Pedidos pendientes para el siguiente día
+router.get('/getOrdersDateDeliveryToday', decodeToken, getOrdersDateDeliveryToday)                                              //Pedidos pendientes para el día de hoy (actual)')
+router.get('/getDiscriminatedDeliveries', decodeToken, getDiscriminatedDeliveries)                                              // Pedidos discriminados por estado
+router.get('/getDeliveriesCompany/:id_company', decodeToken, getDeliveriesCompany)                                              // Pedidos discriminados por comercio
 
+
+// Consultas ganancias
+router.get('/getTotalEarnings', decodeToken, getTotalEarnings)                                                                  //Obtener las ganancias totales del día
+router.get('/getTotalEarnings/date_start/date_end', decodeToken, getTotalEarningsByDate)                                        //Obtener las ganancias totales en un periodo de tiempo determinado
+router.get('/getTotalEarningsByDateOfDeliveryMan/:id_delivery/:date_start/:date_end', decodeToken, getTotalEarningsByDateOfDeliveryMan) //Obtener las ganancias totales del día segun id del repartidor
+router.get('/getTotalEarningsByDateOfDeliveryMan/:id_delivery', decodeToken, getTotalEarningsOfDeliveryManToday)                //Obtener las ganancias totales del día segun id del repartidor
 
 // Subir imagen
 router.post('/uploadImage', decodeToken, image);
-router.post('/uploadImageUser/:id', decodeToken, imageUser);                                                                 // Subir imagen de usuario editando base de datos
+router.post('/uploadImageUser/:id', decodeToken, imageUser);                                                                    // Subir imagen de usuario editando base de datos
 
 // Exportando el router
 export default router;

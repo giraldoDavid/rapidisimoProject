@@ -1,6 +1,7 @@
 import * as Joi from 'joi';
 
 export const ordersSchema = Joi.object().keys({
+    id_order: Joi.number(),
     id_company: Joi.number().min(10000).max(99999).required(),
     client_email: Joi.string().email().max(50).required(),
     client_name: Joi.string().max(50).required(),
@@ -16,6 +17,7 @@ export const ordersSchema = Joi.object().keys({
 });
 
 export const ordersSchemaPatch = Joi.object().keys({
+    id_order: Joi.number(),
     id_company: Joi.number().min(10000).max(99999),
     client_email: Joi.string().email().max(50),
     client_name: Joi.string().max(50),
