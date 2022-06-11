@@ -16,7 +16,6 @@ const createUser = async (email: string, password: string) => {
             const errorMessage = error.message;
             return { error: true, data: error }
         });
-
     return response;
 }
 

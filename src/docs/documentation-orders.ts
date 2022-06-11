@@ -69,6 +69,8 @@
  * @swagger
  * /allOrders:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get all Orders
  *    tags: [Orders]
  *    responses:
@@ -82,6 +84,8 @@
  * @swagger
  * /postOrder:
  *  post:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Create new Order
  *    tags: [Orders]
  *    requestBody:
@@ -104,6 +108,8 @@
  * @swagger
  * /putOrder/:id:
  *  put:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Edit a Orders
  *      tags: [Orders]
  *      parameters:
@@ -131,6 +137,8 @@
  * @swagger
  * /patchOrder/:id:
  *  patch:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Edit a Orders with the method PATCH
  *      tags: [Orders]
  *      parameters:
@@ -159,6 +167,8 @@
  * @swagger
  * /deleteOrder/:id:
  *  delete:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Delete a Orders
  *      tags: [Orders]
  *      parameters:

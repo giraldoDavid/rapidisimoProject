@@ -2,6 +2,8 @@
  * @swagger
  * /deliveryMan/:id:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get delivery man according to Id
  *    tags: [Services of delivery man]
  *    parameters:
@@ -22,6 +24,8 @@
  * @swagger
  * /ordersOfDeliveryMan/:id:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get the orders of delivery man 
  *    tags: [Services of delivery man]
  *    parameters:
@@ -44,6 +48,8 @@
  * @swagger
  * /deliveryManAvailable:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get the delivery man available
  *    tags: [Services of delivery man]
  *    responses:
@@ -58,6 +64,8 @@
  * @swagger
  * /deliveriesByDeliveryMan/:id:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get the deliveries by delivery man (current date)
  *    tags: [Services of delivery man]
  *    parameters:
@@ -79,6 +87,8 @@
  * @swagger
  * /deliveriesByDeliveryManRange/:id/:startDate/:endDate:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get the deliveries by delivery man (date range)
  *    tags: [Services of delivery man]
  *    parameters:

@@ -5,7 +5,6 @@
  *      Assigned Order:
  *          type: object
  *          properties:
-
  *             id_assigned:
  *                 type: number
  *                 description: Id autoincrementing
@@ -29,6 +28,8 @@
  * @swagger
  * /allAssignedOrder:
  *  get:
+ *    security:
+ *      - bearerAuth: []
  *    summary: Get all Assigned Order
  *    tags: [Assigned Order]
  *    responses:
@@ -42,6 +43,8 @@
  * @swagger
  * /postAssignedOrder:
  *  post:
+ *    security:
+ *      - bearerAuth: []
  *    summary: Create new Assigned Order
  *    tags: [Assigned Order]
  *    requestBody:
@@ -64,6 +67,8 @@
  * @swagger
  * /putAssignedOrder/:id:
  *  put:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Edit a Assigned Order
  *      tags: [Assigned Order]
  *      parameters:
@@ -91,6 +96,8 @@
  * @swagger
  * /patchAssignedOrder/:id:
  *  patch:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Edit a Assigned Order with the method PATCH
  *      tags: [Assigned Order]
  *      parameters:
@@ -118,6 +125,8 @@
  * @swagger
  * /deleteAssignedOrder/:id:
  *  delete:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Delete a Assigned Order
  *      tags: [Assigned Order]
  *      parameters:

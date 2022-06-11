@@ -58,6 +58,8 @@
  * @swagger
  * /allUsers:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get all users
  *    tags: [Users]
  *    responses:
@@ -71,6 +73,8 @@
  * @swagger
  * /postUser:
  *  post:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Create new users
  *    tags: [Users]
  *    requestBody:
@@ -93,6 +97,8 @@
  * @swagger
  * /putUser/:id:
  *  put:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Edit a Users
  *      tags: [Users]
  *      parameters:
@@ -120,6 +126,8 @@
  * @swagger
  * /patchUser/:id:
  *  patch:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Edit a Users with the method PATCH
  *      tags: [Users]
  *      parameters:
@@ -147,6 +155,8 @@
  * @swagger
  * /deleteUser/:id:
  *  delete:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Delete a Users
  *      tags: [Users]
  *      parameters:

@@ -30,8 +30,21 @@ const swaggerSpec = {
         servers: [
             {
                 url: `http://localhost:${process.env.PORT}/`,
+                description: "Local"
+            },
+            {
+                url: `http://34.75.198.96:4200/`,
+                description: "Servidor"
             }
-        ]
+        ],
+        components: {
+            securitySchemes:{
+                    bearerAuth:{
+                        type: "http",
+                        scheme: "bearer"
+                    }
+            }
+        }
     },
     apis: ['./dist/docs/*.js']
 }
