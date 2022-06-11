@@ -35,7 +35,6 @@
  *                 description: close_time_company
  *
  *          required:
- *             - id_company
  *             - email_company
  *             - name_company
  *             - phone_company

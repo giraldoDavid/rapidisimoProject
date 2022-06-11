@@ -17,7 +17,6 @@
  *                 description: Id of the Order
  *             
  *          required:
- *             - id_assigned
  *             - id_delivery_man
  *             - id_order
  *          example:

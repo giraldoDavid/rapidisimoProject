@@ -1,6 +1,7 @@
 import * as Joi from 'joi';
 
 export const userSchema = Joi.object().keys({
+    id_user: Joi.number(),
     email: Joi.string().email().max(50).required(),
     document: Joi.number().required(),
     name: Joi.string().max(50).required(),
@@ -13,6 +14,7 @@ export const userSchema = Joi.object().keys({
 });
 
 export const userSchemaPatch = Joi.object().keys({
+    id_user: Joi.number(),
     email: Joi.string().email().max(50),
     document: Joi.number(),
     name: Joi.string().max(50),

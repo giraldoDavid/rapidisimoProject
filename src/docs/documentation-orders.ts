@@ -33,15 +33,20 @@
  *             order_cost:
  *                 type: number
  *                 description: Order cost
- *             image:
+ *             image_order:
  *                 type: string
  *                 description: Image of the Order
  *             status_order:
  *                 type: string
  *                 description: Status Order
+ *             rating:
+ *                 type: number
+ *                 description: Rating of the Order
+ *             _id_traking:
+ *                 type: string
+ *                 description: Trancking of the Order
  *
  *          required:
- *             - id_order
  *             - id_company
  *             - client_email
  *             - client_name
@@ -49,9 +54,6 @@
  *             - client_address
  *             - date_delivery
  *             - estimated_time
- *             - order_cost
- *             - image
- *             - status_order
  *          example:
  *             "id_company": 10001
  *             "client_email": "isa123@gmail.com"
@@ -60,10 +62,6 @@
  *             "client_address": "Cra. 5 # 34 - 4 Medell¡n - Colombia"
  *             "date_delivery": "2020-05-05T05:00:00.000Z"
  *             "estimated_time": "12:00:00"
- *             "order_cost": 6000
- *             "image_order": "http.cat/201"
- *             "status_order": "En reparto"
- *             "rating": 5
  */
 /**            
  * @swagger
