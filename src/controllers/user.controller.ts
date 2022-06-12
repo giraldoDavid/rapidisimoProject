@@ -7,12 +7,12 @@ const validator = createValidator();
 // Traer todos los usuarios
 export const getAllUsers = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
+    let result: QueryResult = await cliente.query('SELECT * FROM users');
     try {
-        let result: QueryResult = await cliente.query('SELECT * FROM users');
-        res.status(201).json(result.rows);
+        return res.status(201).json(result.rows);
     } catch (error) {
         console.log(error);
-        res.status(508).json({
+        return res.status(508).json({
             message: 'Error al traer los usuarios',
         });
     } finally {
@@ -27,14 +27,14 @@ export const getAllUsers = async (req: Request, res: Response) => {
 // Crear usuario
 export const postUser = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
+    let result: QueryResult = await cliente.query
+        ('INSERT INTO users(email, document, name, lastname, phone, delivery_man_status, vehicle, rol, user_image) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)',
+            [req.body.email, req.body.document, req.body.name, req.body.lastname, req.body.phone, req.body.delivery_man_status, req.body.vehicle, req.body.rol, req.body.user_image]);
     try {
-        let result: QueryResult = await cliente.query
-            ('INSERT INTO users(email, document, name, lastname, phone, delivery_man_status, vehicle, rol) VALUES($1, $2, $3, $4, $5, $6, $7, $8)', 
-                [req.body.email, req.body.document, req.body.name, req.body.lastname, req.body.phone, req.body.delivery_man_status, req.body.vehicle, req.body.rol]);
-        res.status(201).json(`Usuario creado satisfactoriamente`);
+        return res.status(201).json(`Usuario creado satisfactoriamente`);
     } catch (error) {
         console.log(error);
-        res.status(508).json({
+        return res.status(508).json({
             message: 'Error al crear el usuario',
         });
     } finally {
@@ -46,14 +46,14 @@ export const postUser = async (req: Request, res: Response) => {
 export const putUser = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     let id = req.params.id;
+    let result: QueryResult = await cliente.query
+        ('UPDATE users SET email=$1, document=$2, name=$3, lastname=$4, phone=$5, delivery_man_status=$6, vehicle=$7, rol=$8, user_image=$9 WHERE id_user=$10',
+            [req.body.email, req.body.document, req.body.name, req.body.lastname, req.body.phone, req.body.delivery_man_status, req.body.vehicle, req.body.rol, req.body.user_image, id]);
     try {
-        let result: QueryResult = await cliente.query
-            ('UPDATE users SET email=$1, document=$2, name=$3, lastname=$4, phone=$5, delivery_man_status=$6, vehicle=$7, rol=$8 WHERE id_user=$9', 
-                [req.body.email, req.body.document, req.body.name, req.body.lastname, req.body.phone, req.body.delivery_man_status, req.body.vehicle, req.body.rol, id]);
-        res.status(201).json(`Usuario con id: ${id}, editado satisfactoriamente`);
+        return res.status(201).json(`Usuario con id: ${id}, editado satisfactoriamente`);
     } catch (error) {
         console.log(error);
-        res.status(508).json({
+        return res.status(508).json({
             message: 'Error al editar el usuario',
         });
     } finally {
@@ -65,20 +65,20 @@ export const putUser = async (req: Request, res: Response) => {
 export const patchUser = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     let id = req.params.id;
+    const fields = Object.keys(req.body);
+    const fieldsQuery = fields.map(field => {
+        if (typeof req.body[`${field}`] === 'string') {
+            return `${field} = '${req.body[`${field}`]}'`
+        } else {
+            return `${field} = ${req.body[`${field}`]}`
+        }
+    });
+    await cliente.query(`UPDATE users SET ${fieldsQuery.join()} WHERE id_user = '${id}'`);
     try {
-        const fields = Object.keys(req.body);
-        const fieldsQuery = fields.map(field => {
-            if(typeof req.body[`${field}`] === 'string'){
-                return `${field} = '${req.body[`${field}`]}'`
-            }else{
-                return `${field} = ${req.body[`${field}`]}`
-            }
-        });
-        await cliente.query(`UPDATE users SET ${fieldsQuery.join()} WHERE id_user = '${id}'`);
-        res.status(201).json(`Usuario con id: ${id}, editado satisfactoriamente`);
+        return res.status(201).json(`Usuario con id: ${id}, editado satisfactoriamente`);
     } catch (error) {
         console.log(error);
-        res.status(508).json({
+        return res.status(508).json({
             message: 'Error al editar el usuario',
         });
     } finally {
@@ -90,13 +90,13 @@ export const patchUser = async (req: Request, res: Response) => {
 export const deleteUser = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     let id = req.params.id;
+    let result: QueryResult = await cliente.query
+        ('DELETE FROM users WHERE id_user=$1', [id]);
     try {
-        let result: QueryResult = await cliente.query
-            ('DELETE FROM users WHERE id_user=$1', [id]);
-        res.status(201).json(`Usuario con id: ${id}, eliminado satisfactoriamente`);
+        return res.status(201).json(`Usuario con id: ${id}, eliminado satisfactoriamente`);
     } catch (error) {
         console.log(error);
-        res.status(500).json({
+        return res.status(500).json({
             message: 'Error al eliminar el usuario',
         });
     } finally {

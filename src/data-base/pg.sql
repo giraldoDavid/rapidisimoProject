@@ -27,6 +27,13 @@ DROP TABLE IF EXISTS orders CASCADE;
 
 DROP TABLE IF EXISTS assigned_order CASCADE;
 
+-- Borrando vistas (en caso de que existan)
+DROP VIEW IF EXISTS orders_view CASCADE;
+
+DROP VIEW IF EXISTS assigned_order_view CASCADE;
+
+DROP VIEW IF EXISTS orders_with_delivery_view CASCADE;
+
 -- Creando Database
 -- CREATE DATABASE rapidisimo WITH ENCODING = 'UTF8';
 -- Seleccionando Database
@@ -59,7 +66,7 @@ CREATE TABLE users (
     phone VARCHAR(13) NOT NULL,
     delivery_man_status type_delivery_man_status,
     vehicle type_vehicle,
-    rol type_rol NOT NULL,
+    rol type_rol DEFAULT 'Delivery man' NOT NULL,
     user_image VARCHAR,
     CONSTRAINT pk_users PRIMARY KEY (id_user)
 );
@@ -86,10 +93,10 @@ CREATE TABLE orders (
     client_address VARCHAR(50) NOT NULL,
     date_delivery DATE NOT NULL,
     estimated_time TIME NOT NULL,
-    order_cost INT NOT NULL,
-    image_order VARCHAR NOT NULL,
-    status_order type_order_status NOT NULL,
-    rating INT NOT NULL,
+    order_cost INT,
+    image_order VARCHAR,
+    status_order type_order_status,
+    rating INT,
     _id_tracking VARCHAR,
     CONSTRAINT pk_orders PRIMARY KEY (id_order),
     CONSTRAINT fk_orders_Company FOREIGN KEY (id_company) REFERENCES company(id_company)
@@ -105,7 +112,15 @@ CREATE TABLE assigned_order (
 );
 
 INSERT INTO
-    users (email, document, name, lastname, phone, rol, user_image)
+    users (
+        email,
+        document,
+        name,
+        lastname,
+        phone,
+        rol,
+        user_image
+    )
 VALUES
     (
         'david.giraldo@gmail.com',
@@ -194,20 +209,21 @@ SELECT
 FROM
     company;
 
-INSERT INTO orders (
-    id_company,
-    client_email,
-    client_name,
-    client_phone,
-    client_address,
-    date_delivery,
-    estimated_time,
-    order_cost,
-    image_order,
-    status_order,
-    rating,
-    _id_tracking
-)
+INSERT INTO
+    orders (
+        id_company,
+        client_email,
+        client_name,
+        client_phone,
+        client_address,
+        date_delivery,
+        estimated_time,
+        order_cost,
+        image_order,
+        status_order,
+        rating,
+        _id_tracking
+    )
 VALUES
     (
         10000,
@@ -222,7 +238,8 @@ VALUES
         'En espera',
         5,
         '8479834INFG9JH8FY493'
-    ),(
+    ),
+    (
         10001,
         'isa123@gmail.com',
         'Isabella Taborda',
@@ -237,19 +254,40 @@ VALUES
         'UYEFN9834INFG9JH8FY493'
     );
 
-SELECT * FROM orders;	
+SELECT
+    *
+FROM
+    orders;
 
-INSERT INTO assigned_order (
-    id_delivery_man,
-    id_order
-) VALUES(
-    3,
-    100001 
-),(
-    3,
-    100000
-);
+INSERT INTO
+    assigned_order (id_delivery_man, id_order)
+VALUES
+    (3, 100001),
+    (3, 100000);
 
-SELECT * FROM assigned_order;
-
-SELECT CURRENT_DATE;
+CREATE VIEW orders_view AS
+SELECT
+    *,
+    'En espera' AS Estado
+FROM
+    orders
+WHERE
+    status_order = 'En espera'
+UNION
+ALL
+SELECT
+    *,
+    'En reparto' AS Estado
+FROM
+    orders
+WHERE
+    status_order = 'En reparto'
+UNION
+ALL
+SELECT
+    *,
+    'Entregadas' AS Estado
+FROM
+    orders
+WHERE
+    status_order = 'Entregadas';

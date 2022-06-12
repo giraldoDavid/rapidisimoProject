@@ -5,13 +5,13 @@ export const decodeToken = async (_req: Request, res: Response, next: NextFuncti
     const token = _req.headers.authorization?.split(" ")[1];
     try {
         if (token === undefined) {
-            return res.status(401).json({ message: "Unauthorized" });
+            return res.status(401).json({ message: "Unauthorized Access" });
         } else {
             const decodeValue = await config.admin.auth().verifyIdToken(token!);
             if (decodeValue != null || decodeValue != undefined) {
                 return next();
             }
-            return res.json({ message: "Unauthorized" });
+            return res.json({ message: "Unauthorized Access" });
         }
     } catch (error) {
         if (error.code === "auth/id-token-expired") {

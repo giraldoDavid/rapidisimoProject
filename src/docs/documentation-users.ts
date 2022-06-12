@@ -5,7 +5,6 @@
  *      Users:
  *          type: object
  *          properties:
- *  
  *             id_user:
  *                 type: number
  *                 description: Id autoincrementing
@@ -33,6 +32,9 @@
  *             rol:
  *                 type: string
  *                 description: User's role
+ *             user_image:
+ *                 type: string
+ *                 description: User's image
  *
  *          required:
  *             - email
@@ -49,12 +51,15 @@
  *              "delivery_man_status": "Ocupado"
  *              "vehicle": "Carro"
  *              "rol": "Delivery man"
+ *              "user_image": "imagen.png"
  */
 
 /**            
  * @swagger
  * /allUsers:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get all users
  *    tags: [Users]
  *    responses:
@@ -68,6 +73,8 @@
  * @swagger
  * /postUser:
  *  post:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Create new users
  *    tags: [Users]
  *    requestBody:
@@ -90,14 +97,15 @@
  * @swagger
  * /putUser/:id:
  *  put:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Edit a Users
  *      tags: [Users]
  *      parameters:
  *        - in: path
  *          name: id_user
  *          schema:
- *              type: objectId
- *              $ref: '#/components/schemas/Users'
+ *              type: number
  *          required: true
  *          description: Identificador del User
  *      requestBody:
@@ -106,6 +114,36 @@
  *              application/json:
  *                 schema:
  *                   type: object
+ *                   $ref: '#/components/schemas/Users'
+ *      responses:
+ *          201:
+ *              description: Usuario con id ${id}, editado satisfactoriamente
+ *          508:
+ *              description: Error al editar el usuario
+ */
+
+/**
+ * @swagger
+ * /patchUser/:id:
+ *  patch:
+ *      security:
+ *          - bearerAuth: []
+ *      summary: Edit a Users with the method PATCH
+ *      tags: [Users]
+ *      parameters:
+ *        - in: path
+ *          name: id_user
+ *          schema:
+ *              type: number
+ *          required: true
+ *          description: Identificador del User
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                 schema:
+ *                   type: object
+ *                   $ref: '#/components/schemas/Users'
  *      responses:
  *          201:
  *              description: Usuario con id ${id}, editado satisfactoriamente
@@ -117,13 +155,15 @@
  * @swagger
  * /deleteUser/:id:
  *  delete:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Delete a Users
  *      tags: [Users]
  *      parameters:
  *        - in: path
  *          name: id_user
  *          schema:
- *              type: objectId
+ *              type: number
  *          required: true
  *          description: Identificador del User
  *      responses:

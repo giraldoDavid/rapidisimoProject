@@ -1,6 +1,7 @@
 import * as Joi from 'joi';
 
 export const companySchema = Joi.object().keys({
+    id_company: Joi.number(),
     email_company: Joi.string().email().max(50).required(),
     name_company: Joi.string().max(50).required(),  
     phone_company: Joi.string().max(13).required(),
@@ -12,6 +13,7 @@ export const companySchema = Joi.object().keys({
 });
 
 export const companySchemaPatch = Joi.object().keys({
+    id_company: Joi.number(),
     email_company: Joi.string().email().max(50),
     name_company: Joi.string().max(50),  
     phone_company: Joi.string().max(13),

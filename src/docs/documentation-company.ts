@@ -35,7 +35,6 @@
  *                 description: close_time_company
  *
  *          required:
- *             - id_company
  *             - email_company
  *             - name_company
  *             - phone_company
@@ -59,6 +58,8 @@
  * @swagger
  * /allCompanies:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get all Companies
  *    tags: [Company]
  *    responses:
@@ -72,6 +73,8 @@
  * @swagger
  * /postCompany:
  *  post:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Create new Company
  *    tags: [Company]
  *    requestBody:
@@ -94,14 +97,15 @@
  * @swagger
  * /putCompany/:id:
  *  put:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Edit a Companies
  *      tags: [Company]
  *      parameters:
  *        - in: path
  *          name: id_company
  *          schema:
- *              type: objectId
- *              $ref: '#/components/schemas/Company'
+ *              type: number
  *          required: true
  *          description: Identificador de la empresa
  *      requestBody:
@@ -110,6 +114,7 @@
  *              application/json:
  *                 schema:
  *                   type: object
+ *                   $ref: '#/components/schemas/Company'
  *      responses:
  *          200:
  *              description: Empresa con id ${id_company}, editada satisfactoriamente
@@ -119,15 +124,46 @@
 
 /**
  * @swagger
+ * /patchCompany/:id:
+ *  patch:
+ *      security:
+ *          - bearerAuth: []
+ *      summary: Edit a Companies with the method PATCH
+ *      tags: [Company]
+ *      parameters:
+ *        - in: path
+ *          name: id_company
+ *          schema:
+ *              type: number
+ *          required: true
+ *          description: Identificador de la empresa
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                 schema:
+ *                   type: object
+ *                   $ref: '#/components/schemas/Company'
+ *      responses:
+ *          201:
+ *              description: Compañia con id ${id_company}, se ha editado satisfactoriamente
+ *          508:
+ *              description: Error al editar la compañia
+ */
+
+/**
+ * @swagger
  * /deleteCompany/:id:
  *  delete:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Delete a Companies
  *      tags: [Company]
  *      parameters:
  *        - in: path
  *          name: id_company
  *          schema:
- *              type: objectId
+ *              type: number
  *          required: true
  *          description: Identificador de la empresa
  *      responses:

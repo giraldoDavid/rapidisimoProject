@@ -10,6 +10,7 @@ import { connectToDatabase } from './data-base/config.mongodb';
 import { mailRouter } from "./routes/mail.routes";
 import { authRouter } from "./routes/auth.router";
 
+
 dotenv.config();
 const app = express();
 
@@ -29,8 +30,21 @@ const swaggerSpec = {
         servers: [
             {
                 url: `http://localhost:${process.env.PORT}/`,
+                description: "Local"
+            },
+            {
+                url: `http://34.75.198.96:4200/`,
+                description: "Servidor"
             }
-        ]
+        ],
+        components: {
+            securitySchemes:{
+                    bearerAuth:{
+                        type: "http",
+                        scheme: "bearer"
+                    }
+            }
+        }
     },
     apis: ['./dist/docs/*.js']
 }
@@ -49,7 +63,7 @@ app.use("/api/", (req, res, next) => {
 //routes
 app.use("/", router);
 app.use("/", routerMap);                        // rutas para la Peticiones de MongoDB
-app.use('/mail',mailRouter);                    // rutas de mail SendGrid
+app.use('/mail', mailRouter);                   // rutas de mail SendGrid
 app.use("/auth", authRouter);                   // ruta de autenticación
 
 //Swagger
@@ -60,10 +74,10 @@ app.set("port", process.env.PORT || 3000);
 
 // Conectar con la base de datos MONGODB
 connectToDatabase()
-    .then(() => {
+    .then(async () => {
         console.log("Connected to database");
     })
-    .catch((error: Error) => {
+    .catch(async (error: Error) => {
         console.error("Database connection failed", error);
         process.exit();
     });
@@ -72,4 +86,6 @@ connectToDatabase()
 app.listen(app.get("port"), () => {
     console.log(`Server started at http://localhost:${app.get("port")}`);
 });
+
+export default app;
 
