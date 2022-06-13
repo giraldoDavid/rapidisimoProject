@@ -2,6 +2,8 @@
  * @swagger
  * /getOrdersCompanySlopes/:id_company:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get pending orders by company
  *    tags: [Services of the Company]
  *    parameters:
@@ -22,6 +24,8 @@
  * @swagger
  * /OrdersDateDelivery:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get pending orders for the next day
  *    tags: [Services of the Company]
  *    responses:
@@ -35,6 +39,8 @@
  * @swagger
  * /getOrdersDateDeliveryToday:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get pending orders for today
  *    tags: [Services of the Company]
  *    responses:
@@ -50,6 +56,8 @@
  * @swagger
  * /getDiscriminatedDeliveries:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get all deliveries discriminated
  *    tags: [Services of the Company]
  *    responses:
@@ -63,10 +71,19 @@
 
 /**            
  * @swagger
- * /getDeliveriesCompany:
+ * /getDeliveriesCompany/:id:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get all deliveries discriminated by company
  *    tags: [Services of the Company]
+ *    parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *              type: number
+ *          required: true
+ *          description: Identificador de la empresa
  *    responses:
  *      204:
  *          description: No hay entregas discriminadas por comercio

@@ -2,6 +2,8 @@
  * @swagger
  * /getTotalEarnings:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get total earnings of the day
  *    tags: [Services of Earnings]
  *    responses:
@@ -15,6 +17,8 @@
  * @swagger
  * /getTotalEarningsByDate:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get total earnings by date range
  *    tags: [Services of Earnings]
  *    responses:
@@ -28,6 +32,8 @@
  * @swagger
  * /getTotalEarningsByDateOfDeliveryMan/:id_delivery/:date_start/:date_end:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get the earnings by date range with the id of a delivery man 
  *    tags: [Services of Earnings]
  *    parameters:
@@ -44,7 +50,7 @@
  *          required: true
  *          description: Fecha final
  *        - in: path
- *          name: id_delivery_man
+ *          name: id_delivery
  *          schema:
  *              type: date
  *          required: true
@@ -60,11 +66,13 @@
  * @swagger
  * /getTotalEarningsByDateOfDeliveryMan/:id_delivery:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get the earnings of today by the id of a delivery man 
  *    tags: [Services of Earnings]
  *    parameters:
  *        - in: path
- *          name: id_delivery_man
+ *          name: id_delivery
  *          schema:
  *              type: number
  *          required: true

@@ -67,8 +67,27 @@
  * @swagger
  * /allOrders:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get all Orders
  *    tags: [Orders]
+ *    responses:
+ *      201:
+ *          description: Trae todas las ordenes
+ *      508: 
+ *          description: Error al traer las ordenes
+ */
+/**            
+ * @swagger
+ * /getOrderById/:id:
+ *  get:
+ *    summary: Get all Orders
+ *    tags: [Orders]
+ *    parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *              type: objectId
  *    responses:
  *      201:
  *          description: Trae todas las ordenes
@@ -80,6 +99,8 @@
  * @swagger
  * /postOrder:
  *  post:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Create new Order
  *    tags: [Orders]
  *    requestBody:
@@ -102,11 +123,13 @@
  * @swagger
  * /putOrder/:id:
  *  put:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Edit a Orders
  *      tags: [Orders]
  *      parameters:
  *        - in: path
- *          name: id_order
+ *          name: id
  *          schema:
  *              type: number
  *          required: true
@@ -129,11 +152,13 @@
  * @swagger
  * /patchOrder/:id:
  *  patch:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Edit a Orders with the method PATCH
  *      tags: [Orders]
  *      parameters:
  *        - in: path
- *          name: id_order
+ *          name: id
  *          schema:
  *              type: number
  *          required: true
@@ -157,11 +182,13 @@
  * @swagger
  * /deleteOrder/:id:
  *  delete:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Delete a Orders
  *      tags: [Orders]
  *      parameters:
  *        - in: path
- *          name: id_order
+ *          name: id
  *          schema:
  *              type: number
  *          required: true

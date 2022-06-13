@@ -48,6 +48,8 @@
  * @swagger
  * /allMaps:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get all locations
  *    tags: [Location]
  *    responses:
@@ -65,7 +67,7 @@
  *    tags: [Location]
  *    parameters:
  *        - in: path
- *          name: _id
+ *          name: id
  *          schema:
  *              type: objectId
  *          required: true
@@ -81,6 +83,8 @@
  * @swagger
  * /postMap:
  *  post:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Create new location
  *    tags: [Location]
  *    requestBody:
@@ -103,11 +107,13 @@
  * @swagger
  * /putMap/:id:
  *  put:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Edit a Location
  *      tags: [Location]
  *      parameters:
  *        - in: path
- *          name: _id
+ *          name: id
  *          schema:
  *              type: number
  *          required: true
@@ -130,11 +136,13 @@
  * @swagger
  * /deleteMap/:id:
  *  delete:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Delete a Location
  *      tags: [Location]
  *      parameters:
  *        - in: path
- *          name: _id
+ *          name: id
  *          schema:
  *              type: objectId
  *          required: true

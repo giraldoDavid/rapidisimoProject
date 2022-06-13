@@ -58,6 +58,8 @@
  * @swagger
  * /allCompanies:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get all Companies
  *    tags: [Company]
  *    responses:
@@ -71,6 +73,8 @@
  * @swagger
  * /postCompany:
  *  post:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Create new Company
  *    tags: [Company]
  *    requestBody:
@@ -93,11 +97,13 @@
  * @swagger
  * /putCompany/:id:
  *  put:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Edit a Companies
  *      tags: [Company]
  *      parameters:
  *        - in: path
- *          name: id_company
+ *          name: id
  *          schema:
  *              type: number
  *          required: true
@@ -120,11 +126,13 @@
  * @swagger
  * /patchCompany/:id:
  *  patch:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Edit a Companies with the method PATCH
  *      tags: [Company]
  *      parameters:
  *        - in: path
- *          name: id_company
+ *          name: id
  *          schema:
  *              type: number
  *          required: true
@@ -147,11 +155,13 @@
  * @swagger
  * /deleteCompany/:id:
  *  delete:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Delete a Companies
  *      tags: [Company]
  *      parameters:
  *        - in: path
- *          name: id_company
+ *          name: id
  *          schema:
  *              type: number
  *          required: true

@@ -2,11 +2,13 @@
  * @swagger
  * /deliveryMan/:id:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get delivery man according to Id
  *    tags: [Services of delivery man]
  *    parameters:
  *        - in: path
- *          name: id_user
+ *          name: id
  *          schema:
  *              type: number
  *          required: true
@@ -22,11 +24,13 @@
  * @swagger
  * /ordersOfDeliveryMan/:id:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get the orders of delivery man 
  *    tags: [Services of delivery man]
  *    parameters:
  *        - in: path
- *          name: id_user
+ *          name: id
  *          schema:
  *              type: number
  *          required: true
@@ -44,6 +48,8 @@
  * @swagger
  * /deliveryManAvailable:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get the delivery man available
  *    tags: [Services of delivery man]
  *    responses:
@@ -58,11 +64,13 @@
  * @swagger
  * /deliveriesByDeliveryMan/:id:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get the deliveries by delivery man (current date)
  *    tags: [Services of delivery man]
  *    parameters:
  *        - in: path
- *          name: id_delivery_man
+ *          name: id
  *          schema:
  *              type: number
  *          required: true
@@ -79,11 +87,13 @@
  * @swagger
  * /deliveriesByDeliveryManRange/:id/:startDate/:endDate:
  *  get:
+ *    security:
+ *          - bearerAuth: []
  *    summary: Get the deliveries by delivery man (date range)
  *    tags: [Services of delivery man]
  *    parameters:
  *        - in: path
- *          name: id_delivery_man
+ *          name: id
  *          schema:
  *              type: number
  *          required: true
@@ -95,7 +105,7 @@
  *          required: true
  *          description: Fecha de inicio
  *        - in: path
- *          name: startDate
+ *          name: endDate
  *          schema:
  *              type: date
  *          required: true
