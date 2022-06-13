@@ -79,7 +79,7 @@
  */
 /**            
  * @swagger
- * /allOrders/:id:
+ * /getOrderById/:id:
  *  get:
  *    summary: Get all Orders
  *    tags: [Orders]
