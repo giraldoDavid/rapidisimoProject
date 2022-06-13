@@ -66,7 +66,7 @@ CREATE TABLE users (
     phone VARCHAR(13) NOT NULL,
     delivery_man_status type_delivery_man_status,
     vehicle type_vehicle,
-    rol type_rol DEFAULT 'Delivery man' NOT NULL,
+    rol type_rol DEFAULT 'Delivery man',
     user_image VARCHAR,
     CONSTRAINT pk_users PRIMARY KEY (id_user)
 );
@@ -199,6 +199,46 @@ VALUES
         '3456789123',
         'Cali',
         'Santa Rita',
+        'Calle 102',
+        'Carrera 129',
+        '21:00:00'
+    ),
+(
+        'ferreteriaoasisi@gmail.com',
+        'Ferretería Oasis',
+        '3174889744',
+        'Medellín',
+        'Aranjuez - Comuna 4',
+        'Calle 1',
+        'Carrera 3',
+        '18:00:00'
+    ),
+    (
+        'metalicas@gmail.com',
+        'Metálicas S.A.S',
+        '3456789123',
+        'Pasto',
+        'Bomboná',
+        'Calle 102',
+        'Carrera 129',
+        '21:00:00'
+    ),
+(
+        'tiendaamarilla@gmail.com',
+        'Tienda Amarilla',
+        '3174887469',
+        'Chocó',
+        'Ánimas Bajas',
+        'Calle 5',
+        'Carrera 26',
+        '18:00:00'
+    ),
+    (
+        'garitofeliz@gmail.com',
+        'Garito Feliz',
+        '3156789123',
+        'Barranquilla',
+        'Barlovento',
         'Calle 102',
         'Carrera 129',
         '21:00:00'

@@ -34,14 +34,14 @@ import { userSchema, userSchemaPatch } from '../schemas-joi/user.schemajoi';
 import { decodeToken } from '../firebase/manage.token';
 
 // Tabla usuarios
-router.get('/allUsers', getAllUsers);
-router.post('/postUser', decodeToken, validator.body(userSchema), postUser);
+router.get('/allUsers', decodeToken, getAllUsers);
+router.post('/postUser',  validator.body(userSchema), postUser);
 router.put('/putUser/:id', decodeToken, validator.body(userSchema), putUser);
 router.patch('/patchUser/:id', decodeToken, validator.body(userSchemaPatch), patchUser);
 router.delete('/deleteUser/:id', decodeToken, deleteUser);
 
 // Tabla empresas
-router.get('/allCompanies', decodeToken, getAllCompanies);
+router.get('/allCompanies', getAllCompanies);
 router.post('/postCompany', decodeToken, validator.body(companySchema), postCompany);
 router.put('/putCompany/:id', decodeToken, validator.body(companySchema), putCompany);
 router.patch('/patchCompany/:id', decodeToken, validator.body(companySchemaPatch), patchCompany);
@@ -49,7 +49,7 @@ router.delete('/deleteCompany/:id', decodeToken, deleteCompany);
 
 // Tabla ordenes
 router.get('/allOrders', decodeToken, getAllOrders);
-router.get('/getOrderById/:id', decodeToken, getOrderById);                                                                  // NUEVO SERVICIO
+router.get('/getOrderById/:id', decodeToken, getOrderById);                                                                             // NUEVO SERVICIO
 router.post('/postOrder', decodeToken, validator.body(ordersSchema), postOrder);
 router.put('/putOrder/:id', decodeToken, validator.body(ordersSchema), putOrder);
 router.patch('/patchOrder/:id', decodeToken, validator.body(ordersSchemaPatch), patchOrder);

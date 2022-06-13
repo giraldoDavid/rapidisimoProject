@@ -81,7 +81,6 @@ connectToDatabase()
         console.error("Database connection failed", error);
         process.exit();
     });
-
 //Iniciar el servidor
 app.listen(app.get("port"), () => {
     console.log(`Server started at http://localhost:${app.get("port")}`);
