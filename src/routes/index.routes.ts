@@ -49,7 +49,7 @@ router.delete('/deleteCompany/:id', decodeToken, deleteCompany);
 
 // Tabla ordenes
 router.get('/allOrders', decodeToken, getAllOrders);
-router.get('/getOrderById/:id', decodeToken, getOrderById);                                                                  // NUEVO SERVICIO
+router.get('/getOrderById/:id', getOrderById);  //NO TOKEN
 router.post('/postOrder', decodeToken, validator.body(ordersSchema), postOrder);
 router.put('/putOrder/:id', decodeToken, validator.body(ordersSchema), putOrder);
 router.patch('/patchOrder/:id', decodeToken, validator.body(ordersSchemaPatch), patchOrder);

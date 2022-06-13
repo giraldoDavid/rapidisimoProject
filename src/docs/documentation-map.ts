@@ -63,13 +63,11 @@
  * @swagger
  * /getMapById/:id:
  *  get:
- *    security:
- *          - bearerAuth: []
  *    summary: Get all locations for his Id
  *    tags: [Location]
  *    parameters:
  *        - in: path
- *          name: _id
+ *          name: id
  *          schema:
  *              type: objectId
  *          required: true
@@ -115,7 +113,7 @@
  *      tags: [Location]
  *      parameters:
  *        - in: path
- *          name: _id
+ *          name: id
  *          schema:
  *              type: number
  *          required: true
@@ -144,7 +142,7 @@
  *      tags: [Location]
  *      parameters:
  *        - in: path
- *          name: _id
+ *          name: id
  *          schema:
  *              type: objectId
  *          required: true

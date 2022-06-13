@@ -79,7 +79,7 @@
  *    tags: [Services of the Company]
  *    parameters:
  *        - in: path
- *          name: id_company
+ *          name: id
  *          schema:
  *              type: number
  *          required: true

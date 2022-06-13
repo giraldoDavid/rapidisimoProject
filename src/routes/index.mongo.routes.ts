@@ -9,7 +9,7 @@ import { decodeToken } from '../firebase/manage.token';
 
 //Coleccion Map
 routerMap.get("/allMaps", decodeToken, getAllMaps);
-routerMap.get("/getMapById/:id", decodeToken, getMapById);
+routerMap.get("/getMapById/:id", getMapById);           //NO TOKEN
 routerMap.post("/postMap", decodeToken, postMap);
 routerMap.put("/putMap/:id", decodeToken, putMap);
 routerMap.delete("/deleteMap/:id", decodeToken, deleteMap);

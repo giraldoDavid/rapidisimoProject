@@ -50,7 +50,7 @@
  *          required: true
  *          description: Fecha final
  *        - in: path
- *          name: id_delivery_man
+ *          name: id_delivery
  *          schema:
  *              type: date
  *          required: true
@@ -72,7 +72,7 @@
  *    tags: [Services of Earnings]
  *    parameters:
  *        - in: path
- *          name: id_delivery_man
+ *          name: id_delivery
  *          schema:
  *              type: number
  *          required: true

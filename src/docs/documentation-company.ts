@@ -103,7 +103,7 @@
  *      tags: [Company]
  *      parameters:
  *        - in: path
- *          name: id_company
+ *          name: id
  *          schema:
  *              type: number
  *          required: true
@@ -132,7 +132,7 @@
  *      tags: [Company]
  *      parameters:
  *        - in: path
- *          name: id_company
+ *          name: id
  *          schema:
  *              type: number
  *          required: true
@@ -161,7 +161,7 @@
  *      tags: [Company]
  *      parameters:
  *        - in: path
- *          name: id_company
+ *          name: id
  *          schema:
  *              type: number
  *          required: true

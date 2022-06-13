@@ -8,7 +8,7 @@
  *    tags: [Services of delivery man]
  *    parameters:
  *        - in: path
- *          name: id_user
+ *          name: id
  *          schema:
  *              type: number
  *          required: true
@@ -30,7 +30,7 @@
  *    tags: [Services of delivery man]
  *    parameters:
  *        - in: path
- *          name: id_user
+ *          name: id
  *          schema:
  *              type: number
  *          required: true
@@ -70,7 +70,7 @@
  *    tags: [Services of delivery man]
  *    parameters:
  *        - in: path
- *          name: id_delivery_man
+ *          name: id
  *          schema:
  *              type: number
  *          required: true
@@ -93,7 +93,7 @@
  *    tags: [Services of delivery man]
  *    parameters:
  *        - in: path
- *          name: id_delivery_man
+ *          name: id
  *          schema:
  *              type: number
  *          required: true
@@ -105,7 +105,7 @@
  *          required: true
  *          description: Fecha de inicio
  *        - in: path
- *          name: startDate
+ *          name: endDate
  *          schema:
  *              type: date
  *          required: true

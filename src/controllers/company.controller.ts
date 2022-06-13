@@ -28,7 +28,7 @@ export const postCompany = async (req: Request, res: Response) => {
     const { email_company, name_company, phone_company, city, neighborhood, streat, career, close_time_company } = req.body;
     let result: QueryResult = await cliente.query
         ('INSERT INTO company (email_company, name_company, phone_company, city, neighborhood, streat, career, close_time_company) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
-            [name_company, email_company, phone_company, city, neighborhood, streat, career, close_time_company]);
+            [ email_company, name_company, phone_company, city, neighborhood, streat, career, close_time_company]);
     try {
         return res.status(201).json(`Empresa creada con exito`);
     } catch (error) {

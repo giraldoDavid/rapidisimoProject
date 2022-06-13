@@ -72,7 +72,7 @@
  *      tags: [Assigned Order]
  *      parameters:
  *        - in: path
- *          name: id_assigned
+ *          name: id
  *          schema:
  *              type: number
  *          required: true
@@ -101,7 +101,7 @@
  *      tags: [Assigned Order]
  *      parameters:
  *        - in: path
- *          name: id_assigned
+ *          name: id
  *          schema:
  *              type: number
  *          required: true
@@ -130,7 +130,7 @@
  *      tags: [Assigned Order]
  *      parameters:
  *        - in: path
- *          name: id_assigned
+ *          name: id
  *          schema:
  *              type: number
  *          required: true

@@ -77,6 +77,23 @@
  *      508: 
  *          description: Error al traer las ordenes
  */
+/**            
+ * @swagger
+ * /allOrders/:id:
+ *  get:
+ *    summary: Get all Orders
+ *    tags: [Orders]
+ *    parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *              type: objectId
+ *    responses:
+ *      201:
+ *          description: Trae todas las ordenes
+ *      508: 
+ *          description: Error al traer las ordenes
+ */
 
 /** 
  * @swagger
@@ -112,7 +129,7 @@
  *      tags: [Orders]
  *      parameters:
  *        - in: path
- *          name: id_order
+ *          name: id
  *          schema:
  *              type: number
  *          required: true
@@ -141,7 +158,7 @@
  *      tags: [Orders]
  *      parameters:
  *        - in: path
- *          name: id_order
+ *          name: id
  *          schema:
  *              type: number
  *          required: true
@@ -171,7 +188,7 @@
  *      tags: [Orders]
  *      parameters:
  *        - in: path
- *          name: id_order
+ *          name: id
  *          schema:
  *              type: number
  *          required: true
