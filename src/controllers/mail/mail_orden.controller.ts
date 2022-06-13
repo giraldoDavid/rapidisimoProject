@@ -27,7 +27,7 @@ export const mailOrder = async (_req: Request, res: Response) => {
                 mensaje: 'Welcome to Rapidisimo',
                 nombre: order.rows[0].client_name,
                 comercio: company.rows[0].name_company,
-                fecha_entraga: order.rows[0].delivery_date,
+                fecha_entrega: order.rows[0].delivery_date,
                 horario: order.rows[0].estimated_time,
                 codigo: order.rows[0]._id_tracking,
                 link: `https://rapidisimo.com/tracking/`
