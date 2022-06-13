@@ -74,18 +74,16 @@ app.set("port", process.env.PORT || 3000);
 
 // Conectar con la base de datos MONGODB
 connectToDatabase()
-    .then(() => {
+    .then(async () => {
         console.log("Connected to database");
     })
-    .catch((error: Error) => {
+    .catch(async (error: Error) => {
         console.error("Database connection failed", error);
         process.exit();
     });
-
 //Iniciar el servidor
 app.listen(app.get("port"), () => {
     console.log(`Server started at http://localhost:${app.get("port")}`);
 });
 
 export default app;
-

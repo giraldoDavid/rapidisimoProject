@@ -35,7 +35,7 @@ import { decodeToken } from '../firebase/manage.token';
 
 // Tabla usuarios
 router.get('/allUsers', decodeToken, getAllUsers);
-router.post('/postUser', decodeToken, validator.body(userSchema), postUser);
+router.post('/postUser',  validator.body(userSchema), postUser);
 router.put('/putUser/:id', decodeToken, validator.body(userSchema), putUser);
 router.patch('/patchUser/:id', decodeToken, validator.body(userSchemaPatch), patchUser);
 router.delete('/deleteUser/:id', decodeToken, deleteUser);
