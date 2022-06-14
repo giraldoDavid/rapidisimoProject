@@ -1,6 +1,6 @@
 import express from "express";
 import morgan from "morgan";
-import  cors from "cors";
+import cors from "cors";
 import * as dotenv from 'dotenv';
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
@@ -38,11 +38,11 @@ const swaggerSpec = {
             }
         ],
         components: {
-            securitySchemes:{
-                    bearerAuth:{
-                        type: "http",
-                        scheme: "bearer"
-                    }
+            securitySchemes: {
+                bearerAuth: {
+                    type: "http",
+                    scheme: "bearer"
+                }
             }
         }
     },

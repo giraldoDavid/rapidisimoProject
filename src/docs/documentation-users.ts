@@ -99,7 +99,7 @@
  *  put:
  *      security:
  *          - bearerAuth: []
- *      summary: Edit a Users
+ *      summary: Edit a Users 
  *      tags: [Users]
  *      parameters:
  *        - in: path
@@ -121,6 +121,7 @@
  *          508:
  *              description: Error al editar el usuario
  */
+
 
 /**
  * @swagger

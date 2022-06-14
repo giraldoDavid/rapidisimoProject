@@ -69,7 +69,7 @@
  *        - in: path
  *          name: id
  *          schema:
- *              type: objectId
+ *              type: string
  *          required: true
  *          description: Identificador de la localización
  *    responses:
@@ -115,7 +115,7 @@
  *        - in: path
  *          name: id
  *          schema:
- *              type: number
+ *              type: string
  *          required: true
  *          description: Identificador de la localización
  *      requestBody:
@@ -142,9 +142,9 @@
  *      tags: [Location]
  *      parameters:
  *        - in: path
- *          name: id
+ *          name: :id
  *          schema:
- *              type: objectId
+ *              type: string
  *          required: true
  *          description: Identificador de la localización
  *      responses:

@@ -87,7 +87,7 @@
  *        - in: path
  *          name: id
  *          schema:
- *              type: objectId
+ *              type: number
  *    responses:
  *      201:
  *          description: Trae todas las ordenes

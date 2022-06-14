@@ -63,8 +63,6 @@
  * @swagger
  * /auth/createUser:
  *  post:
- *      security:
- *          - bearerAuth: []
  *      summary: Create a user on a firebase and generate a token
  *      tags: [Auth]
  *      requestBody: 

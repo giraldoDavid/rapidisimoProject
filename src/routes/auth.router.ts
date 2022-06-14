@@ -13,4 +13,4 @@ export const authRouter = express.Router();
 authRouter.use(express.json());
 
 authRouter.post('/logIn', validator.body(authSchema), logIn )
-authRouter.post('/createUser', decodeToken, validator.body(authSchema), createUser)
+authRouter.post('/createUser', validator.body(authSchema), createUser)

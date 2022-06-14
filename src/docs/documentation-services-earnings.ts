@@ -40,7 +40,7 @@
  *        - in: path
  *          name: date_start
  *          schema:
- *              type: number
+ *              type: date
  *          required: true
  *          description: Fecha de inicio
  *        - in: path
@@ -52,7 +52,7 @@
  *        - in: path
  *          name: id_delivery
  *          schema:
- *              type: date
+ *              type: number
  *          required: true
  *          description: Identificador del repartidor
  *    responses:
