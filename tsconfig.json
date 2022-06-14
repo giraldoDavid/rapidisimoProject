@@ -13,5 +13,5 @@
     "esModuleInterop": true,
     "noImplicitAny": true,
   },
-  "include": ["src/**/*", "aceptance", "babel.config.js"]
+  "include": ["src/**/*", "aceptance", "babel.config.js", "jest.config.ts"]
 }

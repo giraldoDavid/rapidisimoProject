@@ -142,7 +142,7 @@
  *      tags: [Location]
  *      parameters:
  *        - in: path
- *          name: id
+ *          name: :id
  *          schema:
  *              type: objectId
  *          required: true

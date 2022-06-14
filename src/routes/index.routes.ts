@@ -34,7 +34,7 @@ import { userSchema, userSchemaPatch } from '../schemas-joi/user.schemajoi';
 import { decodeToken } from '../firebase/manage.token';
 
 // Tabla usuarios
-router.get('/allUsers', decodeToken, getAllUsers);
+router.get('/allUsers', getAllUsers);
 router.post('/postUser',  validator.body(userSchema), postUser);
 router.put('/putUser/:id', decodeToken, validator.body(userSchema), putUser);
 router.patch('/patchUser/:id', decodeToken, validator.body(userSchemaPatch), patchUser);
