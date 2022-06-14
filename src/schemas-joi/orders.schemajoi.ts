@@ -13,7 +13,7 @@ export const ordersSchema = Joi.object().keys({
     image_order: Joi.string(),
     status_order: Joi.string().max(50),
     rating: Joi.number().min(0).max(5),
-    _id_traking: Joi.string(),
+    _id_tracking: Joi.string(),
 });
 
 export const ordersSchemaPatch = Joi.object().keys({
@@ -29,5 +29,5 @@ export const ordersSchemaPatch = Joi.object().keys({
     image_order: Joi.string(),
     status_order: Joi.string().max(50),
     rating: Joi.number().min(0).max(5),
-    _id_traking: Joi.string()
+    _id_tracking: Joi.string()
 });
