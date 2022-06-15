@@ -75,7 +75,7 @@ router.get('/getOrdersCompanySlopes/:id_company', decodeToken, getOrdersCompanyS
 router.get('/OrdersDateDelivery', decodeToken, getOrdersDateDelivery)                                                           //Pedidos pendientes para el siguiente día
 router.get('/getOrdersDateDeliveryToday', decodeToken, getOrdersDateDeliveryToday)                                              //Pedidos pendientes para el día de hoy (actual)')
 router.get('/getDiscriminatedDeliveries', decodeToken, getDiscriminatedDeliveries)                                              // Pedidos discriminados por estado
-router.get('/getDeliveriesCompany/:id_company', decodeToken, getDeliveriesCompany)                                              // Pedidos discriminados por comercio
+router.get('/getDeliveriesCompany/:id', decodeToken, getDeliveriesCompany)                                              // Pedidos discriminados por comercio
 
 
 // Consultas ganancias
