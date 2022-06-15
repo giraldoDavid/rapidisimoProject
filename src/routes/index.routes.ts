@@ -41,9 +41,9 @@ router.patch('/patchUser/:id', decodeToken, validator.body(userSchemaPatch), pat
 router.delete('/deleteUser/:id', decodeToken, deleteUser);
 
 // Tabla empresas
-router.get('/allCompanies', decodeToken, getAllCompanies);
+router.get('/allCompanies',  getAllCompanies);
 router.post('/postCompany', decodeToken, validator.body(companySchema), postCompany);
-router.put('/putCompany/:id', decodeToken, validator.body(companySchema), putCompany);
+router.put('/putCompany/:id', validator.body(companySchema), putCompany);
 router.patch('/patchCompany/:id', decodeToken, validator.body(companySchemaPatch), patchCompany);
 router.delete('/deleteCompany/:id', decodeToken, deleteCompany);
 

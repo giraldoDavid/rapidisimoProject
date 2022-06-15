@@ -1,5 +1,13 @@
-import app from "../index";
+const { app, server } = require("../index")
 import Request from 'supertest';
+
+let id_assigned = 1000001
+
+
+afterAll(() => {
+    server.close();
+})
+
 
 describe("Assigned Orders", () => {
     test("Get all the assigned orders", async () => {
@@ -16,17 +24,22 @@ describe("Assigned Orders", () => {
     });
 
     test("Update an Assigned Order", async () => {
-        const response = await Request(app).put("/putAssignedOrder/:id");
+        const response = await Request(app).put(`/putAssignedOrder/${id_assigned}`).send({
+            id_delivery_man: 2,
+            id_order: 100001
+        })
         expect(response.status).toBe(201);
     });
 
     test("Update an Assigned Order with the method PATCH", async () => {
-        const response = await Request(app).patch("/patchAssignedOrder/:id");
+        const response = await Request(app).patch(`/patchAssignedOrder/${id_assigned}`).send({
+            id_delivery_man: 1
+        })
         expect(response.status).toBe(201);
     });
 
     test("Delete an Assigned Order", async () => {
-        const response = await Request(app).delete("/deleteAssignedOrder/:id");
+        const response = await Request(app).delete(`/deleteAssignedOrder/${id_assigned}`);
         expect(response.status).toBe(201);
     });
 })

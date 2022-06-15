@@ -1,9 +1,16 @@
-import app from "../index";
+const { app, server } = require("../index")
 import Request from 'supertest';
 
-describe("Services of the company", () => {
+let id_company = 10001
+
+
+afterAll(() => {
+    server.close();
+})
+
+describe("Services of the orders", () => {
     test("Orders pending by company", async () => {
-        const response = await Request(app).get("/getOrdersCompanySlopes/:id_company");
+        const response = await Request(app).get(`/getOrdersCompanySlopes/${id_company}`);
         expect(response.status).toBe(201);
     });
 
@@ -26,7 +33,7 @@ describe("Services of the company", () => {
    
     
     test("Orders discriminated by company", async () => {
-    const response = await Request(app).get("/getDeliveriesCompany/:id");
+    const response = await Request(app).get(`/getDeliveriesCompany/${id_company}`);
         expect(response.status).toBe(201);
     });
    
