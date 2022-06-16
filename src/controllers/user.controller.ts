@@ -27,18 +27,28 @@ export const getAllUsers = async (req: Request, res: Response) => {
 // Crear usuario
 export const postUser = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
-    let result: QueryResult = await cliente.query
-        ('INSERT INTO users(email, document, name, lastname, phone, delivery_man_status, vehicle, rol, user_image, user_latitude, user_longitude) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)',
-            [req.body.email, req.body.document, req.body.name, req.body.lastname, req.body.phone, req.body.delivery_man_status, req.body.vehicle, req.body.rol, req.body.user_image, req.body.user_latitude, req.body.user_longitude]);
-    try {
-        return res.status(201).json([{message:`Usuario creado satisfactoriamente`}, result.rows]);
-    } catch (error) {
-        console.log(error);
-        return res.status(508).json({
-            message: 'Error al crear el usuario',
-        });
-    } finally {
-        cliente.release(true)
+    const  { email,  document,  name,  lastname,  phone,  delivery_man_status,  vehicle,  rol,  user_image,  user_latitude,  user_longitude } = req.body
+    let validarEmail: QueryResult = await cliente.query (`SELECT * FROM users WHERE email = '${email}'`);
+    try{
+        if (validarEmail.rows[0].email === email) {
+            return res.status(409).json({
+                message: 'El usuario ya existe',
+            });
+        }
+    } catch {
+        try {
+            let result: QueryResult = await cliente.query('INSERT INTO users(email, document, name, lastname, phone, delivery_man_status, vehicle, rol, user_image, user_latitude, user_longitude) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)',
+                [email,  document,  name,  lastname,  phone,  delivery_man_status,  vehicle,  rol,  user_image,  user_latitude,  user_longitude]);
+            let user: QueryResult = await cliente.query (`SELECT * FROM users WHERE email = '${email}'`);
+            return res.status(201).json([{message:`Usuario creado satisfactoriamente`}, user.rows]);
+        } catch (error) {
+            console.log(error);
+            return res.status(508).json({
+                message: 'Error al crear el usuario',
+            });
+        } finally {
+            cliente.release(true)
+        }
     }
 }
 

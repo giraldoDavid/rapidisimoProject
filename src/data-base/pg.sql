@@ -59,7 +59,7 @@ CREATE TYPE type_vehicle AS ENUM ('Carro', 'A pie', 'Bicicleta');
 -- Creando Tablas
 CREATE TABLE users (
     id_user INT DEFAULT NEXTVAL('id_users_seq'),
-    email VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,
     document INTEGER NOT NULL,
     name VARCHAR(50) NOT NULL,
     lastname VARCHAR(50) NOT NULL,
