@@ -63,7 +63,7 @@
  * @swagger
  * /getMapById/:id:
  *  get:
- *    summary: Get all locations for his Id
+ *    summary: Get a locations by id
  *    tags: [Location]
  *    parameters:
  *        - in: path

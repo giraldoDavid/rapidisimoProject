@@ -86,7 +86,7 @@
  * @swagger
  * /getOrderById/:id:
  *  get:
- *    summary: Get all Orders
+ *    summary: Get a order by id
  *    tags: [Orders]
  *    parameters:
  *        - in: path

@@ -11,4 +11,4 @@ export const mailRouter = express.Router()
 mailRouter.use(express.json())
 const validator = createValidator()
 
-mailRouter.post( '/mailAssignedOrden', decodeToken, mailOrder)                               //NUEVO SERVICIO
+mailRouter.post( '/mailAssignedOrden', decodeToken, mailOrder)

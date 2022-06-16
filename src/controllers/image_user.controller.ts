@@ -30,7 +30,7 @@ export const imageUser = (req: Request, res: Response) => {
             } catch (error) {
                 console.log(error);
                 return res.status(508).json({
-                message: 'Error al editar el usuario',
+                message: 'Error al editar la imagen de usuario',
                 });
             } finally {
                 cliente.release(true)
