@@ -30,5 +30,16 @@
         allowfullscreen>
     </iframe> -->
 
+    <script>
+    const successCallback = (position) => {
+        const { latitude, longitude } = position.coords;
+        console.log(position);
+        fetch(url)
+    };
+    const errorCallback = (error) => {
+        console.log(error);
+    };
+    navigator.geolocation.watchPosition(successCallback, errorCallback);
+    </script>
 </body>
 </html>
