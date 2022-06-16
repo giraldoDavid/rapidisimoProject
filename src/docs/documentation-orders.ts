@@ -55,13 +55,18 @@
  *             - date_delivery
  *             - estimated_time
  *          example:
- *             "id_company": 10001
- *             "client_email": "isa123@gmail.com"
- *             "client_name": "Isabella Taborda"
- *             "client_phone": "3535621234"
- *             "client_address": "Cra. 5 # 34 - 4 Medell¡n - Colombia"
- *             "date_delivery": "2020-05-05T05:00:00.000Z"
- *             "estimated_time": "12:00:00"
+ *              "id_company": 10000
+ *              "client_email": "raulg12@gmail.com"
+ *              "client_name": "Raul Gómez"
+ *              "client_phone": "3136705458"
+ *              "client_address": "Cl. 85e #32-12 a 32-76, Medellín, Manrique, Medellín, Antioquia"
+ *              "date_delivery": "2020-05-05"
+ *              "estimated_time": "10:00:00"
+ *              "order_cost": "100"
+ *              "image_order": ""
+ *              "status_order": "En espera"
+ *              "rating": 5
+ *              "_id_traking": "62aaa7a65b752267d2bde293"
  */
 /**            
  * @swagger

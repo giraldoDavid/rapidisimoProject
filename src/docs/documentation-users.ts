@@ -35,7 +35,13 @@
  *             user_image:
  *                 type: string
  *                 description: User's image
- *
+ *             user_latitude:
+ *                 type: number
+ *                 description: User latitude
+ *             user_longitude:
+ *                 type: number
+ *                 description: User longitude
+ *  
  *          required:
  *             - email
  *             - document
@@ -48,10 +54,12 @@
  *              "name": "Mario"
  *              "lastname": "Cárdenas"
  *              "phone": "3136763849"
- *              "delivery_man_status": "Ocupado"
+ *              "delivery_man_status": "Disponible"
  *              "vehicle": "Carro"
  *              "rol": "Delivery man"
- *              "user_image": "imagen.png"
+ *              "user_image": ""
+ *              "user_latitude": 6.167237411799037
+ *              "user_longitude": -75.61377269092478
  */
 
 /**            

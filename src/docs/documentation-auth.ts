@@ -109,5 +109,20 @@
  *                          $ref: '#/components/schemas/FirebaseUser'
  *          401:
  *              description: Unauthorized Access
- * 
  */
+
+/**
+ * @swagger
+ * /auth/validateUser:
+ *  get:
+ *      security:
+ *          - bearerAuth: []
+ *      summary: Validate a user on a firebase and generate a token
+ *      tags: [Auth]
+ *      responses:
+ *         201:
+ *             description: User information validated
+ *         401:
+ *             description: Usuario registrado en Firebase, pero no existe en la base de datos
+ *  
+ */ 

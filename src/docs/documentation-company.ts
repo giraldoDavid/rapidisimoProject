@@ -6,52 +6,55 @@
  *          type: object
  *          properties:
  *  
- *             id_company:
- *                 type: number
- *                 description: Id autoincrementing
- *             email_company:
- *                 type: string
- *                 description: Email of the Company
- *             name_company:
- *                 type: string
- *                 description: Name of the Company
- *             phone_company:
- *                 type: number
- *                 description: Phone of the Company
- *             city:
- *                 type: string
- *                 description: City of the Company
- *             neighborhood:
- *                 type: string
- *                 description: Neighborhood of the Company
- *             streat:
- *                 type: string
- *                 description: Streat of the Company
- *             career:
- *                 type: string
- *                 description: Career of the Company 
- *             close_time_company:
- *                 type: string
- *                 description: close_time_company
- *
+ *              id_company:
+ *                  type: number
+ *                  description: Id autoincrementing
+ *              email_company:
+ *                  type: string
+ *                  description: Email of the Company
+ *              name_company:
+ *                  type: string
+ *                  description: Name of the Company
+ *              phone_company:
+ *                  type: number
+ *                  description: Phone of the Company
+ *              city:
+ *                  type: string
+ *                  description: City of the Company
+ *              neighborhood:
+ *                  type: string
+ *                  description: Neighborhood of the Company
+ *              companie_address:
+ *                  type: string
+ *                  description: Streat of the Company
+ *              close_time_company:
+ *                  type: string
+ *                  description: close_time_company
+ *              companie_latitude:
+ *                  type: number
+ *                  description: latitude of the Company
+ *              companie_longitude:
+ *                  type: number
+ *                  description: longitude of the Company
+ *  
  *          required:
- *             - email_company
- *             - name_company
- *             - phone_company
- *             - city
- *             - neighborhood
- *             - streat
- *             - career
- *             - close_time_company
+ *              - email_company
+ *              - name_company
+ *              - phone_company
+ *              - city
+ *              - neighborhood
+ *              - companie_address
+ *              - close_time_company
  *          example:
- *             "email_company": "nike123@gmail.com"
- *             "name_company": "Nike"
- *             "phone_company": "3456789123"
- *             "city": "Cali"
- *             "neighborhood": "Santa Rita"
- *             "streat": "Calle 102"
- *             "career": "Carrera 129"
- *             "close_time_company": "21:00:00"
+ *              "email_company": "nike123@gmail.com"
+ *              "name_company": "Nike"
+ *              "phone_company": "3456789123"
+ *              "city": "Cali"
+ *              "neighborhood": "Santa Rita"
+ *              "companie_address": "Calle 102"
+ *              "close_time_company": "21:00:00"
+ *              "companie_latitude": 4.56789
+ *              "companie_longitude": 3.45678
  */
 
 /**            

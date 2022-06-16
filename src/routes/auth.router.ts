@@ -15,4 +15,4 @@ authRouter.use(express.json());
 
 authRouter.post('/logIn', validator.body(authSchema), logIn )
 authRouter.post('/createUser', validator.body(authSchema), createUser)
-authRouter.get('/validateUser', validateUser)
+authRouter.get('/validateUser', decodeToken, validateUser)

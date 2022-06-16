@@ -33,7 +33,7 @@ const swaggerSpec = {
                 description: "Local"
             },
             {
-                url: `http://34.75.198.96:4200/`,
+                url: `http://34.75.198.96:${process.env.PORT}/`,
                 description: "Servidor"
             }
         ],
@@ -46,7 +46,7 @@ const swaggerSpec = {
             }
         }
     },
-    apis: ['./dist/docs/*.js']
+    apis: ['./dist/src/docs/*.js']
 }
 
 

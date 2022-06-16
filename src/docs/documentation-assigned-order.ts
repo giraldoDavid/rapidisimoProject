@@ -19,7 +19,7 @@
  *             - id_delivery_man
  *             - id_order
  *          example:
- *             "id_delivery_man": 3
+ *             "id_delivery_man": 2
  *             "id_order": 100000
  */
 
