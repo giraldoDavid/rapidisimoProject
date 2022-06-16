@@ -10,7 +10,9 @@ export const userSchema = Joi.object().keys({
     delivery_man_status: Joi.string().max(17),
     vehicle: Joi.string().max(9),
     rol: Joi.string().max(12),
-    user_image: Joi.string()
+    user_image: Joi.string(),
+    user_latitude: Joi.number(),
+    user_longitude: Joi.number(),
 });
 
 export const userSchemaPatch = Joi.object().keys({
@@ -23,5 +25,7 @@ export const userSchemaPatch = Joi.object().keys({
     delivery_man_status: Joi.string().max(17),
     vehicle: Joi.string().max(9),
     rol: Joi.string().max(12),
-    user_image: Joi.string()
+    user_image: Joi.string(),
+    user_latitude: Joi.number(),
+    user_longitude: Joi.number(),
 });

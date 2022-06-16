@@ -9,6 +9,23 @@
 <body>
     <h1>Hola k ase</h1>
 
+    let newdirection = await axios
+            .get("https://maps.googleapis.com/maps/api/geocode/json", {
+                params: {
+                    address: direccion,
+                    key: "AIzaSyBlCaKCX56EQYIGA-bQntTu6yaez5f3Jfw",
+                },
+            })
+            .then(function (response: { data: { results: { geometry: { location: { lng: any; lat: any } } }[] } }) {
+                let lat = response.data.results[0].geometry.location.lat;
+                let lng = response.data.results[0].geometry.location.lng;
+                return [lat, lng];
+            })
+            .catch(function (error: any) {
+                return error;
+            });
+
+
     <iframe
         width="600"
         height="450"

@@ -28,8 +28,8 @@ export const getAllUsers = async (req: Request, res: Response) => {
 export const postUser = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     let result: QueryResult = await cliente.query
-        ('INSERT INTO users(email, document, name, lastname, phone, delivery_man_status, vehicle, rol, user_image) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)',
-            [req.body.email, req.body.document, req.body.name, req.body.lastname, req.body.phone, req.body.delivery_man_status, req.body.vehicle, req.body.rol, req.body.user_image]);
+        ('INSERT INTO users(email, document, name, lastname, phone, delivery_man_status, vehicle, rol, user_image, user_latitude, user_longitude) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)',
+            [req.body.email, req.body.document, req.body.name, req.body.lastname, req.body.phone, req.body.delivery_man_status, req.body.vehicle, req.body.rol, req.body.user_image, req.body.user_latitude, req.body.user_longitude]);
     try {
         return res.status(201).json(`Usuario creado satisfactoriamente`);
     } catch (error) {
@@ -47,8 +47,8 @@ export const putUser = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     let id = req.params.id;
     let result: QueryResult = await cliente.query
-        ('UPDATE users SET email=$1, document=$2, name=$3, lastname=$4, phone=$5, delivery_man_status=$6, vehicle=$7, rol=$8, user_image=$9 WHERE id_user=$10',
-            [req.body.email, req.body.document, req.body.name, req.body.lastname, req.body.phone, req.body.delivery_man_status, req.body.vehicle, req.body.rol, req.body.user_image, id]);
+        ('UPDATE users SET email=$1, document=$2, name=$3, lastname=$4, phone=$5, delivery_man_status=$6, vehicle=$7, rol=$8, user_image=$9, user_latitude=$10, user_longitude=$11 WHERE id_user=$12',
+            [req.body.email, req.body.document, req.body.name, req.body.lastname, req.body.phone, req.body.delivery_man_status, req.body.vehicle, req.body.rol, req.body.user_image, req.body.user_latitude, req.body.user_longitude, id]);
     try {
         return res.status(201).json(`Usuario con id: ${id}, editado satisfactoriamente`);
     } catch (error) {

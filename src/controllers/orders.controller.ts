@@ -70,8 +70,20 @@ export const putOrder = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     let id = req.params.id;
     let result: QueryResult = await cliente.query
-            ('UPDATE orders SET id_company=$1, client_email=$2, client_name=$3, client_phone=$4, client_address=$5, date_delivery=$6, estimated_time=$7, order_cost=$8, image_order=$9, status_order=$10, rating=$11,_id_tracking =$12 WHERE id_order=$13',
-                [req.body.id_company,req.body.client_email,req.body.client_name,req.body.client_phone,req.body.client_address,req.body.date_delivery,req.body.estimated_time,req.body.order_cost,req.body.image_order,req.body.status_order,req.body.rating,req.body._id_tracking,id]);
+            ('UPDATE orders SET id_company=$1, client_email=$2, client_name=$3, client_phone=$4, client_address=$5, date_delivery=$6, estimated_time=$7, order_cost=$8, image_order=$9, status_order=$10, rating=$11, _id_tracking=$12 WHERE id_order=$13',
+                [req.body.id_company,
+                req.body.client_email,
+                req.body.client_name,
+                req.body.client_phone,
+                req.body.client_address,
+                req.body.date_delivery,
+                req.body.estimated_time,
+                req.body.order_cost,
+                req.body.image_order,
+                req.body.status_order,
+                req.body.rating,
+                req.body._id_tracking,
+                id]);
     try {
         return res.status(201).json(`Orden con id: ${id}, editado satisfactoriamente`);
     } catch (error) {
