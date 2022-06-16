@@ -25,10 +25,10 @@ export const getAllCompanies = async (req: Request, res: Response) => {
 // Crear una nueva empresa
 export const postCompany = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
-    const { email_company, name_company, phone_company, city, neighborhood, streat, career, close_time_company } = req.body;
+    const { email_company, name_company, phone_company, city, neighborhood, companie_address, company_latitude, company_longitude, close_time_company } = req.body;
     let result: QueryResult = await cliente.query
-        ('INSERT INTO company (email_company, name_company, phone_company, city, neighborhood, streat, career, close_time_company) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
-            [ email_company, name_company, phone_company, city, neighborhood, streat, career, close_time_company]);
+        ('INSERT INTO company (email_company, name_company, phone_company, city, neighborhood, companie_address, company_latitude, company_longitude, close_time_company) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
+            [email_company, name_company, phone_company, city, neighborhood, companie_address, company_latitude, company_longitude, close_time_company]);
     try {
         return res.status(201).json(`Empresa creada con exito`);
     } catch (error) {
@@ -45,10 +45,10 @@ export const postCompany = async (req: Request, res: Response) => {
 export const putCompany = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     const id_company = req.params.id;
-    const { email_company, name_company, phone_company, city, neighborhood, streat, career, close_time_company } = req.body;
+    const { email_company, name_company, phone_company, city, neighborhood, companie_address, company_latitude, company_longitude, close_time_company } = req.body;
     let result: QueryResult = await cliente.query
-        ('UPDATE company SET email_company=$1, name_company=$2, phone_company=$3, city=$4, neighborhood=$5, streat=$6, career=$7, close_time_company=$8 WHERE id_company=$9',
-            [email_company, name_company, phone_company, city, neighborhood, streat, career, close_time_company, id_company]);
+        ('UPDATE company SET email_company = $1, name_company = $2, phone_company = $3, city = $4, neighborhood = $5, companie_address = $6, company_latitude = $7, company_longitude = $8, close_time_company = $9 WHERE id_company = $10',
+            [email_company, name_company, phone_company, city, neighborhood, companie_address, company_latitude, company_longitude, close_time_company, id_company]);
     try {
         return res.status(201).json(`Empresa con id: ${id_company}, editada satisfactoriamente`);
     } catch (error) {
@@ -73,7 +73,7 @@ export const patchCompany = async (req: Request, res: Response) => {
             return `${field} = ${req.body[`${field}`]}`
         }
     });
-    await cliente.query(`UPDATE company SET ${fieldsQuery.join()} WHERE id_user = '${id}'`);
+    await cliente.query(`UPDATE company SET ${fieldsQuery.join()} WHERE id_company = '${id}'`);
     try {
         return res.status(201).json(`Compañia con id: ${id}, se ha editado satisfactoriamente`);
     } catch (error) {

@@ -42,7 +42,7 @@ router.delete('/deleteUser/:id',  deleteUser);
 
 // Tabla empresas
 router.get('/allCompanies', getAllCompanies);
-router.post('/postCompany',  validator.body(companySchema), postCompany);
+router.post('/postCompany', validator.body(companySchema), postCompany);
 router.put('/putCompany/:id',  validator.body(companySchema), putCompany);
 router.patch('/patchCompany/:id',  validator.body(companySchemaPatch), patchCompany);
 router.delete('/deleteCompany/:id',  deleteCompany);
