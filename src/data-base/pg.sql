@@ -331,3 +331,8 @@ FROM
     orders
 WHERE
     status_order = 'Entregadas';
+
+    
+INSERT INTO orders ( id_company, client_email, client_name, client_phone, client_address, date_delivery, estimated_time, _id_tracking )
+    VALUES
+        ( 10002, 'carmen1980@gmail.com', 'Karen Cecilia', '3125429812', 'Cl. 32EE #76-2 a 76-206, Medellín, Belén, Medellín, Antioquia', '2022-06-16', '17:30:00', '62aaa8225b752267d2bde295');

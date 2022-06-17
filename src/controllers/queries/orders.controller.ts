@@ -10,10 +10,10 @@ export const getOrdersCompanySlopes = async (req: Request, res: Response) => {
     let result: QueryResult = await cliente.query(
         `SELECT * FROM orders WHERE status_order = 'En espera' AND id_company= $1;`, [id_company]);
     try {
-        res.status(201).json(result.rows);
+        return res.status(201).json(result.rows);
     } catch (error) {
         console.log(error);
-        res.status(508).json({
+        return res.status(508).json({
             message: 'Error al traer las ordenes de los comercios',
         });
     } finally {
@@ -27,10 +27,10 @@ export const getOrdersDateDelivery = async (req: Request, res: Response) => {
     let result: QueryResult = await cliente.query(
         `SELECT * FROM orders WHERE date_delivery = current_date + INTERVAL '1 day'`)
     try {
-        res.status(201).json(result.rows);
+        return res.status(201).json(result.rows);
     } catch (error) {
         console.log(error);
-        res.status(508).json({
+        return res.status(508).json({
             message: 'Error al traer las ordenes de mañana',
         });
     } finally {

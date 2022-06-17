@@ -28,10 +28,10 @@ export const getTotalEarningsByDate = async (req: Request, res: Response) => {
     let result: QueryResult = await cliente.query(
         `SELECT SUM(order_cost) FROM orders WHERE date_delivery >= $1 AND date_delivery <= $2`, [date_start, date_end])
     try {
-        res.status(201).json(result.rows);
+        return res.status(201).json(result.rows);
     } catch (error) {
         console.log(error);
-        res.status(508).json({
+        return res.status(508).json({
             message: 'Error al obtener las ganancias por rango de fechas',
         });
     } finally {
@@ -49,10 +49,10 @@ export const getTotalEarningsByDateOfDeliveryMan = async (req: Request, res: Res
     let result: QueryResult = await cliente.query(
         `SELECT SUM(order_cost) AS Ganancias FROM assigned_order INNER JOIN users ON assigned_order.id_delivery_man = users.id_user INNER JOIN orders ON assigned_order.id_order = orders.id_order WHERE date_delivery >= $1 AND date_delivery <= $2 AND assigned_order.id_delivery_man = $3;`, [date_start, date_end, id_delivery])
     try {
-        res.status(201).json(result.rows[0]);
+        return res.status(200).json(result.rows[0]);
     } catch (error) {
         console.log(error);
-        res.status(508).json({
+        return res.status(508).json({
             message: `Error al obtener las ganancias del repartidor con id: ${id_delivery} por rango de fechas`,
         });
     } finally {
@@ -68,10 +68,10 @@ export const getTotalEarningsOfDeliveryManToday = async (req: Request, res: Resp
     let result: QueryResult = await cliente.query(
         `SELECT SUM(order_cost) AS Ganancias FROM assigned_order INNER JOIN users ON assigned_order.id_delivery_man = users.id_user INNER JOIN orders ON assigned_order.id_order = orders.id_order WHERE date_delivery = CURRENT_DATE - INTERVAL '1 day' AND assigned_order.id_delivery_man = $1`, [id_delivery])
     try {
-        res.status(201).json(result.rows[0]);
+        return res.status(201).json(result.rows[0]);
     } catch (error) {
         console.log(error);
-        res.status(508).json({
+        return res.status(508).json({
             message: `Error al obtener las ganancias del repartidor con id: ${id_delivery} por rango de fechas`,
         });
     } finally {

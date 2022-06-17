@@ -3,7 +3,7 @@ import Request from 'supertest';
 
 // Por medio de esta constante podemos hacer las pruebas de nuestra API
 let id_user = 33;
-let id_company = 10021;
+
 
 afterAll(() => {
     server.close();
@@ -18,7 +18,7 @@ describe("Users", () => {
 
     test("Post - New User", async () => {
         const response = await Request(app).post("/postUser").send({
-            email: "mariocardenas@gmail.com",
+            email: "mariocardena@gmail.com",
             document: 420106835,
             name: "Mario",
             lastname: "Cárdenas",
@@ -33,7 +33,7 @@ describe("Users", () => {
 
     test("Put - Update Info User", async () => {
         const response = await Request(app).put(`/putUser/${id_user}`).send({
-            email: "mariocardenas@gmail.com",
+            email: "mariocardena@gmail.com",
             document: 420106835,
             name: "Prueba",
             lastname: "Jest",
