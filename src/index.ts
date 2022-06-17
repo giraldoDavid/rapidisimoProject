@@ -60,6 +60,7 @@ app.use("/api/", (req, res, next) => {
     res.send("Welcome to the API of Rapidisimo");
 });
 
+
 //routes
 app.use("/", router);
 app.use("/", routerMap);                        // rutas para la Peticiones de MongoDB

@@ -93,6 +93,23 @@
  *          description: Error al traer las entregas discriminadas por comercio
  */
 
+/**            
+ * @swagger
+ * /getNumOrdersToday:
+ *  get:
+ *    security:
+ *          - bearerAuth: []
+ *    summary: Get num orders today
+ *    tags: [Services of the Company]
+ *    responses:
+ *      204:
+ *          description: No hay ordenes entregadas
+ *      201: 
+ *          description: Total de ordenes hoy
+ *      508: 
+ *          description: Error al traer las ordenes de hoy
+ */
+
 
 
 

@@ -116,7 +116,7 @@ export const getNumOrdersToday = async (req: Request, res: Response) => {
     try {
         if (result.rowCount === 0) {
             console.log('No hay ordenes para hoy');
-            return res.status(204).json({ message: "No hay ordenes para hoy" });
+            return res.status(204).json({ message: "No hay ordenes entregadas" });
         }
         else if (result.rowCount > 0) {
             return res.status(201).json(result.rowCount);

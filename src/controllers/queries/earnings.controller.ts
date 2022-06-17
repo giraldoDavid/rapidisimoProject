@@ -98,7 +98,7 @@ export const utilities = async (req: Request, res: Response) => {
     } catch (error) {
         console.log(error);
         return res.status(508).json({
-            message: 'Error al obtener las ganancias del día',
+            message: 'Error al obtener el porcentaje',
         });
     }
     finally {
@@ -128,7 +128,7 @@ export const utilitiesRangeDate = async (req: Request, res: Response) => {
     } catch (error) {
         console.log(error);
         return res.status(508).json({
-            message: 'Error al obtener las ganancias del día',
+            message: 'Error al obtener las utilidades por rango de fecha',
         });
     }
     finally {

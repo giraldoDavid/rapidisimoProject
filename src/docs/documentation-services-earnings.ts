@@ -83,3 +83,50 @@
  *      508:
  *          description: Error al obtener las ganancias del repartidor con id ${id_delivery} por rango de fechas
  */
+
+/**            
+ * @swagger
+ * /utilities:
+ *  get:
+ *    security:
+ *          - bearerAuth: []
+ *    summary: Get utilities of the day
+ *    tags: [Services of Earnings]
+ *    responses:
+ *      201:
+ *          description: Trae el total de las utilidades del día
+ *      409: 
+ *          description: Error al obtener las utilidades
+ *      508: 
+ *          description: Error al obtener el porcentaje
+ */
+
+/**            
+ * @swagger
+ * /utilitiesRangeDate/:date_start/:date_end:
+ *  get:
+ *    security:
+ *          - bearerAuth: []
+ *    summary: Get the utilities by date range
+ *    tags: [Services of Earnings]
+ *    parameters:
+ *        - in: path
+ *          name: date_start
+ *          schema:
+ *              type: date
+ *          required: true
+ *          description: Fecha de inicio
+ *        - in: path
+ *          name: date_end
+ *          schema:
+ *              type: date
+ *          required: true
+ *          description: Fecha final
+ *    responses:
+ *      201:
+ *          description: Trae el total de utilidades por rango de fecha
+ *      409:
+ *          description: Error al obtener las utilidades
+ *      508:
+ *          description: Error al obtener las utilidades por rango de fecha
+ */
