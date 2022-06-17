@@ -17,11 +17,11 @@ import { getDeliveryManById, getOrdersOfDeliveryMan, getDeliveryManAvailable, ge
     from '../controllers/queries/deliveryman.controller';
 
 //Importando consultas de las ordenes
-import { getOrdersCompanySlopes, getOrdersDateDelivery, getOrdersDateDeliveryToday, getDiscriminatedDeliveries, getDeliveriesCompany }
+import { getOrdersCompanySlopes, getOrdersDateDelivery, getOrdersDateDeliveryToday, getDiscriminatedDeliveries, getDeliveriesCompany, getNumOrdersToday}
     from '../controllers/queries/orders.controller'
 
 //Importando consultas de ganancias
-import { getTotalEarnings, getTotalEarningsByDate, getTotalEarningsByDateOfDeliveryMan, getTotalEarningsOfDeliveryManToday }
+import { getTotalEarnings, getTotalEarningsByDate, getTotalEarningsByDateOfDeliveryMan, getTotalEarningsOfDeliveryManToday, utilities, utilitiesRangeDate }
     from '../controllers/queries/earnings.controller'
 
 // Importando los esquemas de Joi para las rutas
@@ -76,6 +76,7 @@ router.get('/OrdersDateDelivery', decodeToken, getOrdersDateDelivery)           
 router.get('/getOrdersDateDeliveryToday', decodeToken, getOrdersDateDeliveryToday)                                              //Pedidos pendientes para el día de hoy (actual)')
 router.get('/getDiscriminatedDeliveries', decodeToken, getDiscriminatedDeliveries)                                              // Pedidos discriminados por estado
 router.get('/getDeliveriesCompany/:id_company', decodeToken, getDeliveriesCompany)                                              // Pedidos discriminados por comercio
+router.get('/getNumOrdersToday', getNumOrdersToday)                                                                             // Numero de pedidos entregados hoy
 
 
 // Consultas ganancias
@@ -83,6 +84,8 @@ router.get('/getTotalEarnings', decodeToken, getTotalEarnings)                  
 router.get('/getTotalEarnings/date_start/date_end', decodeToken, getTotalEarningsByDate)                                        //Obtener las ganancias totales en un periodo de tiempo determinado
 router.get('/getTotalEarningsByDateOfDeliveryMan/:id_delivery/:date_start/:date_end', decodeToken, getTotalEarningsByDateOfDeliveryMan) //Obtener las ganancias totales del día segun id del repartidor
 router.get('/getTotalEarningsByDateOfDeliveryMan/:id_delivery', decodeToken, getTotalEarningsOfDeliveryManToday)                //Obtener las ganancias totales del día segun id del repartidor
+router.get('/utilities', utilities)                                                                                             //Obtener la utilidades acumuladas en un día
+router.get('/utilitiesRangeDate/:date_start/:date_end', utilitiesRangeDate)                                                     //Obtener las utilidades acumuladas por rango de fecha
 
 // Subir imagen
 router.post('/uploadImage', decodeToken, image);

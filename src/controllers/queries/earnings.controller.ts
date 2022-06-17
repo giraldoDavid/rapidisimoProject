@@ -78,3 +78,60 @@ export const getTotalEarningsOfDeliveryManToday = async (req: Request, res: Resp
         cliente.release(true)
     }
 }
+
+//Utilidades acumuladas hoy
+export const utilities = async (req: Request, res: Response) => {
+    let cliente = await pool.connect();
+    let result: QueryResult = await cliente.query(
+        `SELECT SUM(order_cost) FROM orderS WHERE date_delivery = current_date - INTERVAL '1 day';`)
+    try {
+        const { sum } = result.rows[0]
+        const operacion = sum * 0.10
+        try {
+            return res.status(201).json(operacion);
+        } catch (error) {
+            console.log(error);
+            return res.status(409).json({
+                message: 'Error al obtener las utilidades',
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(508).json({
+            message: 'Error al obtener las ganancias del día',
+        });
+    }
+    finally {
+        cliente.release(true)
+    }
+}
+
+
+//utilidades acumuladas por rango de fecha
+export const utilitiesRangeDate = async (req: Request, res: Response) => {
+    let cliente = await pool.connect();
+    let date_start = req.params.date_start;
+    let date_end = req.params.date_end;
+    let result: QueryResult = await cliente.query(
+        `SELECT SUM(order_cost) FROM orders WHERE date_delivery >= $1 AND date_delivery <= $2`, [date_start, date_end])
+    try {
+        const { sum } = result.rows[0]
+        const operacion = sum * 0.10
+        try {
+            return res.status(201).json(operacion);
+        } catch (error) {
+            console.log(error);
+            return res.status(409).json({
+                message: 'Error al obtener las utilidades',
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(508).json({
+            message: 'Error al obtener las ganancias del día',
+        });
+    }
+    finally {
+        cliente.release(true)
+    }
+}
