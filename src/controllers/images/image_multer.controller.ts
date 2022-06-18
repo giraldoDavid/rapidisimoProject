@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { upload } from '../config/configMulter'
+import { upload } from '../../config/configMulter'
 
 export const image = (req: Request, res: Response) => {
     upload(req, res, (err) => {

@@ -46,7 +46,7 @@ const swaggerSpec = {
             }
         }
     },
-    apis: ['./dist/src/docs/*.js']
+    apis: ['./dist/docs/*.js']
 }
 
 

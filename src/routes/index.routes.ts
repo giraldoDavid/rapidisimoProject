@@ -9,8 +9,11 @@ import { getAllCompanies, postCompany, putCompany, patchCompany, deleteCompany, 
 import { getAllOrders, getOrderById, postOrder, putOrder, patchOrder, deleteOrder } from '../controllers/orders.controller';
 import { getAllAssignedOrder, postAssignedOrder, putAssignedOrder, patchAssignedOrder, deleteAssignedOrder }
     from '../controllers/assigned_order.controller';
-import { image } from '../controllers/image_multer.controller';
-import { imageUser } from '../controllers/image_user.controller';
+
+// Importando las rutas de las imagenes
+import { image } from '../controllers/images/image_multer.controller';
+import { imageUser } from '../controllers/images/image_user.controller';
+import { imageOrder } from '../controllers/images/image_order.controller';
 
 // Importando consultas del repartidor
 import { getDeliveryManById, getOrdersOfDeliveryMan, getDeliveryManAvailable, getDeliveriesByDeliveryMan, getDeliveriesByDeliveryManRange, }
@@ -90,6 +93,7 @@ router.get('/utilitiesRangeDate/:date_start/:date_end', decodeToken, utilitiesRa
 // Subir imagen
 router.post('/uploadImage', decodeToken, image);
 router.post('/uploadImageUser/:id', decodeToken, imageUser);                                                                    // Subir imagen de usuario editando base de datos
+router.post('/uploadImageOrder/:id', decodeToken, imageOrder);                                                                  // Subir imagen de orden editando base de datos
 
 // Exportando el router
 export default router;
