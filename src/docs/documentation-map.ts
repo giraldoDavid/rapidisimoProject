@@ -5,7 +5,6 @@
  *      Location:
  *          type: object
  *          properties:
- *  
  *             _id:
  *                 type: ObjectId
  *                 description: Id for default

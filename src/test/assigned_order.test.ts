@@ -18,7 +18,7 @@ describe("Assigned Orders", () => {
     test("Create new Assigned Order", async () => {
         const response = await Request(app).post("/postAssignedOrder").send({
             id_delivery_man: 3,
-            id_order: 100000
+            id_order: 100003
         })
         expect(response.status).toBe(201);
     });
@@ -26,7 +26,7 @@ describe("Assigned Orders", () => {
     test("Update an Assigned Order", async () => {
         const response = await Request(app).put(`/putAssignedOrder/${id_assigned}`).send({
             id_delivery_man: 2,
-            id_order: 100001
+            id_order: 100002
         })
         expect(response.status).toBe(201);
     });

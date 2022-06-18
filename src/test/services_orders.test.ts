@@ -22,7 +22,7 @@ describe("Services of the orders", () => {
   
     test("Orders pending for today", async () => {
     const response = await Request(app).get("/getOrdersDateDeliveryToday");
-        expect(response.status).toBe(201);
+        expect(response.body).toBeInstanceOf(Object);
     });
    
     
@@ -34,7 +34,7 @@ describe("Services of the orders", () => {
     
     test("Orders discriminated by company", async () => {
     const response = await Request(app).get(`/getDeliveriesCompany/${id_company}`);
-        expect(response.status).toBe(201);
+        expect(response.body).toBeInstanceOf(Object);
     });
    
 })

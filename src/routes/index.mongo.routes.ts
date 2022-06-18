@@ -8,7 +8,7 @@ import { getAllMaps, getMapById, postMap, putMap, deleteMap } from "../controlle
 import { decodeToken } from '../firebase/manage.token';
 
 //Coleccion Map
-routerMap.get("/allMaps", decodeToken, getAllMaps);
+routerMap.get("/allMaps", getAllMaps);
 routerMap.get("/getMapById/:id", getMapById);           //NO TOKEN
 routerMap.post("/postMap", decodeToken, postMap);
 routerMap.put("/putMap/:id", decodeToken, putMap);

@@ -5,7 +5,6 @@
  *      Company:
  *          type: object
  *          properties:
- *  
  *             id_company:
  *                 type: number
  *                 description: Id autoincrementing

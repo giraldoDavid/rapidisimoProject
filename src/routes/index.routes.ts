@@ -17,11 +17,11 @@ import { getDeliveryManById, getOrdersOfDeliveryMan, getDeliveryManAvailable, ge
     from '../controllers/queries/deliveryman.controller';
 
 //Importando consultas de las ordenes
-import { getOrdersCompanySlopes, getOrdersDateDelivery, getOrdersDateDeliveryToday, getDiscriminatedDeliveries, getDeliveriesCompany }
+import { getOrdersCompanySlopes, getOrdersDateDelivery, getOrdersDateDeliveryToday, getDiscriminatedDeliveries, getDeliveriesCompany, getNumOrdersToday }
     from '../controllers/queries/orders.controller'
 
 //Importando consultas de ganancias
-import { getTotalEarnings, getTotalEarningsByDate, getTotalEarningsByDateOfDeliveryMan, getTotalEarningsOfDeliveryManToday }
+import { getTotalEarnings, getTotalEarningsByDate, getTotalEarningsByDateOfDeliveryMan, getTotalEarningsOfDeliveryManToday, utilities, utilitiesRangeDate }
     from '../controllers/queries/earnings.controller'
 
 // Importando los esquemas de Joi para las rutas
@@ -32,61 +32,65 @@ import { userSchema, userSchemaPatch } from '../schemas-joi/user.schemajoi';
 
 // Importando la validación del token
 import { decodeToken } from '../firebase/manage.token';
+import { util } from '@google-cloud/storage/build/src/nodejs-common';
 
 // Tabla usuarios
 router.get('/allUsers', getAllUsers);
 router.post('/postUser',  validator.body(userSchema), postUser);
-router.put('/putUser/:id', decodeToken, validator.body(userSchema), putUser);
-router.patch('/patchUser/:id', decodeToken, validator.body(userSchemaPatch), patchUser);
-router.delete('/deleteUser/:id', decodeToken, deleteUser);
+router.put('/putUser/:id',  validator.body(userSchema), putUser);
+router.patch('/patchUser/:id',  validator.body(userSchemaPatch), patchUser);
+router.delete('/deleteUser/:id',  deleteUser);
 
 // Tabla empresas
 router.get('/allCompanies',  getAllCompanies);
-router.post('/postCompany', decodeToken, validator.body(companySchema), postCompany);
-router.put('/putCompany/:id', validator.body(companySchema), putCompany);
-router.patch('/patchCompany/:id', decodeToken, validator.body(companySchemaPatch), patchCompany);
-router.delete('/deleteCompany/:id', decodeToken, deleteCompany);
+router.post('/postCompany',  validator.body(companySchema), postCompany);
+router.put('/putCompany/:id',  validator.body(companySchema), putCompany);
+router.patch('/patchCompany/:id',  validator.body(companySchemaPatch), patchCompany);
+router.delete('/deleteCompany/:id',  deleteCompany);
 
 // Tabla ordenes
-router.get('/allOrders', decodeToken, getAllOrders);
+router.get('/allOrders',  getAllOrders);
 router.get('/getOrderById/:id', getOrderById);  //NO TOKEN
-router.post('/postOrder', decodeToken, validator.body(ordersSchema), postOrder);
-router.put('/putOrder/:id', decodeToken, validator.body(ordersSchema), putOrder);
-router.patch('/patchOrder/:id', decodeToken, validator.body(ordersSchemaPatch), patchOrder);
-router.delete('/deleteOrder/:id', decodeToken, deleteOrder);
+router.post('/postOrder',  validator.body(ordersSchema), postOrder);
+router.put('/putOrder/:id',  validator.body(ordersSchema), putOrder);
+router.patch('/patchOrder/:id',  validator.body(ordersSchemaPatch), patchOrder);
+router.delete('/deleteOrder/:id',  deleteOrder);
 
 // Tabla de ordenes asignadas
-router.get('/allAssignedOrder', decodeToken, getAllAssignedOrder);
-router.post('/postAssignedOrder', decodeToken, validator.body(assignedOrderSchema), postAssignedOrder);
-router.put('/putAssignedOrder/:id', decodeToken, validator.body(assignedOrderSchema), putAssignedOrder);
-router.patch('/patchAssignedOrder/:id', decodeToken, validator.body(assignedOrderSchemaPatch), patchAssignedOrder);
-router.delete('/deleteAssignedOrder/:id', decodeToken, deleteAssignedOrder);
+router.get('/allAssignedOrder',  getAllAssignedOrder);
+router.post('/postAssignedOrder', validator.body(assignedOrderSchema), postAssignedOrder);
+router.put('/putAssignedOrder/:id',  validator.body(assignedOrderSchema), putAssignedOrder);
+router.patch('/patchAssignedOrder/:id',  validator.body(assignedOrderSchemaPatch), patchAssignedOrder);
+router.delete('/deleteAssignedOrder/:id',  deleteAssignedOrder);
 
 // Consultas repartidor
-router.get('/deliveryMan/:id', decodeToken, getDeliveryManById);                                                                        // Traer la información del repartidor segun id
-router.get('/ordersOfDeliveryMan/:id', decodeToken, getOrdersOfDeliveryMan);                                                            // Traer todos las ordenes segun id del repartidor
-router.get('/deliveryManAvailable', decodeToken, getDeliveryManAvailable)                                                               //Traer todos los repartidores disponiles
-router.get('/deliveriesByDeliveryMan/:id', decodeToken, getDeliveriesByDeliveryMan)                                                     //Traer todas las ordenes del día segun id del repartidor
-router.get('/deliveriesByDeliveryManRange/:id/:startDate/:endDate', decodeToken, getDeliveriesByDeliveryManRange)                       //Traer todas las ordenes del día segun id del repartidor
+router.get('/deliveryMan/:id',  getDeliveryManById);                                                                        // Traer la información del repartidor segun id
+router.get('/ordersOfDeliveryMan/:id',  getOrdersOfDeliveryMan);                                                            // Traer todos las ordenes segun id del repartidor
+router.get('/deliveryManAvailable',  getDeliveryManAvailable)                                                               //Traer todos los repartidores disponiles
+router.get('/deliveriesByDeliveryMan/:id',  getDeliveriesByDeliveryMan)                                                     //Traer todas las ordenes del día segun id del repartidor
+router.get('/deliveriesByDeliveryManRange/:id/:startDate/:endDate',  getDeliveriesByDeliveryManRange)                       //Traer todas las ordenes del día segun id del repartidor
 
 
 // Consultas ordenes
-router.get('/getOrdersCompanySlopes/:id_company', decodeToken, getOrdersCompanySlopes);                                         //Pedido pendientes por comercio
-router.get('/OrdersDateDelivery', decodeToken, getOrdersDateDelivery)                                                           //Pedidos pendientes para el siguiente día
-router.get('/getOrdersDateDeliveryToday', decodeToken, getOrdersDateDeliveryToday)                                              //Pedidos pendientes para el día de hoy (actual)')
-router.get('/getDiscriminatedDeliveries', decodeToken, getDiscriminatedDeliveries)                                              // Pedidos discriminados por estado
-router.get('/getDeliveriesCompany/:id', decodeToken, getDeliveriesCompany)                                              // Pedidos discriminados por comercio
+router.get('/getOrdersCompanySlopes/:id_company',  getOrdersCompanySlopes);                                         //Pedido pendientes por comercio
+router.get('/OrdersDateDelivery',  getOrdersDateDelivery)                                                           //Pedidos pendientes para el siguiente día
+router.get('/getOrdersDateDeliveryToday', getOrdersDateDeliveryToday)                                              //Pedidos pendientes para el día de hoy (actual)')
+router.get('/getDiscriminatedDeliveries',  getDiscriminatedDeliveries)                                              // Pedidos discriminados por estado
+router.get('/getDeliveriesCompany/:id',  getDeliveriesCompany)                                              // Pedidos discriminados por comercio
+router.get('/getNumOrdersToday', getNumOrdersToday)
 
 
 // Consultas ganancias
-router.get('/getTotalEarnings', decodeToken, getTotalEarnings)                                                                  //Obtener las ganancias totales del día
-router.get('/getTotalEarnings/date_start/date_end', decodeToken, getTotalEarningsByDate)                                        //Obtener las ganancias totales en un periodo de tiempo determinado
-router.get('/getTotalEarningsByDateOfDeliveryMan/:id_delivery/:date_start/:date_end', decodeToken, getTotalEarningsByDateOfDeliveryMan) //Obtener las ganancias totales del día segun id del repartidor
-router.get('/getTotalEarningsByDateOfDeliveryMan/:id_delivery', decodeToken, getTotalEarningsOfDeliveryManToday)                //Obtener las ganancias totales del día segun id del repartidor
+router.get('/getTotalEarnings',  getTotalEarnings)                                                                  //Obtener las ganancias totales del día
+router.get('/getTotalEarnings/date_start/date_end',  getTotalEarningsByDate)                                        //Obtener las ganancias totales en un periodo de tiempo determinado
+router.get('/getTotalEarningsByDateOfDeliveryMan/:id_delivery/:date_start/:date_end',  getTotalEarningsByDateOfDeliveryMan) //Obtener las ganancias totales del día segun id del repartidor
+router.get('/getTotalEarningsByDateOfDeliveryMan/:id_delivery',  getTotalEarningsOfDeliveryManToday)                //Obtener las ganancias totales del día segun id del repartidor
+router.get('/utilities', utilities)
+router.get('/utilitiesRangeDate/:date_start/:date_end', utilitiesRangeDate)
 
 // Subir imagen
-router.post('/uploadImage', decodeToken, image);
-router.post('/uploadImageUser/:id', decodeToken, imageUser);                                                                    // Subir imagen de usuario editando base de datos
+router.post('/uploadImage',  image);
+router.post('/uploadImageUser/:id',  imageUser);                                                                    // Subir imagen de usuario editando base de datos
 
 // Exportando el router
 export default router;

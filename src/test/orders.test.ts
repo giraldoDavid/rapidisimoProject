@@ -27,7 +27,12 @@ describe("Orders", () => {
             client_phone: "3535621204",
             client_address: "Cra. 6 # 33 - 4 Medell¡n - Colombia",
             date_delivery: "2020-06-05T05:00:00.000Z",
-            estimated_time: "10:00:00"
+            estimated_time: "10:00:00",
+            order_cost: 10000,
+            image_order: "img.png",
+            status_order: "En espera",
+            rating: 5,
+            _id_tracking: "629b9f0a96e29b24c75a9582"
         })
         expect(response.status).toBe(201);
     });
@@ -40,7 +45,12 @@ describe("Orders", () => {
             client_phone: "3535621204",
             client_address: "Cra. 5 # 33 - 4 Medell¡n - Colombia",
             date_delivery: "2022-06-05T05:00:00.000Z",
-            estimated_time: "12:00:00"
+            estimated_time: "12:00:00",
+            order_cost: 10000,
+            image_order: "imagen.png",
+            status_order: "En espera",
+            rating: 5,
+            _id_tracking: "dfdvg65343ff"
         })
         expect(response.status).toBe(201);
     });
