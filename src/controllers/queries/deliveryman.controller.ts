@@ -52,6 +52,8 @@ export const getDeliveryManAvailable = async (req: Request, res: Response) => {
         return res.status(508).json({
             message: 'Error al traer los repartidores disponibles',
         });
+    } finally {
+        cliente.release(true)
     }
 }
 
@@ -69,6 +71,8 @@ export const getDeliveriesByDeliveryMan = async (req: Request, res: Response) =>
         return res.status(508).json({
             message: "Error al traer las ordenes del repartidor"
         })
+    } finally {
+        cliente.release(true)
     }
 }
 
@@ -91,5 +95,7 @@ export const getDeliveriesByDeliveryManRange = async (req: Request, res: Respons
         return res.status(508).json({
             message: "Error al traer las ordenes del repartidor por el rango de fecha"
         })
+    } finally {
+        cliente.release(true)
     }
 }
