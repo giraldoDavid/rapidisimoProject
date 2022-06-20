@@ -67,7 +67,7 @@ CREATE TABLE users (
     delivery_man_status type_delivery_man_status DEFAULT 'Disponible',
     vehicle type_vehicle DEFAULT 'Carro',
     rol type_rol DEFAULT 'Delivery man',
-    user_image VARCHAR DEFAULT '',
+    user_image VARCHAR DEFAULT ' ',
     user_latitude DECIMAL,
     user_longitude DECIMAL,
     CONSTRAINT pk_users PRIMARY KEY (id_user)
@@ -97,7 +97,7 @@ CREATE TABLE orders (
     date_delivery DATE NOT NULL,
     estimated_time TIME NOT NULL,
     order_cost INT DEFAULT 100,
-    image_order VARCHAR DEFAULT '',
+    image_order VARCHAR DEFAULT ' ',
     status_order type_order_status DEFAULT 'En espera',
     rating INT DEFAULT 5,
     _id_tracking VARCHAR,
