@@ -9,8 +9,9 @@ export const getOrdersCompanySlopes = async (req: Request, res: Response) => {
     let id_company = req.params.id_company;
     let result: QueryResult = await cliente.query(
         `SELECT * FROM orders WHERE status_order = 'En espera' AND id_company= $1;`, [id_company]);
+        const numOrders = { orders: result.rowCount };
     try {
-        res.status(201).json(result.rows);
+        return res.status(201).json(numOrders);
     } catch (error) {
         console.log(error);
         res.status(508).json({
@@ -26,8 +27,9 @@ export const getOrdersDateDelivery = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     let result: QueryResult = await cliente.query(
         `SELECT * FROM orders WHERE date_delivery = current_date + INTERVAL '1 day'`)
+        const numOrders = { orders: result.rowCount };
     try {
-        res.status(201).json(result.rows);
+        return res.status(201).json(numOrders);
     } catch (error) {
         console.log(error);
         res.status(508).json({
@@ -43,13 +45,14 @@ export const getOrdersDateDeliveryToday = async (req: Request, res: Response) =>
     let cliente = await pool.connect();
     let result: QueryResult = await cliente.query(
         `SELECT * FROM orders WHERE date_delivery = current_date - INTERVAL '1 day'`)
+        const numOrders = { orders: result.rowCount };
     try {
-        if (result.rows.length === 0) {
+        if (result.rowCount === 0) {
             console.log('No hay ordenes para hoy');
             return res.status(204).json({ message: "No hay ordenes para hoy" });
         }
-        else if (result.rows.length > 0) {
-            return res.status(201).json(result.rows);
+        else if (result.rowCount > 0) {
+            return res.status(201).json(numOrders);
         }
     } catch (error) {
         console.log(error);
@@ -66,13 +69,14 @@ export const getDiscriminatedDeliveries = async (req: Request, res: Response) =>
     let cliente = await pool.connect();
     let result: QueryResult = await cliente.query(
         `SELECT * FROM orders_view`)
+        const numOrders = { orders: result.rowCount };
     try {
-        if (result.rows.length === 0) {
+        if (result.rowCount === 0) {
             console.log('No hay entregas discriminadas');
             return res.status(204).json({ message: "No hay ordenes para hoy" });
         }
-        else if (result.rows.length > 0) {
-            return res.status(201).json(result.rows);
+        else if (result.rowCount > 0) {
+            return res.status(201).json(numOrders);
         }
     } catch (error) {
         console.log(error);
@@ -90,13 +94,14 @@ export const getDeliveriesCompany = async (req: Request, res: Response) => {
     let id_company = req.params.id_company;
     let result: QueryResult = await cliente.query(
         `SELECT * FROM orders WHERE id_company = $1 ORDER BY status_order`, [id_company])
+        const numOrders = { orders: result.rowCount };
     try {
-        if (result.rows.length === 0) {
+        if (result.rowCount === 0) {
             console.log('No hay ordenes para hoy');
             return res.status(204).json({ message: "No hay entregas discriminadas por comercio" });
         }
-        else if (result.rows.length > 0) {
-            return res.status(201).json(result.rows);
+        else if (result.rowCount > 0) {
+            return res.status(201).json(numOrders);
         }
     } catch (error) {
         console.log(error);
@@ -113,15 +118,14 @@ export const getNumOrdersToday = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     let result: QueryResult = await cliente.query(
         `SELECT * FROM orders WHERE date_delivery = current_date - INTERVAL '1 day'`)
+        const numOrders = { orders: result.rowCount };
     try {
-        
         if (result.rowCount === 0) {
             console.log('No hay ordenes para hoy');
             return res.status(204).json({ message: "No hay ordenes entregadas" });
         }
         else if (result.rowCount > 0) {
-            const numOrders = result.rowCount;
-            return res.status(201).json({numOrders});
+            return res.status(201).json(numOrders);
         }
     } catch (error) {
         console.log(error);
