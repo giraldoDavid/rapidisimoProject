@@ -114,12 +114,14 @@ export const getNumOrdersToday = async (req: Request, res: Response) => {
     let result: QueryResult = await cliente.query(
         `SELECT * FROM orders WHERE date_delivery = current_date - INTERVAL '1 day'`)
     try {
+        
         if (result.rowCount === 0) {
             console.log('No hay ordenes para hoy');
             return res.status(204).json({ message: "No hay ordenes entregadas" });
         }
         else if (result.rowCount > 0) {
-            return res.status(201).json(result.rowCount);
+            const numOrders = result.rowCount;
+            return res.status(201).json({numOrders});
         }
     } catch (error) {
         console.log(error);
