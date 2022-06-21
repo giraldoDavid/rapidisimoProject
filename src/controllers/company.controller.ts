@@ -2,10 +2,6 @@ import { Request, Response } from 'express';
 import { pool } from '../data-base/config.postgres';
 import { QueryResult } from 'pg';
 
-// Importando los esquemas para las rutas
-import { assignedOrderSchema } from "../schemas-joi/assigned_order.schemajoi";
-import { AnyMxRecord } from 'dns';
-
 // Obtener todos las empresas y/o compañias registradas
 export const getAllCompanies = async (req: Request, res: Response) => {
     let cliente = await pool.connect();

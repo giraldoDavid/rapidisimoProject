@@ -35,6 +35,7 @@ import { userSchema, userSchemaPatch } from '../schemas-joi/user.schemajoi';
 
 // Importando la validación del token
 import { decodeToken } from '../firebase/manage.token';
+import { validateRol } from '../controllers/firebase/validate_rol.controller';
 
 // Tabla usuarios
 router.get('/allUsers', decodeToken, getAllUsers);
