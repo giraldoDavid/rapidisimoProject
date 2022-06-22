@@ -9,15 +9,18 @@ import { getAllCompanies, postCompany, putCompany, patchCompany, deleteCompany, 
 import { getAllOrders, getOrderById, postOrder, putOrder, patchOrder, deleteOrder } from '../controllers/orders.controller';
 import { getAllAssignedOrder, postAssignedOrder, putAssignedOrder, patchAssignedOrder, deleteAssignedOrder }
     from '../controllers/assigned_order.controller';
-import { image } from '../controllers/image_multer.controller';
-import { imageUser } from '../controllers/image_user.controller';
+
+// Importando las rutas de las imagenes
+import { image } from '../controllers/images/image_multer.controller';
+import { imageUser } from '../controllers/images/image_user.controller';
+import { imageOrder } from '../controllers/images/image_order.controller';
 
 // Importando consultas del repartidor
 import { getDeliveryManById, getOrdersOfDeliveryMan, getDeliveryManAvailable, getDeliveriesByDeliveryMan, getDeliveriesByDeliveryManRange, }
     from '../controllers/queries/deliveryman.controller';
 
 //Importando consultas de las ordenes
-import { getOrdersCompanySlopes, getOrdersDateDelivery, getOrdersDateDeliveryToday, getDiscriminatedDeliveries, getDeliveriesCompany, getNumOrdersToday}
+import { getOrdersCompanySlopes, getOrdersDateDelivery, getOrdersDateDeliveryToday, getDiscriminatedDeliveries, getDeliveriesCompany, getNumOrdersToday }
     from '../controllers/queries/orders.controller'
 
 //Importando consultas de ganancias
@@ -34,8 +37,8 @@ import { userSchema, userSchemaPatch } from '../schemas-joi/user.schemajoi';
 import { decodeToken } from '../firebase/manage.token';
 
 // Tabla usuarios
-router.get('/allUsers', getAllUsers);
-router.post('/postUser',  validator.body(userSchema), postUser);
+router.get('/allUsers', decodeToken, getAllUsers);
+router.post('/postUser', decodeToken, validator.body(userSchema), postUser);
 router.put('/putUser/:id', decodeToken, validator.body(userSchema), putUser);
 router.patch('/patchUser/:id', decodeToken, validator.body(userSchemaPatch), patchUser);
 router.delete('/deleteUser/:id', decodeToken, deleteUser);
@@ -76,20 +79,21 @@ router.get('/OrdersDateDelivery', decodeToken, getOrdersDateDelivery)           
 router.get('/getOrdersDateDeliveryToday', decodeToken, getOrdersDateDeliveryToday)                                              //Pedidos pendientes para el día de hoy (actual)')
 router.get('/getDiscriminatedDeliveries', decodeToken, getDiscriminatedDeliveries)                                              // Pedidos discriminados por estado
 router.get('/getDeliveriesCompany/:id_company', decodeToken, getDeliveriesCompany)                                              // Pedidos discriminados por comercio
-router.get('/getNumOrdersToday', getNumOrdersToday)                                                                             // Numero de pedidos entregados hoy
+router.get('/getNumOrdersToday', decodeToken, getNumOrdersToday)                                                                             // Numero de pedidos entregados hoy
 
 
 // Consultas ganancias
 router.get('/getTotalEarnings', decodeToken, getTotalEarnings)                                                                  //Obtener las ganancias totales del día
-router.get('/getTotalEarnings/date_start/date_end', decodeToken, getTotalEarningsByDate)                                        //Obtener las ganancias totales en un periodo de tiempo determinado
+router.get('/getTotalEarnings/date_start/date_end', getTotalEarningsByDate)                                        //Obtener las ganancias totales en un periodo de tiempo determinado
 router.get('/getTotalEarningsByDateOfDeliveryMan/:id_delivery/:date_start/:date_end', decodeToken, getTotalEarningsByDateOfDeliveryMan) //Obtener las ganancias totales del día segun id del repartidor
 router.get('/getTotalEarningsByDateOfDeliveryMan/:id_delivery', decodeToken, getTotalEarningsOfDeliveryManToday)                //Obtener las ganancias totales del día segun id del repartidor
-router.get('/utilities', utilities)                                                                                             //Obtener la utilidades acumuladas en un día
-router.get('/utilitiesRangeDate/:date_start/:date_end', utilitiesRangeDate)                                                     //Obtener las utilidades acumuladas por rango de fecha
+router.get('/utilities', decodeToken, utilities)                                                                                             //Obtener la utilidades acumuladas en un día
+router.get('/utilitiesRangeDate/:date_start/:date_end', decodeToken, utilitiesRangeDate)                                                     //Obtener las utilidades acumuladas por rango de fecha
 
 // Subir imagen
 router.post('/uploadImage', decodeToken, image);
 router.post('/uploadImageUser/:id', decodeToken, imageUser);                                                                    // Subir imagen de usuario editando base de datos
+router.post('/uploadImageOrder/:id', decodeToken, imageOrder);                                                                  // Subir imagen de orden editando base de datos
 
 // Exportando el router
 export default router;

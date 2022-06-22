@@ -8,7 +8,7 @@ export const getDeliveryManById = async (req: Request, res: Response) => {
     let id = req.params.id;
     let result: QueryResult = await cliente.query('SELECT * FROM users WHERE id_user=$1;', [id]);
     try {
-        return res.status(201).json(result.rows);
+        return res.status(201).json(result.rows[0]);
     } catch (error) {
         console.log(error);
         return res.status(508).json({
@@ -52,6 +52,8 @@ export const getDeliveryManAvailable = async (req: Request, res: Response) => {
         return res.status(508).json({
             message: 'Error al traer los repartidores disponibles',
         });
+    } finally {
+        cliente.release(true)
     }
 }
 
@@ -60,15 +62,23 @@ export const getDeliveryManAvailable = async (req: Request, res: Response) => {
 export const getDeliveriesByDeliveryMan = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     let id = req.params.id;
-    let result: QueryResult = await cliente.query(`SELECT id_delivery_man,id_company,orders.id_order,client_email,client_name,client_phone,client_address, date_delivery, estimated_time, order_cost FROM assigned_order INNER JOIN users ON assigned_order.id_delivery_man = users.id_user INNER JOIN orders ON assigned_order.id_order = orders.id_order WHERE orders.date_delivery = current_date - INTERVAL '1 day' AND assigned_order.id_delivery_man = $1;`, 
-    [id]);
+    let result: QueryResult = await cliente.query(`SELECT id_delivery_man,id_company,orders.id_order,client_email,client_name,client_phone,client_address, date_delivery, estimated_time, order_cost FROM assigned_order INNER JOIN users ON assigned_order.id_delivery_man = users.id_user INNER JOIN orders ON assigned_order.id_order = orders.id_order WHERE orders.date_delivery = current_date - INTERVAL '1 day' AND assigned_order.id_delivery_man = $1;`,
+        [id]);
+    console.log(result);
     try {
-        return res.status(201).json(result.rows)
+        if (result.rowCount === 0) {
+            return res.status(202).json({ message: "No hay ordenes para hoy" });
+        }
+        else if (result.rowCount > 0) {
+            return res.status(201).json(result.rows[0]);
+        }
     } catch (error) {
         console.log(error);
         return res.status(508).json({
             message: "Error al traer las ordenes del repartidor"
         })
+    } finally {
+        cliente.release(true)
     }
 }
 
@@ -91,5 +101,7 @@ export const getDeliveriesByDeliveryManRange = async (req: Request, res: Respons
         return res.status(508).json({
             message: "Error al traer las ordenes del repartidor por el rango de fecha"
         })
+    } finally {
+        cliente.release(true)
     }
 }
