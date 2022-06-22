@@ -30,13 +30,19 @@
 
 /**            
  * @swagger
- * /getTotalEarningsByDateOfDeliveryMan/:id_delivery/:date_start/:date_end:
+ * /getTotalEarningsByDateOfDeliveryMan/{id_delivery}/{date_start}/{date_end}:
  *  get:
  *    security:
  *          - bearerAuth: []
  *    summary: Get the earnings by date range with the id of a delivery man 
  *    tags: [Services of Earnings]
  *    parameters:
+ *        - in: path
+ *          name: id_delivery
+ *          schema:
+ *              type: number
+ *          required: true
+ *          description: Identificador del repartidor 
  *        - in: path
  *          name: date_start
  *          schema:
@@ -49,12 +55,6 @@
  *              type: date
  *          required: true
  *          description: Fecha final
- *        - in: path
- *          name: id_delivery
- *          schema:
- *              type: number
- *          required: true
- *          description: Identificador del repartidor
  *    responses:
  *      201:
  *          description: Trae el total de ganancias por rango de fecha según el repartidor
@@ -64,7 +64,7 @@
 
 /**            
  * @swagger
- * /getTotalEarningsByDateOfDeliveryMan/:id_delivery:
+ * /getTotalEarningsByDateOfDeliveryMan/{id_delivery}:
  *  get:
  *    security:
  *          - bearerAuth: []
@@ -103,7 +103,7 @@
 
 /**            
  * @swagger
- * /utilitiesRangeDate/:date_start/:date_end:
+ * /utilitiesRangeDate/{date_start}/{date_end}:
  *  get:
  *    security:
  *          - bearerAuth: []

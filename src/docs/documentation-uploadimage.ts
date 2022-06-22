@@ -1,6 +1,6 @@
 /** 
  * @swagger
- * /uploadImageUser/:id:
+ * /uploadImageUser/{id}:
  *  post:
  *      security:
  *          - bearerAuth: []
@@ -23,7 +23,7 @@
 
 /** 
  * @swagger
- * /uploadImageOrder/:id:
+ * /uploadImageOrder/{id}:
  *  post:
  *      security:
  *          - bearerAuth: []

@@ -35,7 +35,6 @@ import { userSchema, userSchemaPatch } from '../schemas-joi/user.schemajoi';
 
 // Importando la validación del token
 import { decodeToken } from '../firebase/manage.token';
-import { validateRol } from '../controllers/firebase/validate_rol.controller';
 
 // Tabla usuarios
 router.get('/allUsers', decodeToken, getAllUsers);
@@ -85,7 +84,7 @@ router.get('/getNumOrdersToday', decodeToken, getNumOrdersToday)                
 
 // Consultas ganancias
 router.get('/getTotalEarnings', decodeToken, getTotalEarnings)                                                                  //Obtener las ganancias totales del día
-router.get('/getTotalEarnings/date_start/date_end', decodeToken, getTotalEarningsByDate)                                        //Obtener las ganancias totales en un periodo de tiempo determinado
+router.get('/getTotalEarnings/date_start/date_end', getTotalEarningsByDate)                                        //Obtener las ganancias totales en un periodo de tiempo determinado
 router.get('/getTotalEarningsByDateOfDeliveryMan/:id_delivery/:date_start/:date_end', decodeToken, getTotalEarningsByDateOfDeliveryMan) //Obtener las ganancias totales del día segun id del repartidor
 router.get('/getTotalEarningsByDateOfDeliveryMan/:id_delivery', decodeToken, getTotalEarningsOfDeliveryManToday)                //Obtener las ganancias totales del día segun id del repartidor
 router.get('/utilities', decodeToken, utilities)                                                                                             //Obtener la utilidades acumuladas en un día

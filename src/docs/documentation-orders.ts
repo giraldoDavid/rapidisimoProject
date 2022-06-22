@@ -84,7 +84,7 @@
  */
 /**            
  * @swagger
- * /getOrderById/:id:
+ * /getOrderById/{id}:
  *  get:
  *    summary: Get a order by id
  *    tags: [Orders]
@@ -126,7 +126,7 @@
 
 /**
  * @swagger
- * /putOrder/:id:
+ * /putOrder/{id}:
  *  put:
  *      security:
  *          - bearerAuth: []
@@ -155,7 +155,7 @@
 
 /**
  * @swagger
- * /patchOrder/:id:
+ * /patchOrder/{id}:
  *  patch:
  *      security:
  *          - bearerAuth: []
@@ -185,7 +185,7 @@
 
 /**
  * @swagger
- * /deleteOrder/:id:
+ * /deleteOrder/{id}:
  *  delete:
  *      security:
  *          - bearerAuth: []

@@ -103,7 +103,7 @@
 
 /**
  * @swagger
- * /putUser/:id:
+ * /putUser/{id}:
  *  put:
  *      security:
  *          - bearerAuth: []
@@ -133,7 +133,7 @@
 
 /**
  * @swagger
- * /patchUser/:id:
+ * /patchUser/{id}:
  *  patch:
  *      security:
  *          - bearerAuth: []
@@ -162,7 +162,7 @@
 
 /**
  * @swagger
- * /deleteUser/:id:
+ * /deleteUser/{id}:
  *  delete:
  *      security:
  *          - bearerAuth: []

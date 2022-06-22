@@ -1,6 +1,6 @@
 /**            
  * @swagger
- * /deliveryMan/:id:
+ * /deliveryMan/{id}:
  *  get:
  *    security:
  *          - bearerAuth: []
@@ -22,7 +22,7 @@
 
 /**            
  * @swagger
- * /ordersOfDeliveryMan/:id:
+ * /ordersOfDeliveryMan/{id}:
  *  get:
  *    security:
  *          - bearerAuth: []
@@ -62,7 +62,7 @@
 
 /**            
  * @swagger
- * /deliveriesByDeliveryMan/:id:
+ * /deliveriesByDeliveryMan/{id}:
  *  get:
  *    security:
  *          - bearerAuth: []
@@ -85,7 +85,7 @@
 
 /**            
  * @swagger
- * /deliveriesByDeliveryManRange/:id/:startDate/:endDate:
+ * /deliveriesByDeliveryManRange/{id}/{startDate}/{endDate}:
  *  get:
  *    security:
  *          - bearerAuth: []
