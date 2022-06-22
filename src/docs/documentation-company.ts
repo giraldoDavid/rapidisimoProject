@@ -98,7 +98,7 @@
 
 /**
  * @swagger
- * /putCompany/:id:
+ * /putCompany/{id}:
  *  put:
  *      security:
  *          - bearerAuth: []
@@ -127,7 +127,7 @@
 
 /**
  * @swagger
- * /patchCompany/:id:
+ * /patchCompany/{id}:
  *  patch:
  *      security:
  *          - bearerAuth: []
@@ -156,7 +156,7 @@
 
 /**
  * @swagger
- * /deleteCompany/:id:
+ * /deleteCompany/{id}:
  *  delete:
  *      security:
  *          - bearerAuth: []
