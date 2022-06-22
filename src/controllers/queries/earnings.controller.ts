@@ -8,7 +8,11 @@ export const getTotalEarnings = async (req: Request, res: Response) => {
     let result: QueryResult = await cliente.query(
         `SELECT SUM(order_cost) FROM orderS WHERE date_delivery = current_date - INTERVAL '1 day';`)
     try {
-        return res.status(201).json(result.rows[0]);
+        if (result.fields[0].tableID === 0) {
+            return res.status(204).json({ message: 'No se tienen ganancias' })
+        } else {
+            return res.status(201).json(result.rows[0]);
+        }
     } catch (error) {
         console.log(error);
         return res.status(508).json({
@@ -28,7 +32,11 @@ export const getTotalEarningsByDate = async (req: Request, res: Response) => {
     let result: QueryResult = await cliente.query(
         `SELECT SUM(order_cost) FROM orders WHERE date_delivery >= $1 AND date_delivery <= $2`, [date_start, date_end])
     try {
-        res.status(201).json(result.rows);
+        if (result.fields[0].tableID !== 0) {
+            res.status(201).json(result.rows);
+        } else {
+            return res.status(202).json({ message: 'No hay entregas en el rango de fechas' })
+        }
     } catch (error) {
         console.log(error);
         res.status(508).json({
@@ -87,8 +95,9 @@ export const utilities = async (req: Request, res: Response) => {
     try {
         const { sum } = result.rows[0]
         const operacion = sum * 0.10
+        const total = { total: operacion }
         try {
-            return res.status(201).json(operacion);
+            return res.status(201).json(total);
         } catch (error) {
             console.log(error);
             return res.status(409).json({
@@ -117,8 +126,9 @@ export const utilitiesRangeDate = async (req: Request, res: Response) => {
     try {
         const { sum } = result.rows[0]
         const operacion = sum * 0.10
+        const total = { total: operacion }
         try {
-            return res.status(201).json(operacion);
+            return res.status(201).json(total);
         } catch (error) {
             console.log(error);
             return res.status(409).json({
