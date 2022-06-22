@@ -25,7 +25,7 @@
 
 /** 
  * @swagger
- * /mailAssignedOrden:
+ * /mail/mailAssignedOrden:
  *  post:
  *    security:
  *      - bearerAuth: []
