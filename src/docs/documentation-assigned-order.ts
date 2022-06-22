@@ -64,7 +64,7 @@
 
 /**
  * @swagger
- * /putAssignedOrder/:id:
+ * /putAssignedOrder/{id}:
  *  put:
  *      security:
  *          - bearerAuth: []
@@ -93,7 +93,7 @@
 
 /**
  * @swagger
- * /patchAssignedOrder/:id:
+ * /patchAssignedOrder/{id}:
  *  patch:
  *      security:
  *          - bearerAuth: []
@@ -122,7 +122,7 @@
 
 /**
  * @swagger
- * /deleteAssignedOrder/:id:
+ * /deleteAssignedOrder/{id}:
  *  delete:
  *      security:
  *          - bearerAuth: []

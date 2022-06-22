@@ -61,7 +61,7 @@
 
 /**            
  * @swagger
- * /getMapById/:id:
+ * /getMapById/{id}:
  *  get:
  *    summary: Get a locations by id
  *    tags: [Location]
@@ -105,7 +105,7 @@
 
 /**
  * @swagger
- * /putMap/:id:
+ * /putMap/{id}:
  *  put:
  *      security:
  *          - bearerAuth: []
@@ -134,7 +134,7 @@
 
 /**
  * @swagger
- * /deleteMap/:id:
+ * /deleteMap/{id}:
  *  delete:
  *      security:
  *          - bearerAuth: []
