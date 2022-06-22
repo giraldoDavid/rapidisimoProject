@@ -1,6 +1,6 @@
 /**            
  * @swagger
- * /getOrdersCompanySlopes/:id_company:
+ * /getOrdersCompanySlopes/{id_company}:
  *  get:
  *    security:
  *          - bearerAuth: []
@@ -71,7 +71,7 @@
 
 /**            
  * @swagger
- * /getDeliveriesCompany/:id:
+ * /getDeliveriesCompany/{id}:
  *  get:
  *    security:
  *          - bearerAuth: []
