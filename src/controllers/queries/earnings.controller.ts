@@ -7,9 +7,11 @@ export const getTotalEarnings = async (req: Request, res: Response) => {
     let cliente = await pool.connect();
     let result: QueryResult = await cliente.query(
         `SELECT SUM(order_cost) FROM orderS WHERE date_delivery = current_date - INTERVAL '1 day';`)
+        const resultado = {ganancias: 0}
     try {
         if (result.fields[0].tableID === 0) {
-            return res.status(204).json({ message: 'No se tienen ganancias' })
+            
+            return res.status(202).send(resultado)
         } else {
             return res.status(201).json(result.rows[0]);
         }
