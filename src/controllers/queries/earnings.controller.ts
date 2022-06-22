@@ -28,27 +28,25 @@ export const getTotalEarnings = async (req: Request, res: Response) => {
 
 // Traer las ganancias por rango de fechas
 export const getTotalEarningsByDate = async (req: Request, res: Response) => {
-    console.log("hola");
-    // let cliente = await pool.connect();
-    // let date_start = req.params.date_start;
-    // let date_end = req.params.date_end;
-    // let result: QueryResult = await cliente.query(
-    //     `SELECT SUM(order_cost) FROM orders WHERE date_delivery >= $1 AND date_delivery <= $2`, [date_start, date_end])
-
-    // try {
-    //     if (result.fields[0].tableID !== 0) {
-    //         res.status(201).json(result.rows);
-    //     } else {
-    //         return res.status(202).json({ message: 'No hay entregas en el rango de fechas' })
-    //     }
-    // } catch (error) {
-    //     console.log(error);
-    //     res.status(508).json({
-    //         message: 'Error al obtener las ganancias por rango de fechas',
-    //     });
-    // } finally {
-    //     cliente.release(true)
-    // }
+    let cliente = await pool.connect();
+    let date_start = req.params.date_start;
+    let date_end = req.params.date_end;
+    let result: QueryResult = await cliente.query(
+        `SELECT SUM(order_cost) FROM orders WHERE date_delivery >= $1 AND date_delivery <= $2`, [date_start, date_end])
+    try {
+        if (result.fields[0].tableID !== 0) {
+            res.status(201).json(result.rows);
+        } else {
+            return res.status(202).json({ message: 'No hay entregas en el rango de fechas' })
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(508).json({
+            message: 'Error al obtener las ganancias por rango de fechas',
+        });
+    } finally {
+        cliente.release(true)
+    }
 }
 
 
