@@ -30,7 +30,7 @@ export const mailOrder = async (_req: Request, res: Response) => {
                 fecha_entrega: order.rows[0].delivery_date,
                 horario: order.rows[0].estimated_time,
                 codigo: order.rows[0]._id_tracking,
-                link: `https://rapidisimo.com/tracking/`
+                link: `https://rapidisimo-project.web.app/`
             },
             templateIds.SEND_CODE
         )
