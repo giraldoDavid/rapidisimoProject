@@ -35,7 +35,6 @@ import { userSchema, userSchemaPatch } from '../schemas-joi/user.schemajoi';
 
 // Importando la validación del token
 import { decodeToken } from '../firebase/manage.token';
-import { validateRol } from '../controllers/firebase/validate_rol.controller';
 
 // Tabla usuarios
 router.get('/allUsers', decodeToken, getAllUsers);
@@ -80,7 +79,7 @@ router.get('/OrdersDateDelivery', decodeToken, getOrdersDateDelivery)           
 router.get('/getOrdersDateDeliveryToday', decodeToken, getOrdersDateDeliveryToday)                                              //Pedidos pendientes para el día de hoy (actual)')
 router.get('/getDiscriminatedDeliveries', decodeToken, getDiscriminatedDeliveries)                                              // Pedidos discriminados por estado
 router.get('/getDeliveriesCompany/:id_company', decodeToken, getDeliveriesCompany)                                              // Pedidos discriminados por comercio
-router.get('/getNumOrdersToday',  getNumOrdersToday)                                                                             // Numero de pedidos entregados hoy
+router.get('/getNumOrdersToday', decodeToken, getNumOrdersToday)                                                                             // Numero de pedidos entregados hoy
 
 
 // Consultas ganancias

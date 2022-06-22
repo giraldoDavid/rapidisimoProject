@@ -48,8 +48,7 @@ export const getOrdersDateDeliveryToday = async (req: Request, res: Response) =>
         const numOrders = { orders: result.rowCount };
     try {
         if (result.rowCount === 0) {
-            console.log('No hay ordenes para hoy');
-            return res.status(204).json({ message: "No hay ordenes para hoy" });
+            return res.status(202).json({ message: "No hay ordenes para hoy" });
         }
         else if (result.rowCount > 0) {
             return res.status(201).json(numOrders);
@@ -72,8 +71,7 @@ export const getDiscriminatedDeliveries = async (req: Request, res: Response) =>
         const numOrders = { orders: result.rowCount };
     try {
         if (result.rowCount === 0) {
-            console.log('No hay entregas discriminadas');
-            return res.status(204).json({ message: "No hay ordenes para hoy" });
+            return res.status(202).json({ message: "No hay ordenes para hoy" });
         }
         else if (result.rowCount > 0) {
             return res.status(201).json(numOrders);
@@ -97,8 +95,7 @@ export const getDeliveriesCompany = async (req: Request, res: Response) => {
         const numOrders = { orders: result.rowCount };
     try {
         if (result.rowCount === 0) {
-            console.log('No hay ordenes para hoy');
-            return res.status(204).json({ message: "No hay entregas discriminadas por comercio" });
+            return res.status(202).json({ message: "No hay entregas discriminadas por comercio" });
         }
         else if (result.rowCount > 0) {
             return res.status(201).json(numOrders);
@@ -121,8 +118,7 @@ export const getNumOrdersToday = async (req: Request, res: Response) => {
         const numOrders = { orders: result.rowCount };
     try {
         if (result.rowCount === 0) {
-            console.log('No hay ordenes para hoy');
-            return res.status(204).json({ message: "No hay ordenes entregadas" });
+            return res.status(202).json({ message: "No hay ordenes entregadas" });
         }
         else if (result.rowCount > 0) {
             return res.status(201).json(numOrders);
